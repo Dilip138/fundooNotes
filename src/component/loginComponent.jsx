@@ -1,3 +1,11 @@
+/******************************************************************************************
+* @purpose : User Interface -Responsive design to support multiple resolution for Login page
+* @file : loginComponent.jsx
+* @module : state,props,Login,snackBarOpen,snackBarMsg
+* @author : Dilip
+* @version : 1.0
+* @since : 9-Nov-2019
+******************************************************************************************/
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import userLogin from "../sercvice/userService";

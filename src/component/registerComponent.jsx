@@ -1,3 +1,11 @@
+/******************************************************************************************
+* @purpose : User Interface -Responsive design to support multiple resolution for Registration page
+* @file : registerComponent.jsx
+* @module : state,props,Login,snackBarOpen,snackBarMsg
+* @author : Dilip
+* @version : 1.0
+* @since : 9-Nov-2019
+******************************************************************************************/
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
