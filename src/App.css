@@ -1,0 +1,40 @@
+.login-card{
+    width: 30%;   
+    justify-content: center;
+    margin: 4rem 24rem;
+    padding: 60px;
+}
+#fundo-login{
+    text-align: center;
+    padding: 10px;
+}
+#continue{
+    text-align: center;
+    padding: 10px;
+} 
+#login{
+    text-align: right;
+}
+#account{
+    text-align: left;
+}
+.register-card{
+    height: 400px;
+    width: 35%;   
+    justify-content: center;
+    position: relative;
+    margin: 4rem 22rem;
+    padding: 60px;
+}
+#signup{
+    padding: 20px;
+    text-align: right;
+}
+#cart{
+    text-align: center;
+}
+.sevice-card{
+    display: flex;
+    justify-content: space-around;
+}
+
