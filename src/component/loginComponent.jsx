@@ -19,8 +19,8 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
-import ClearIcon from "@material-ui/icons/Clear";
-import Input from "@material-ui/core/Input";
+// import ClearIcon from "@material-ui/icons/Clear";
+// import Input from "@material-ui/core/Input";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -35,6 +35,9 @@ class Login extends Component {
   }
   handleRegister = () => {
     this.props.history.push("/register");
+  };
+  handleForgot = () => {
+    this.props.history.push("/forgot");
   };
   snackbarClose = e => {
     this.setState({
@@ -89,8 +92,10 @@ class Login extends Component {
       userLogin
         .userLogin(data)
         .then(res => {
-          console.log("res in login---------", res);
-          localStorage.setItem("email", this.state.email, res.id);
+          console.log("res in login---------", res.data.id);
+          localStorage.setItem("email", this.state.email);
+          localStorage.setItem("token",res.data.id);
+
           this.props.history.push("/dashboard");
           this.setState({
             snackbarOpen: true,
@@ -200,7 +205,6 @@ class Login extends Component {
                   placeholder="password"
                   id="standard-basic"
                   label="Password*"
-                  margin="normal"
                   fullWidth
                   value={this.state.password}
                   onChange={this.handlePasswordChange}
