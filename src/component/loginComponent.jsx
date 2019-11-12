@@ -1,11 +1,11 @@
 /******************************************************************************************
-* @purpose : User Interface -Responsive design to support multiple resolution for Login page
-* @file : loginComponent.jsx
-* @module : state,props,Login,snackBarOpen,snackBarMsg
-* @author : Dilip
-* @version : 1.0
-* @since : 9-Nov-2019
-******************************************************************************************/
+ * @purpose : User Interface -Responsive design to support multiple resolution for Login page
+ * @file : loginComponent.jsx
+ * @module : state,props,Login,snackBarOpen,snackBarMsg
+ * @author : Dilip
+ * @version : 1.0
+ * @since : 9-Nov-2019
+ ******************************************************************************************/
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import userLogin from "../sercvice/userService";
@@ -94,7 +94,7 @@ class Login extends Component {
         .then(res => {
           console.log("res in login---------", res.data.id);
           localStorage.setItem("email", this.state.email);
-          localStorage.setItem("token",res.data.id);
+          localStorage.setItem("token", res.data.id);
 
           this.props.history.push("/dashboard");
           this.setState({
@@ -114,152 +114,116 @@ class Login extends Component {
   };
   render() {
     return (
-      <div className="login-container">
-        <Card className="login-card">
-          <div className="login-contents">
-            <div id="fundo-login">
-              <span
-                style={{
-                  color: "blue",
-                  fontFamily: "TimesNewRoman",
-                  fontSize: 30
-                }}
-              >
-                F
-              </span>
-              <span
-                style={{
-                  color: "red",
-                  fontFamily: "TimesNewRoman",
-                  fontSize: 25
-                }}
-              >
-                u
-              </span>
-              <span
-                style={{
-                  color: "orange",
-                  fontFamily: "TimesNewRoman",
-                  fontSize: 25
-                }}
-              >
-                n
-              </span>
-              <span
-                style={{
-                  color: "blue",
-                  fontFamily: "TimesNewRoman",
-                  fontSize: 25
-                }}
-              >
-                d
-              </span>
-              <span
-                style={{
-                  color: "green",
-                  fontFamily: "TimesNewRoman",
-                  fontSize: 25
-                }}
-              >
-                o
-              </span>
-              <span
-                style={{
-                  color: "red",
-                  fontFamily: "TimesNewRoman",
-                  fontSize: 25
-                }}
-              >
-                o
-              </span>
-            </div>
-            <div id="signin">
-              <div
-                style={{ color: "black", fontSize: 25, textAlign: "center" }}
-              >
-                <b>Sign In</b>
-              </div>
-            </div>
-            <div id="continue">
-              <div style={{ fontSize: 25, fontFamily: "TimesNewRoman" }}>
-                Continue to fundoo
-              </div>
-            </div>
-            <div className="login_text_field">
-              <div>
-                <TextField
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  id="standard-basic"
-                  label="Email id*"
-                  fullWidth
-                  value={this.state.email}
-                  onChange={this.handleEmailChange}
-                />
-              </div>
-              <div>
-                <TextField
-                  type={!this.state.visible ? "password" : "text"}
-                  name="password"
-                  placeholder="password"
-                  id="standard-basic"
-                  label="Password*"
-                  fullWidth
-                  value={this.state.password}
-                  onChange={this.handlePasswordChange}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton onClick={this.handleVisibility}>
-                        {!this.state.visible ? (
-                          <Visibility />
-                        ) : (
-                          <VisibilityOff />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-              </div>
-            </div>
-            <div id="login">
-              <Button
-                style={{ backgroundColor: "blue" }}
-                type="button"
-                value="submit"
-                onClick={this.handleSubmit}
-              >
-                log in
-              </Button>
-              <div>
-                <div id="account">
-                  <Grid container>
-                    <Grid item xs>
-                      <Link
-                        href="#"
-                        variant="body2"
-                        onClick={this.handleRegister}
-                      >
-                        Create account
-                      </Link>
-                    </Grid>
-                  </Grid>
-                  <Grid container>
-                    <Grid item xs>
-                      <Link
-                        href="#"
-                        variant="body2"
-                        onClick={this.handleForgot}
-                      >
-                        Forgot password?
-                      </Link>
-                    </Grid>
-                  </Grid>
-                </div>
-              </div>
+      <div class="d-flex justify-content-center">
+        <Card
+          className="d-flex flex-column justify-content-center"
+          style={{
+            width: "30%",
+            marginTop:"10%"
+          }}
+        >
+          <div className="d-flex justify-content-center" style=
+          {{font:"bold 25px Times New Roman"}}>
+            <span class="text-primary"
+            >
+              F
+            </span>
+            <span class="text-danger"
+            >
+              u
+            </span>
+            <span class="text-warning"
+            >
+              n
+            </span>
+            <span class="text-primary"
+            >
+              d
+            </span>
+            <span class="text-danger"
+            >
+              o
+            </span>
+            <span class="text-success"
+            >
+              o
+            </span>
+          </div>
+
+          <div id="signin">
+            <div style={{ color: "black", fontSize: 25, textAlign: "center" }}>
+              <b>Sign In</b>
             </div>
           </div>
+          <div id="continue">
+            <div
+              class="d-flex justify-content-center"
+              style={{ fontSize: 25, fontFamily: "TimesNewRoman" }}
+            >
+              Continue to fundoo
+            </div>
+          </div>
+          <div class="d-flex flex-column">
+            <div class="d-flex justify-content-center">
+              <TextField
+                type="email"
+                name="email"
+                placeholder="Email"
+                id="standard-basic"
+                label="Email id*"
+                value={this.state.email}
+                onChange={this.handleEmailChange}
+              />
+            </div>
+            <div class="d-flex justify-content-center">
+              <TextField
+                type={!this.state.visible ? "password" : "text"}
+                name="password"
+                placeholder="password"
+                id="standard-basic"
+                label="Password*"
+                value={this.state.password}
+                onChange={this.handlePasswordChange}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton onClick={this.handleVisibility}>
+                      {!this.state.visible ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </div>
+          </div>
+          <div class="d-flex justify-content-around"style={{marginTop:"4%",marginBottom:"4%"}}>
+            <div>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2" onClick={this.handleRegister}>
+                    Create account
+                  </Link>
+                </Grid>
+              </Grid>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2" onClick={this.handleForgot}>
+                    Forgot password?
+                  </Link>
+                </Grid>
+              </Grid>
+            </div>
+
+            <Button
+              class="btn btn-primary btn-sm"
+              type="button"
+              value="submit"
+              onClick={this.handleSubmit}
+            >
+              log in
+            </Button>
+
+          </div>
         </Card>
+
         <Snackbar
           anchorOrigin={{
             vertical: "bottom",

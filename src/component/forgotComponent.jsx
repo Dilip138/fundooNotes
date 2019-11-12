@@ -69,7 +69,7 @@ class ForgotPassword extends Component {
     return (
       <div className="container-fluid">
         <div className="responsive">
-          <Card className="card">
+          <Card className="card1">
             <div className="fundoo-content">
               <span className="test1">F</span>
               <span className="test2">u</span>
