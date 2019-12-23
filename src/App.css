@@ -1,126 +1,84 @@
-/* .login-card{
-    margin-top: 4%;
-    width: 40%; 
-    height: 400px;  
-} */
-/* .login_text_field{
-    margin-left: 3%;
-    margin-right: 3%;
-
-}
-#fundo-login{
-    text-align: center;
-    padding: 10px;
-}
-#continue{
-    text-align: center;
-    padding: 10px;
-} 
-#login{
-    text-align: right;
-    margin-top: 6%;
-    margin-right: 3%;
-}
-#account{
-    text-align: left;
-    margin-left: 3%;
-} */
-#root{
+#root {
     width: 100vw;
     height: 100vh;
 }
-.register-card{
+
+.register-card {
     height: 500px;
-    width: 35%;   
+    width: 35%;
     justify-content: center;
     position: relative;
     margin: 4rem 25rem;
     padding: 60px;
 }
-#signup{
+
+#signup {
     padding: 20px;
     text-align: right;
 }
-#cart{
+
+#cart {
     text-align: center;
 }
-.sevice-card{
+
+.sevice-card {
     display: flex;
     justify-content: space-around;
 }
-.container-fluid{
+
+.container-fluid {
     display: flex;
     justify-content: center;
     margin-top: 4%;
 }
-.card1{
-    height: 450px ;
-    width: 550px; 
+
+.card1 {
+    height: 450px;
+    width: 550px;
 }
-.email{
+
+.email {
     padding: 40px;
 }
-.fundoo-content{
+
+.fundoo-content {
     text-align: center;
     margin-bottom: 2%;
     margin-top: 4%;
 }
-.yourEmail{
+
+.yourEmail {
     text-align: center;
     margin-top: 4%;
     color: red;
     font-size: 22px;
 }
-.recoveryEmail{
+
+.recoveryEmail {
     text-align: center;
     margin-top: 4%;
-    color:green;
+    color: green;
     font-size: 22px;
 }
-.test1{
-    color:blue;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 30px;
 
-}
-.test2{
-    color: red;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 25px;
-
-}
-.test3{
-    color:orange;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 25px;
-
-}
-.test4{
-    color:blue;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 25px;
-
-}
-.test5{
-    color:green;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 25px;
-
-}
-.test6{
-    color:red;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 25px;
-
-}
-.back-next{
+.back-next {
     display: flex;
     justify-content: space-around;
     margin-top: -2%;
 }
-.card{
+
+.card {
     width: 35%;
     height: 300px;
     margin-top: 6%;
 }
 
+/** appBar design **/
+.searchIcon{
+   border-radius: 2px solid;
+    
+}
+.sectionDesktop{
+    display: flex;
+    flex-direction: row;
+}

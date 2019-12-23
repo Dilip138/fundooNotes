@@ -117,39 +117,16 @@ class Login extends Component {
       <div class="d-flex justify-content-center">
         <Card
           className="d-flex flex-column justify-content-center"
-          style={{
-            width: "30%",
-            marginTop:"10%"
-          }}
-        >
+          style={{ width: "30%", marginTop: "10%" }}>
           <div className="d-flex justify-content-center" style=
-          {{font:"bold 25px Times New Roman"}}>
-            <span class="text-primary"
-            >
-              F
-            </span>
-            <span class="text-danger"
-            >
-              u
-            </span>
-            <span class="text-warning"
-            >
-              n
-            </span>
-            <span class="text-primary"
-            >
-              d
-            </span>
-            <span class="text-danger"
-            >
-              o
-            </span>
-            <span class="text-success"
-            >
-              o
-            </span>
+            {{ font: "bold 25px Times New Roman" }}>
+            <span class="text-primary" >F </span>
+            <span class="text-danger">u</span>
+            <span class="text-warning">n</span>
+            <span class="text-primary">d</span>
+            <span class="text-danger"> o</span>
+            <span class="text-success">o</span>
           </div>
-
           <div id="signin">
             <div style={{ color: "black", fontSize: 25, textAlign: "center" }}>
               <b>Sign In</b>
@@ -158,8 +135,7 @@ class Login extends Component {
           <div id="continue">
             <div
               class="d-flex justify-content-center"
-              style={{ fontSize: 25, fontFamily: "TimesNewRoman" }}
-            >
+              style={{ fontSize: 25, fontFamily: "TimesNewRoman" }} >
               Continue to fundoo
             </div>
           </div>
@@ -172,8 +148,7 @@ class Login extends Component {
                 id="standard-basic"
                 label="Email id*"
                 value={this.state.email}
-                onChange={this.handleEmailChange}
-              />
+                onChange={this.handleEmailChange} />
             </div>
             <div class="d-flex justify-content-center">
               <TextField
@@ -190,11 +165,10 @@ class Login extends Component {
                       {!this.state.visible ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
-                }
-              />
+                } />
             </div>
           </div>
-          <div class="d-flex justify-content-around"style={{marginTop:"4%",marginBottom:"4%"}}>
+          <div class="d-flex justify-content-around" style={{ marginTop: "4%", marginBottom: "4%" }}>
             <div>
               <Grid container>
                 <Grid item xs>
@@ -211,19 +185,15 @@ class Login extends Component {
                 </Grid>
               </Grid>
             </div>
-
             <Button
               class="btn btn-primary btn-sm"
               type="button"
               value="submit"
-              onClick={this.handleSubmit}
-            >
+              onClick={this.handleSubmit}>
               log in
             </Button>
-
           </div>
         </Card>
-
         <Snackbar
           anchorOrigin={{
             vertical: "bottom",
@@ -237,8 +207,7 @@ class Login extends Component {
             <IconButton onClick={this.handleClose}>
               <CloseIcon onClick={this.snackbarClose} />
             </IconButton>
-          ]}
-        />
+          ]} />
       </div>
     );
   }

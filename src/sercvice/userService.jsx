@@ -9,11 +9,6 @@ function userLogin(data) {
   console.log("login data", data);
   console.log("token", localStorage.getItem("token"));
   return axios.post(baseURL + "/user/login", data);
-  // {
-  //     headers: {
-  //       Authorization: localStorage.getItem("token")
-  //     }
-  //   });
 }
 function userForgot(data) {
   return axios

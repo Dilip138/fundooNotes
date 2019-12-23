@@ -70,13 +70,14 @@ class ForgotPassword extends Component {
       <div className="container-fluid">
         <div className="responsive">
           <Card className="card1">
-            <div className="fundoo-content">
-              <span className="test1">F</span>
-              <span className="test2">u</span>
-              <span className="test3">n</span>
-              <span className="test4">d</span>
-              <span className="test5">o</span>
-              <span className="test6">o</span>
+            <div className="d-flex justify-content-center" style=
+              {{ font: "bold 25px Times New Roman" }}>
+              <span class="text-primary" >F </span>
+              <span class="text-danger">u</span>
+              <span class="text-warning">n</span>
+              <span class="text-primary">d</span>
+              <span class="text-danger"> o</span>
+              <span class="text-success">o</span>
             </div>
             <div className="yourEmail">Find Your Email</div>
             <div className="recoveryEmail">Enter Your Recovery Email Id</div>
@@ -88,8 +89,7 @@ class ForgotPassword extends Component {
                 name="email"
                 value={this.state.email}
                 onChange={this.handleEmailChange}
-                fullWidth
-              />
+                fullWidth />
             </div>
             <div className="back-next">
               <div>
@@ -97,8 +97,7 @@ class ForgotPassword extends Component {
                   type="button"
                   value="submit"
                   style={{ backgroundColor: "blue" }}
-                  onClick={this.handleBack}
-                >
+                  onClick={this.handleBack} >
                   Back
                 </Button>
               </div>
@@ -107,8 +106,7 @@ class ForgotPassword extends Component {
                   type="button"
                   value="submit"
                   style={{ backgroundColor: "blue" }}
-                  onClick={this.handleSubmit}
-                >
+                  onClick={this.handleSubmit} >
                   Next
                 </Button>
               </div>
@@ -127,12 +125,10 @@ class ForgotPassword extends Component {
               <IconButton>
                 <CloseIcon onClick={this.snackbarClose} />
               </IconButton>
-            ]}
-          />
+            ]} />
         </div>
       </div>
     );
   }
 }
-
 export default ForgotPassword;

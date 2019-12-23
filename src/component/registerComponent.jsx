@@ -136,74 +136,18 @@ class Register extends Component {
     return (
       <div className="register-content">
         <Card className="register-card">
-          <div id="cart">
-            <span
-              style={{
-                color: "blue",
-                fontFamily: "TimesNewRoman",
-                fontSize: 30
-              }}
-            >
-              F
-            </span>
-            <span
-              style={{
-                color: "red",
-                fontFamily: "TimesNewRoman",
-                fontSize: 25
-              }}
-            >
-              u
-            </span>
-            <span
-              style={{
-                color: "orange",
-                fontFamily: "TimesNewRoman",
-                fontSize: 25
-              }}
-            >
-              n
-            </span>
-            <span
-              style={{
-                color: "blue",
-                fontFamily: "TimesNewRoman",
-                fontSize: 25
-              }}
-            >
-              d
-            </span>
-            <span
-              style={{
-                color: "green",
-                fontFamily: "TimesNewRoman",
-                fontSize: 25
-              }}
-            >
-              o
-            </span>
-            <span
-              style={{
-                color: "red",
-                fontFamily: "TimesNewRoman",
-                fontSize: 25
-              }}
-            >
-              o
-            </span>
+          <div className="d-flex justify-content-center" style=
+            {{ font: "bold 25px Times New Roman" }}>
+            <span class="text-primary" >F </span>
+            <span class="text-danger">u</span>
+            <span class="text-warning">n</span>
+            <span class="text-primary">d</span>
+            <span class="text-danger"> o</span>
+            <span class="text-success">o</span>
           </div>
-          <div
-            style={{
-              color: "black",
-              fontSize: 20,
-              fontFamily: "TimesNewRoman",
-              textAlign: "center",
-              marginTop: "5%"
-            }}
-          >
+          <div style={{ color: "black", fontSize: 20, fontFamily: "TimesNewRoman", textAlign: "center", marginTop: "5%" }} >
             <b>Create your Fundoo Account</b>
           </div>
-
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -214,8 +158,7 @@ class Register extends Component {
                 fullWidth
                 autoComplete="fname"
                 value={this.state.firstName}
-                onChange={this.handleFirstNameChange}
-              />
+                onChange={this.handleFirstNameChange} />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -226,8 +169,7 @@ class Register extends Component {
                 fullWidth
                 autoComplete="lname"
                 value={this.state.lastName}
-                onChange={this.handleLastNameChange}
-              />
+                onChange={this.handleLastNameChange} />
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -238,8 +180,7 @@ class Register extends Component {
                 fullWidth
                 autoComplete="eid"
                 value={this.state.email}
-                onChange={this.handleEmailChange}
-              />
+                onChange={this.handleEmailChange} />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -251,8 +192,7 @@ class Register extends Component {
                 fullWidth
                 autoComplete="pwd"
                 value={this.state.password}
-                onChange={this.handlePasswordChange}
-              />
+                onChange={this.handlePasswordChange} />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -264,8 +204,7 @@ class Register extends Component {
                 fullWidth
                 autoComplete="cnpwd"
                 value={this.state.confirmPassword}
-                onChange={this.handleconfirmPasswordChange}
-              />
+                onChange={this.handleconfirmPasswordChange} />
             </Grid>
           </Grid>
           <div id="signup">
@@ -273,8 +212,7 @@ class Register extends Component {
               style={{ backgroundColor: "blue" }}
               type="button"
               value="submit"
-              onClick={this.handleSubmit}
-            >
+              onClick={this.handleSubmit}>
               sign Up
             </Button>
           </div>
@@ -299,8 +237,7 @@ class Register extends Component {
             <IconButton onClick={this.handleClose}>
               <CloseIcon onClick={this.snackbarClose} />
             </IconButton>
-          ]}
-        />
+          ]} />
       </div>
     );
   }
