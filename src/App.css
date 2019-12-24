@@ -74,11 +74,29 @@
 }
 
 /** appBar design **/
-.searchIcon{
-   border-radius: 2px solid;
-    
+
+.Icon {
+    display: flex;
+    align-items: center;
 }
-.sectionDesktop{
+
+.sectionDesktop {
     display: flex;
     flex-direction: row;
+}
+
+.searchAndIcon {
+    display: flex;
+    justify-content: space-around;
+    width: 61em;
+    margin-left: 7em;
+}
+
+.search {
+    border-radius: 12px;
+    background: rgba(167, 157, 157, 0.39);
+    display: flex;
+    min-width: 37em;
+    padding: 10px;
+    align-items: center;
 }

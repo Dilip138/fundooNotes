@@ -11,6 +11,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import ViewAgenda from '@material-ui/icons/ViewAgenda';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
+import DrawerComponent from '../component/drawer'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 const theme = createMuiTheme({
     overrides: {
@@ -18,53 +19,79 @@ const theme = createMuiTheme({
             colorPrimary: {
                 backgroundColor: "white"
             }
+        },
+        MuiToolbar: {
+            regular: {
+                justifyContent: 'space-between'
+            }
+
+        },
+        MuiDrawer: {
+            paperAnchorDockedLeft: {
+                marginTop: '4em',
+                minWidth: '15em',
+            }
         }
     }
 })
 class DashBoard extends Component {
-
+    constructor() {
+        super()
+        this.state = {
+            drawerOpen: false,
+        }
+    }
+    openDrawer = () => {
+        this.setState({
+            drawerOpen: !this.state.drawerOpen
+        })
+    }
     render() {
         return (
             <div className="root">
                 <MuiThemeProvider theme={theme}>
                     <AppBar>
                         <Toolbar>
-                            <div style={{ position: 'relative', display: 'flex' }}>
+                            <div className="Icon">
                                 <div>
-                                    <IconButton className="menuButton">
+                                    <IconButton className="menuButton" onClick={this.openDrawer}>
                                         <MenuIcon />
                                     </IconButton>
+                                </div>
+                                <div>
+                                    <img src={require('../assets/keep.jpeg')} style={{ width: '32px', height: '32px' }} />
                                 </div>
                                 <div style={{ color: "black", cursor: "pointer" }}>
                                     <Typography className="title" variant="h6">
                                         fundooNotes </Typography>
                                 </div>
                             </div>
-                            <div style={{ border: "1px solid black", borderRadius: "12px", background: "#a79d9d63", display: 'flex', minWidth: '234px' }}>
-                                <div className="searchIcon">
-                                    <SearchIcon style={{ color: "black" }} />
+                            <div className="searchAndIcon">
+                                <div className="search">
+                                    <div className="searchIcon">
+                                        <SearchIcon style={{ color: "black" }} />
+                                    </div>
+                                    <div>
+                                        <InputBase
+                                            placeholder="Search…" />
+                                    </div>
                                 </div>
-                                <div>
-                                    <InputBase
-                                        placeholder="Search…" />
-                                </div>
-                            </div>
-                            <div className="grow" />
-                            <div className="sectionDesktop">
-                                <div style={{ flexDirection: "row" }}>
-                                    <IconButton>
-                                        <Refresh />
-                                    </IconButton>
-                                </div>
-                                <div style={{ flexDirection: "row" }}>
-                                    <IconButton>
-                                        <ViewAgenda />
-                                    </IconButton>
-                                </div>
-                                <div style={{ flexDirection: "row" }}>
-                                    <IconButton>
-                                        <SettingsIcon />
-                                    </IconButton>
+                                <div className="sectionDesktop">
+                                    <div>
+                                        <IconButton>
+                                            <Refresh />
+                                        </IconButton>
+                                    </div>
+                                    <div>
+                                        <IconButton>
+                                            <ViewAgenda />
+                                        </IconButton>
+                                    </div>
+                                    <div>
+                                        <IconButton>
+                                            <SettingsIcon />
+                                        </IconButton>
+                                    </div>
                                 </div>
                             </div>
                             <div>
@@ -76,6 +103,12 @@ class DashBoard extends Component {
                                 </IconButton>
                             </div>
                         </Toolbar>
+                        <DrawerComponent
+                            drawerOpen={this.state.drawerOpen}
+                        // handleArchieve={this.props.handleArchieve}
+                        // handleReminder={this.props.handleReminders}
+                        // handleNotes={this.props.handleNotes}
+                        />
                     </AppBar>
                 </MuiThemeProvider>
             </div>
