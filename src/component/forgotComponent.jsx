@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { TextField, Button, Card, IconButton } from "@material-ui/core";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
-import userForgot from "../sercvice/userService";
+import {userForgot} from "../sercvice/userService";
 class ForgotPassword extends Component {
   constructor(props) {
     super(props);
@@ -49,8 +49,7 @@ class ForgotPassword extends Component {
       let data = {
         email: this.state.email
       };
-      userForgot
-        .userForgot(data)
+      userForgot(data)
         .then(res => {
           console.log("res in login---------", res);
           localStorage.setItem("email", this.state.email);

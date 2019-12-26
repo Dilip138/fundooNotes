@@ -8,7 +8,7 @@
  ******************************************************************************************/
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
-import userLogin from "../sercvice/userService";
+import {userLogin} from "../sercvice/userService";
 import { IconButton, Button } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import Link from "@material-ui/core/Link";
@@ -89,13 +89,11 @@ class Login extends Component {
         email: this.state.email,
         password: this.state.password
       };
-      userLogin
-        .userLogin(data)
+      userLogin(data)
         .then(res => {
           console.log("res in login---------", res.data.id);
           localStorage.setItem("email", this.state.email);
           localStorage.setItem("token", res.data.id);
-
           this.props.history.push("/dashboard");
           this.setState({
             snackbarOpen: true,

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -11,9 +11,9 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import ViewAgenda from '@material-ui/icons/ViewAgenda';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import DrawerComponent from '../component/drawer.jsx'
+// import Button from '@material-ui/core/Button';
+// import DrawerComponent from '../component/drawer.jsx'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
-import CreateNotes from './createNotesComponent'
-import GetNoteComponent from '../component/getNoteComponent'
 const theme = createMuiTheme({
     overrides: {
         MuiAppBar: {
@@ -35,47 +35,16 @@ const theme = createMuiTheme({
         }
     }
 })
-class DashBoard extends Component {
-    constructor() {
-        super()
-        this.state = {
-            drawerOpen: false,
-            notes:true,
-            archive:false,
-            reminders:false,
-            trash:false
+export default class Archive extends Component {
+    constructor(props){
+        super(props)
+        this.state={
+            drawerOpen:false  
         }
     }
     openDrawer = () => {
         this.setState({
             drawerOpen: !this.state.drawerOpen
-        })
-    }
-    handleReload = () => {
-        window.location.reload()
-    }
-    handleNotes =()=>{
-        this.setState({
-            notes:true,
-            archive:false,
-            reminder:false,
-            trash:false
-        })
-    }
-    handleReminders =()=>{
-        this.setState({
-            notes:false,
-            archive:false,
-            reminder:true,
-            trash:false
-        })
-    }
-    handleArchieve =()=>{
-        this.setState({
-            notes:false,
-            archive:true,
-            reminder:false,
-            trash:false
         })
     }
     render() {
@@ -95,7 +64,7 @@ class DashBoard extends Component {
                                 </div>
                                 <div style={{ color: "black", cursor: "pointer" }}>
                                     <Typography className="title" variant="h6">
-                                        fundooNotes </Typography>
+                                        Archive </Typography>
                                 </div>
                             </div>
                             <div className="searchAndIcon">
@@ -137,18 +106,10 @@ class DashBoard extends Component {
                         </Toolbar>
                         <DrawerComponent
                             drawerOpen={this.state.drawerOpen}
-                            // handleArchieve={this.handleArchieve}
-                            // handleReminders={this.handleReminders}
-                            // handleNotes={this.handleNotes}
                         />
                     </AppBar>
                 </MuiThemeProvider>
-                <div><CreateNotes /></div>
-                <div><GetNoteComponent /></div>
-
             </div>
         );
     }
 }
-
-export default DashBoard;

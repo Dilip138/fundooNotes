@@ -9,27 +9,39 @@ import NotesIcon from '@material-ui/icons/Note';
 import AddAlertIcon from '@material-ui/icons/AddAlert';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import DeleteIcon from '@material-ui/icons/Delete';
+import {withRouter} from 'react-router-dom';
 
-
-export default class DrawerComponent extends Component {
+ class DrawerComponent extends Component {
+    constructor(props){
+        super(props)      
+    }
+    handleNotes =()=>{
+        this.props.history.push("/dashboard");
+    }   
+    handleReminders =()=>{
+        this.props.history.push("/reminders");
+    }
+    handleArchieve =()=>{
+        this.props.history.push("/archive");
+    }
+    handleTrash =()=>{
+        this.props.history.push("/trash");
+    }
     render() {
         return (
             <Drawer
                 className="drawer"
                 variant="persistent"
                 overflow="auto"
-                open={this.props.drawerOpen}
-            // width={300}
-
-            >
+                open={this.props.drawerOpen} >
                 <List>
                     <ListItem button key="Note" onClick={this.handleNotes}>
                         <ListItemIcon><NotesIcon /></ListItemIcon>
                         <ListItemText primary="Note" />
                     </ListItem>
-                    <ListItem button key="Reminder" onClick={this.handleReminders}>
+                    <ListItem button key="Reminders" onClick={this.handleReminders}>
                         <ListItemIcon><AddAlertIcon /></ListItemIcon>
-                        <ListItemText primary="Reminder" />
+                        <ListItemText primary="Reminders" />
                     </ListItem>
                     <Divider />
                     <ListItem button key="Edit labels" onClick={this.handlelabel}>
@@ -42,7 +54,7 @@ export default class DrawerComponent extends Component {
                         <ListItemIcon><ArchiveIcon /></ListItemIcon>
                         <ListItemText primary="Archive" />
                     </ListItem>
-                    <ListItem button key="Trash">
+                    <ListItem button key="Trash" onClick={this.handleTrash}>
                         <ListItemIcon><DeleteIcon /></ListItemIcon>
                         <ListItemText primary="Trash" />
                     </ListItem>
@@ -52,3 +64,5 @@ export default class DrawerComponent extends Component {
         );
     }
 }
+
+export default withRouter(DrawerComponent)

@@ -11,7 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import { Card, Button, IconButton } from "@material-ui/core";
 import Link from "@material-ui/core/Link";
-import userRegister from "../sercvice/userService";
+import {userRegister} from "../sercvice/userService";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import { withRouter } from "react-router-dom";
@@ -82,8 +82,7 @@ class Register extends Component {
         password: this.state.password,
         service: "basic"
       };
-      userRegister
-        .userRegister(data)
+      userRegister(data)
         .then(res => {
           console.log("res in register---------", res);
           this.props.history.push("/login");

@@ -73,11 +73,19 @@
     margin-top: 6%;
 }
 
+@media only screen and(min-width:600px) {
+    .allNotes {
+        margin-left: 240px;
+    }
+}
+
 /** appBar design **/
 
 .Icon {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 235px;
 }
 
 .sectionDesktop {
@@ -89,7 +97,7 @@
     display: flex;
     justify-content: space-around;
     width: 61em;
-    margin-left: 7em;
+    margin-left: 5em;
 }
 
 .search {
@@ -99,4 +107,76 @@
     min-width: 37em;
     padding: 10px;
     align-items: center;
+}
+
+.Take_Note {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.card_Note {
+    width: 35em;
+    display: flex;
+    justify-content: space-between;
+    padding: 13px;
+    box-shadow: 0px 1px 7px 0px;
+    margin-top: 8%;
+    margin-bottom: 4%;
+}
+
+.card_Notes {
+    width: 35em;
+    padding: 15px;
+    margin-top: 8%;
+    margin-bottom: 4%;
+}
+
+.icon_Take {
+    display: flex;
+    justify-content: space-between;
+    width: 7em;
+}
+
+.inputNote {
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+.imageAndClose {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
+.imageIcon {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+}
+
+.imageIconCard{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.allNotes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.getcard {
+    width: 240px;
+    min-height: 100px;
+    height: auto;
+    margin: 10px;
+    padding: 15px;
+}
+.dialogCard{
+    width:35em;
+    min-height: 140px;
+    height: auto;
+    padding: 10px;
 }
