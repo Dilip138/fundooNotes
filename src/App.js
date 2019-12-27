@@ -9,7 +9,7 @@ import dashBoard  from './component/dashBoardComponent';
 import drawer from './component/drawer'
 import createNotes from './component/createNotesComponent';
 import getNotes from'./component/getNoteComponent';
-import editNote from './component/editNoteComponent';
+import moreMenu from './component/moreComponent';
 import archive from './component/getArchive';
 import reminders from './component/getReminders';
 import trash from './component/getTrash';
@@ -26,9 +26,10 @@ function App() {
         <Route path="/createNotes" component={createNotes}></Route>
         <Route path="/drawer" component={drawer}></Route>
         <Route path="/getNotes" component={getNotes}></Route>
-        <Route path="/editNote" component={editNote}></Route>
+        <Route path="/moreMenu" component={moreMenu}></Route>
         <Route path="/archive" component={archive}></Route>
         <Route path="/reminders" component={reminders}></Route>
+        <Route path="/trash" component={trash}></Route>
         <Route path="/trash" component={trash}></Route>
 
       </Switch>

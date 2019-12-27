@@ -9,5 +9,4 @@ class dashBoardPage extends Component {
         );
     }
 }
-
 export default dashBoardPage;

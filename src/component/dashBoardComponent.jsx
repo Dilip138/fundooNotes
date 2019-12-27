@@ -25,7 +25,6 @@ const theme = createMuiTheme({
             regular: {
                 justifyContent: 'space-between'
             }
-
         },
         MuiDrawer: {
             paperAnchorDockedLeft: {
@@ -137,9 +136,9 @@ class DashBoard extends Component {
                         </Toolbar>
                         <DrawerComponent
                             drawerOpen={this.state.drawerOpen}
-                            // handleArchieve={this.handleArchieve}
-                            // handleReminders={this.handleReminders}
-                            // handleNotes={this.handleNotes}
+                            handleArchieve={this.handleArchieve}
+                            handleReminders={this.handleReminders}
+                            handleNotes={this.handleNotes}
                         />
                     </AppBar>
                 </MuiThemeProvider>

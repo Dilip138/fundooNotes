@@ -11,7 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import { Card, Button, IconButton } from "@material-ui/core";
 import Link from "@material-ui/core/Link";
-import {userRegister} from "../sercvice/userService";
+import { userRegister } from "../sercvice/userService";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import { withRouter } from "react-router-dom";
@@ -135,8 +135,7 @@ class Register extends Component {
     return (
       <div className="register-content">
         <Card className="register-card">
-          <div className="d-flex justify-content-center" style=
-            {{ font: "bold 25px Times New Roman" }}>
+          <div className="d-flex justify-content-center" style={{ font: "bold 25px Times New Roman" }}>
             <span class="text-primary" >F </span>
             <span class="text-danger">u</span>
             <span class="text-warning">n</span>

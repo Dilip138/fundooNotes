@@ -19,25 +19,43 @@ export function userForgot(data) {
       console.log("err in reset", err);
     });
 }
-export function createNotes(data){
+export function createNotes(data) {
   console.log("----------->", data);
-  return axios.post(baseURL + "/notes/addNotes",data,{
-    headers:{
-      Authorization :localStorage.getItem('token')
+  return axios.post(baseURL + "/notes/addNotes", data, {
+    headers: {
+      Authorization: localStorage.getItem('token')
     }
   })
 }
-export function getAllNotes(){
-  return axios.get(baseURL + "/notes/getNotesList",{
-    headers:{
-      Authorization :localStorage.getItem('token')
+export function getAllNotes() {
+  return axios.get(baseURL + "/notes/getNotesList", {
+    headers: {
+      Authorization: localStorage.getItem('token')
     }
   })
 }
-export function editNote(data){
-  return axios.post(baseURL + "/notes/updateNotes", data,{
-    headers:{
-      Authorization :localStorage.getItem('token')
+export function editNote(data) {
+  return axios.post(baseURL + "/notes/updateNotes", data, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  })
+}
+export function archiveNotes(data) {
+  console.log("data in service for archive ", data,  localStorage.getItem('token'));
+  
+  return axios.post(baseURL + "/notes/archiveNotes", data, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  })
+}
+export function trashNotes(data) {
+  console.log("data in service for trash ", data,  localStorage.getItem('token'));
+  
+  return axios.post(baseURL + "/notes/trashNotes", data, {
+    headers: {
+      Authorization: localStorage.getItem('token')
     }
   })
 }

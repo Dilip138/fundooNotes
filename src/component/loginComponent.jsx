@@ -8,7 +8,7 @@
  ******************************************************************************************/
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
-import {userLogin} from "../sercvice/userService";
+import { userLogin } from "../sercvice/userService";
 import { IconButton, Button } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import Link from "@material-ui/core/Link";
@@ -19,7 +19,6 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
-// import ClearIcon from "@material-ui/icons/Clear";
 // import Input from "@material-ui/core/Input";
 class Login extends Component {
   constructor(props) {
@@ -94,11 +93,11 @@ class Login extends Component {
           console.log("res in login---------", res.data.id);
           localStorage.setItem("email", this.state.email);
           localStorage.setItem("token", res.data.id);
-          this.props.history.push("/dashboard");
           this.setState({
             snackbarOpen: true,
             snackbarMsg: "Login successfully!!"
           });
+          this.props.history.push("/dashboard");
         })
         .catch(err => {
           console.log("err in login component ", err);
