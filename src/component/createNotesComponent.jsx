@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
-import TextField from "@material-ui/core/TextField";
 import Card from "@material-ui/core/Card";
-import { InputBase } from '@material-ui/core';
+import { InputBase, Tooltip } from '@material-ui/core';
 import CheckBoxIcon from '@material-ui/icons/CheckBoxOutlined';
 import EditIcon from '@material-ui/icons/EditOutlined';
 import ImageIcon from '@material-ui/icons/ImageOutlined';
-import AddAlertIcon from '@material-ui/icons/AddAlert';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import ColorLensIcon from '@material-ui/icons/ColorLens';
-import ArchiveIcon from '@material-ui/icons/Archive';
+import AddAlertIcon from '@material-ui/icons/AddAlertOutlined';
+import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
+import ColorLensIcon from '@material-ui/icons/ColorLensOutlined';
+import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { createNotes } from '../sercvice/userService';
+import ColorComponent from '../component/colorComponent';
 export default class TakeNotes extends Component {
     constructor() {
         super()
         this.state = {
             title: '',
             description: '',
-            trash: false,
-            pinned: false,
-            archive: false,
-            reminder: '',
+            color: '',
             open: false
         }
     }
@@ -38,18 +35,25 @@ export default class TakeNotes extends Component {
     handleDescription = (event) => {
         let description = event.target.value
         this.setState({
-            description: description 
+            description: description
+        })
+    }
+    handleColor = (col) => {
+        this.setState({
+            color: col
         })
     }
     handleClose = () => {
         this.setState({
             open: false,
             title: '',
-            description: ''
+            description: '',
+            color:''
         })
         let data = {
             title: this.state.title,
             description: this.state.description,
+            color: this.state.color
         }
         console.log("=========>", data);
         createNotes(data)
@@ -62,7 +66,6 @@ export default class TakeNotes extends Component {
     }
     render() {
         return (
-
             <div>
                 {!this.state.open ? (
                     <div className="Take_Note" >
@@ -79,7 +82,7 @@ export default class TakeNotes extends Component {
                         </Card>
                     </div>
                 ) : (<div className="Take_Note" >
-                    <Card className="card_Notes" style={{ boxShadow: "0px 0px 7px 0px" }}  >
+                    <Card className="card_Notes" style={{backgroundColor:this.state.color, boxShadow: "0px 0px 7px 0px" }}  >
                         <div>
                             <b><InputBase
                                 placeholder="Title"
@@ -94,12 +97,27 @@ export default class TakeNotes extends Component {
                         </div>
                         <div className="imageAndClose">
                             <div className="imageIcon">
-                                <div><AddAlertIcon /></div>
-                                <div><PersonAddIcon /></div>
-                                <div><ColorLensIcon /></div>
-                                <div><ImageIcon /></div>
-                                <div><ArchiveIcon /></div>
-                                <div><MoreVertIcon /></div>
+                                <Tooltip title="Remind me">
+                                    <div><AddAlertIcon /></div>
+                                </Tooltip>
+                                <Tooltip title="Collborator">
+                                    <div><PersonAddIcon /></div>
+                                </Tooltip>
+                                <Tooltip title="Change color">
+                                    <div><ColorComponent
+                                        colorPatter={this.handleColor}
+                                        noteId={""}
+                                         /></div>
+                                </Tooltip>
+                                <Tooltip title="Add image">
+                                    <div><ImageIcon /></div>
+                                </Tooltip>
+                                <Tooltip title="Archive">
+                                    <div><ArchiveIcon /></div>
+                                </Tooltip>
+                                <Tooltip title="more">
+                                    <div><MoreVertIcon /></div>
+                                </Tooltip>
                             </div>
                             <div onClick={this.handleClose} style={{ cursor: 'pointer' }}>Close</div>
                         </div>

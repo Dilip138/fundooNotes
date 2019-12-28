@@ -6,9 +6,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import NotesIcon from '@material-ui/icons/Note';
-import AddAlertIcon from '@material-ui/icons/AddAlert';
-import ArchiveIcon from '@material-ui/icons/Archive';
-import DeleteIcon from '@material-ui/icons/Delete';
+import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
+import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
+import EditIcon from '@material-ui/icons/EditOutlined';
+import DeleteIcon from '@material-ui/icons/DeleteOutline';
 import {withRouter} from 'react-router-dom';
 
  class DrawerComponent extends Component {
@@ -40,13 +41,13 @@ import {withRouter} from 'react-router-dom';
                         <ListItemText primary="Note" />
                     </ListItem>
                     <ListItem button key="Reminders" onClick={this.handleReminders}>
-                        <ListItemIcon><AddAlertIcon /></ListItemIcon>
+                        <ListItemIcon><NotificationsIcon /></ListItemIcon>
                         <ListItemText primary="Reminders" />
                     </ListItem>
                     <Divider />
                     <ListItem button key="Edit labels" onClick={this.handlelabel}>
-                        <ListItemIcon><ArchiveIcon /></ListItemIcon>
-                        <ListItemText primary="Archive" />
+                        <ListItemIcon><EditIcon /></ListItemIcon>
+                        <ListItemText primary="Edit labels" />
                     </ListItem>
                     <Divider />
                     <Divider />

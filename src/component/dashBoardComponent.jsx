@@ -12,8 +12,8 @@ import ViewAgenda from '@material-ui/icons/ViewAgenda';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import DrawerComponent from '../component/drawer.jsx'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
-import CreateNotes from './createNotesComponent'
-import GetNoteComponent from '../component/getNoteComponent'
+import CreateNotes from './createNotesComponent';
+import GetNoteComponent from '../component/getNoteComponent';
 const theme = createMuiTheme({
     overrides: {
         MuiAppBar: {
@@ -39,10 +39,10 @@ class DashBoard extends Component {
         super()
         this.state = {
             drawerOpen: false,
-            notes:true,
-            archive:false,
-            reminders:false,
-            trash:false
+            notes: true,
+            archive: false,
+            reminders: false,
+            trash: false
         }
     }
     openDrawer = () => {
@@ -53,28 +53,28 @@ class DashBoard extends Component {
     handleReload = () => {
         window.location.reload()
     }
-    handleNotes =()=>{
+    handleNotes = () => {
         this.setState({
-            notes:true,
-            archive:false,
-            reminder:false,
-            trash:false
+            notes: true,
+            archive: false,
+            reminder: false,
+            trash: false
         })
     }
-    handleReminders =()=>{
+    handleReminders = () => {
         this.setState({
-            notes:false,
-            archive:false,
-            reminder:true,
-            trash:false
+            notes: false,
+            archive: false,
+            reminder: true,
+            trash: false
         })
     }
-    handleArchieve =()=>{
+    handleArchieve = () => {
         this.setState({
-            notes:false,
-            archive:true,
-            reminder:false,
-            trash:false
+            notes: false,
+            archive: true,
+            reminder: false,
+            trash: false
         })
     }
     render() {
@@ -144,7 +144,6 @@ class DashBoard extends Component {
                 </MuiThemeProvider>
                 <div><CreateNotes /></div>
                 <div><GetNoteComponent /></div>
-
             </div>
         );
     }

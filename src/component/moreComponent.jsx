@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
@@ -12,8 +11,7 @@ export default class MoreMenu extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: false,
-      anchorEl: null,
+      anchorEl: false,
       notes: [],
       isDeleted: false,
     }
@@ -21,12 +19,11 @@ export default class MoreMenu extends Component {
   handleMenu = (e) => {
     this.setState({
       anchorEl: this.state.anchorEl ? false : e.target,
-      open: !this.state.open
     });
   };
   handleClose = () => {
     this.setState({
-      open: this.state.open
+      anchorEl: false
     });
   };
   componentDidMount() {

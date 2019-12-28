@@ -5,20 +5,21 @@ import Register from "./component/registerComponent";
 import ForgotPassword from './component/forgotComponent';
 import "./App.css";
 import ResetPassword from './component/resetComponent';
-import dashBoard  from './component/dashBoardComponent';
+import dashBoard from './component/dashBoardComponent';
 import drawer from './component/drawer'
 import createNotes from './component/createNotesComponent';
-import getNotes from'./component/getNoteComponent';
+import getNotes from './component/getNoteComponent';
 import moreMenu from './component/moreComponent';
 import archive from './component/getArchive';
 import reminders from './component/getReminders';
 import trash from './component/getTrash';
+import colorComponent from './component/colorComponent';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/login" component={Login}></Route>
+        <Route path="/" exact component={Login}></Route>
         <Route path="/register" component={Register}></Route>
         <Route path="/forgot" component={ForgotPassword}></Route>
         <Route path="/resetpassword/:id" component={ResetPassword}></Route>
@@ -30,8 +31,7 @@ function App() {
         <Route path="/archive" component={archive}></Route>
         <Route path="/reminders" component={reminders}></Route>
         <Route path="/trash" component={trash}></Route>
-        <Route path="/trash" component={trash}></Route>
-
+        <Route path="/colorComponent" component={colorComponent}></Route>
       </Switch>
     </Router>
   );

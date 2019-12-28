@@ -114,7 +114,7 @@ class Login extends Component {
       <div class="d-flex justify-content-center">
         <Card
           className="d-flex flex-column justify-content-center"
-          style={{ width: "30%", marginTop: "10%" }}>
+          style={{ width: "35%", marginTop: "8%" ,height:"370px",boxShadow: '0px 0px 1px 0px' }}>
           <div className="d-flex justify-content-center" style=
             {{ font: "bold 25px Times New Roman" }}>
             <span class="text-primary" >F </span>

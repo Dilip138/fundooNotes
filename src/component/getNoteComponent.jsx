@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { Card, InputBase } from '@material-ui/core';
-import ImageIcon from '@material-ui/icons/Image';
-import AddAlertIcon from '@material-ui/icons/AddAlert';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import ColorLensIcon from '@material-ui/icons/ColorLens';
-import ArchiveIcon from '@material-ui/icons/Archive';
+import ImageIcon from '@material-ui/icons/ImageOutlined';
+import AddAlertIcon from '@material-ui/icons/AddAlertOutlined';
+import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
+import ColorLensIcon from '@material-ui/icons/ColorLensOutlined';
+import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { getAllNotes, editNote, archiveNotes } from '../sercvice/userService';
+import { getAllNotes, editNote, archiveNotes, colorNotes } from '../sercvice/userService';
 import { withRouter } from "react-router-dom";
 import Dialog from '@material-ui/core/Dialog';
 import MoreMenu from '../component/moreComponent';
+import ColorComponent from '../component/colorComponent';
 
 class GetNotes extends Component {
     constructor(props) {
@@ -20,7 +21,8 @@ class GetNotes extends Component {
             noteId: '',
             title: '',
             description: '',
-            isArchived: false
+            color: '',
+            isArchived: false,
         };
     };
     componentDidMount() {
@@ -41,17 +43,19 @@ class GetNotes extends Component {
             open: !this.state.open
         })
     }
-    handleEditNote = (title, description, noteId) => {
+    handleEditNote = (title, description, noteId, color) => {
         this.setState({
             noteId: noteId,
             open: false,
             title: title,
-            description: description
+            description: description,
+            color: color,
         })
         let data = {
             noteId: this.state.noteId,
             title: this.state.title,
-            description: this.state.description
+            description: this.state.description,
+            color: this.state.color
         }
         //console.log("res in editData",data)
         editNote(data).then(res => {
@@ -88,6 +92,19 @@ class GetNotes extends Component {
                 console.log("err in archiveNote component ", err);
             });
     }
+    handleChangeColor = (col,noteId) => {
+        let data = {
+            color: col,
+            noteId: [noteId]
+        }
+        console.log("res in colorData", data);
+        colorNotes(data).then(res => {
+            console.log("res in colorNotes", res);
+        })
+            .catch(err => {
+                console.log("err in colorNote component ", err);
+            });
+    }
     render() {
         return (
             <div>
@@ -99,23 +116,25 @@ class GetNotes extends Component {
                                     return (
                                         key.isArchived === false && key.isDeleted === false &&
                                         <div className="getCardNote">
-                                            <Card className="getcard" style={{ boxShadow: "0px 0px 7px 0px", border: "1px solid black", borderRadius: '10px' }}>
+                                            <Card className="getcard" style={{ boxShadow: "0px 0px 7px 0px", border: "1px solid black", borderRadius: '10px' ,backgroundColor:key.color}}>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}
                                                         multiline
-                                                        onClick={() => this.handleEditNote(key.title, key.description, key.id)} />
+                                                        onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
                                                 </div>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.description}
                                                         multiline
-                                                        onClick={() => this.handleEditNote(key.title, key.description, key.id)} />
+                                                        onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
                                                 </div>
                                                 <div className="imageIconCard">
                                                     <div><AddAlertIcon /></div>
                                                     <div><PersonAddIcon /></div>
-                                                    <div><ColorLensIcon /></div>
+                                                    <div><ColorComponent
+                                                        colorPatter={this.handleChangeColor}
+                                                        noteId={key.id} /></div>
                                                     <div><ImageIcon /></div>
                                                     <div onClick={() => this.handleArchiveNotes(key.id)}><ArchiveIcon /></div>
                                                     <div><MoreMenu

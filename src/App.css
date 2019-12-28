@@ -3,8 +3,15 @@
     width: 35%;
     justify-content: center;
     position: relative;
-    margin: 4rem 25rem;
+    /* margin: 4rem 25rem; */
     padding: 60px;
+}
+.fundooAcount{
+    color: black;
+    font-size: 20px;
+    font-family: 'Times New Roman';
+    text-align: center;
+     margin-top: 5%
 }
 
 #signup {
@@ -19,12 +26,12 @@
 .container-fluid {
     display: flex;
     justify-content: center;
-    margin-top: 4%;
+    margin-top: 8%;
 }
 
 .card1 {
-    height: 450px;
-    width: 550px;
+    height: 350px;
+    width: 450px;
 }
 
 .email {
@@ -149,6 +156,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    visibility: hidden;
 }
 
 .allNotes {
@@ -170,6 +178,9 @@
     height: auto;
     margin: 10px;
     padding: 15px;
+}
+.getcard:hover>.imageIconCard{
+    visibility: visible;
 }
 .dialogCard{
     width:35em;

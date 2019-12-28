@@ -28,7 +28,7 @@ class Register extends Component {
     };
   }
   handleLogin = () => {
-    this.props.history.push("/login");
+    this.props.history.push("/");
   };
   handleSubmit = () => {
     if (this.state.firstName === "") {
@@ -133,8 +133,8 @@ class Register extends Component {
   };
   render() {
     return (
-      <div className="register-content">
-        <Card className="register-card">
+      <div className="d-flex justify-content-center">
+        <Card className="d-flex flex-column justify-content-center" style={{ width:'35%',boxShadow: '0px 0px 1px 0px',marginTop:'8%',height:'450px',padding:'35px'}}>
           <div className="d-flex justify-content-center" style={{ font: "bold 25px Times New Roman" }}>
             <span class="text-primary" >F </span>
             <span class="text-danger">u</span>
@@ -143,7 +143,7 @@ class Register extends Component {
             <span class="text-danger"> o</span>
             <span class="text-success">o</span>
           </div>
-          <div style={{ color: "black", fontSize: 20, fontFamily: "TimesNewRoman", textAlign: "center", marginTop: "5%" }} >
+          <div className="fundooAcount">
             <b>Create your Fundoo Account</b>
           </div>
           <Grid container spacing={3}>

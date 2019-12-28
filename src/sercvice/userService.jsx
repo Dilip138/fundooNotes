@@ -42,8 +42,7 @@ export function editNote(data) {
   })
 }
 export function archiveNotes(data) {
-  console.log("data in service for archive ", data,  localStorage.getItem('token'));
-  
+  console.log("data in service for archive ", data, localStorage.getItem('token'));
   return axios.post(baseURL + "/notes/archiveNotes", data, {
     headers: {
       Authorization: localStorage.getItem('token')
@@ -51,12 +50,21 @@ export function archiveNotes(data) {
   })
 }
 export function trashNotes(data) {
-  console.log("data in service for trash ", data,  localStorage.getItem('token'));
-  
+  console.log("data in service for trash ", data, localStorage.getItem('token'));
   return axios.post(baseURL + "/notes/trashNotes", data, {
     headers: {
       Authorization: localStorage.getItem('token')
     }
   })
 }
+export function colorNotes(data) {
+  console.log("data in service for trash ", data, localStorage.getItem('token'));
+  return axios.post(baseURL + "/notes/changesColorNotes", data, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  })
+}
+
+
 

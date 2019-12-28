@@ -25,7 +25,7 @@ class ForgotPassword extends Component {
     });
   };
   handleBack = () => {
-    this.props.history.push("/login");
+    this.props.history.push("/");
   };
   handleSubmit = () => {
     if (this.state.email === "") {
