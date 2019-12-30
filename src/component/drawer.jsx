@@ -5,7 +5,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import NotesIcon from '@material-ui/icons/Note';
+import EmojiObjectsIcon from '@material-ui/icons/EmojiObjectsOutlined';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
 import EditIcon from '@material-ui/icons/EditOutlined';
@@ -37,7 +37,7 @@ import {withRouter} from 'react-router-dom';
                 open={this.props.drawerOpen} >
                 <List>
                     <ListItem button key="Note" onClick={this.handleNotes}>
-                        <ListItemIcon><NotesIcon /></ListItemIcon>
+                        <ListItemIcon><EmojiObjectsIcon /></ListItemIcon>
                         <ListItemText primary="Note" />
                     </ListItem>
                     <ListItem button key="Reminders" onClick={this.handleReminders}>

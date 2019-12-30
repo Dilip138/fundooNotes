@@ -92,10 +92,11 @@ class GetNotes extends Component {
                 console.log("err in archiveNote component ", err);
             });
     }
-    handleChangeColor = (col,noteId) => {
+    handleChangeColor = (color, noteId) => {
         let data = {
-            color: col,
-            noteId: [noteId]
+            noteId: [noteId],
+            color: color,
+            
         }
         console.log("res in colorData", data);
         colorNotes(data).then(res => {

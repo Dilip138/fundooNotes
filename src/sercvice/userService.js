@@ -58,7 +58,7 @@ export function trashNotes(data) {
   })
 }
 export function colorNotes(data) {
-  console.log("data in service for trash ", data, localStorage.getItem('token'));
+  console.log("data in service for color ", data, localStorage.getItem('token'));
   return axios.post(baseURL + "/notes/changesColorNotes", data, {
     headers: {
       Authorization: localStorage.getItem('token')
