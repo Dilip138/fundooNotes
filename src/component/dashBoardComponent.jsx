@@ -39,10 +39,7 @@ class DashBoard extends Component {
         super()
         this.state = {
             drawerOpen: false,
-            notes: true,
-            archive: false,
-            reminders: false,
-            trash: false
+           
         }
     }
     openDrawer = () => {
@@ -52,30 +49,6 @@ class DashBoard extends Component {
     }
     handleReload = () => {
         window.location.reload()
-    }
-    handleNotes = () => {
-        this.setState({
-            notes: true,
-            archive: false,
-            reminder: false,
-            trash: false
-        })
-    }
-    handleReminders = () => {
-        this.setState({
-            notes: false,
-            archive: false,
-            reminder: true,
-            trash: false
-        })
-    }
-    handleArchieve = () => {
-        this.setState({
-            notes: false,
-            archive: true,
-            reminder: false,
-            trash: false
-        })
     }
     render() {
         return (
@@ -136,9 +109,9 @@ class DashBoard extends Component {
                         </Toolbar>
                         <DrawerComponent
                             drawerOpen={this.state.drawerOpen}
-                            handleArchieve={this.handleArchieve}
-                            handleReminders={this.handleReminders}
-                            handleNotes={this.handleNotes}
+                            // handleArchieve={this.handleArchieve}
+                            // handleReminders={this.handleReminders}
+                            // handleNotes={this.handleNotes}
                         />
                     </AppBar>
                 </MuiThemeProvider>
