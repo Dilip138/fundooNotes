@@ -6,8 +6,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import Grid from '@material-ui/core/Grid';
 import AddAlertIcon from '@material-ui/icons/AddAlertOutlined';
-import { Dialog } from '@material-ui/core';
-import { MuiPickersUtilsProvider, TimePicker, DatePicker } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns'
+import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker, } from '@material-ui/pickers';
+import { Dialog, Button } from '@material-ui/core';
 
 export default class Takereminders extends Component {
     constructor(props) {
@@ -33,45 +34,66 @@ export default class Takereminders extends Component {
     };
     handleOpenDialogue = (e) => {
         this.setState({
-            open: !this.state.open
+            open: true
         })
     }
     render() {
         return (
             <div>
                 <div onClick={(e) => this.handleReminder(e)}>
-                <AddAlertIcon />
+                    <AddAlertIcon />
                 </div>
                 <Popper open={this.state.anchorEl} anchorEl={this.state.anchorEl} style={{ zIndex: "999" }} >
                     <Paper>
                         <ClickAwayListener onClickAway={this.handleClose}>
                             <MenuList>
-                                <MenuItem onClick={this.handleOpenDialogue}>Pick date</MenuItem>
-                                <MenuItem onClick={this.handleOpenDialogue}>Pic time</MenuItem>
+                                <MenuItem >Toady</MenuItem>
+                                <MenuItem >Tomorrow</MenuItem>
+                                <MenuItem >Next week</MenuItem>
+                                <MenuItem onClick={this.handleOpenDialogue}>Pick date & time</MenuItem>
                             </MenuList>
                         </ClickAwayListener>
                     </Paper>
                 </Popper>
                 <Dialog
                     open={this.state.open}
-                    >
-                    >
-                    <Grid container className="grid" justify='space-around'>
-                        <DatePicker onClick={this.handleOpenDialogue}
-                            margin="normal"
-                            label="Date picker"
-                            value={this.state.selectedDate}
-                            onChange={this.handleDateChange}
-                        />
-                        <TimePicker
-                            margin="normal"
-                            label="Time picker"
-                            value={this.state.selectedDate}
-                            onChange={this.handleDateChange}
-                        />
-                    </Grid>
+                    onClose={this.handleOpenDialogue}>
+
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}  >
+
+                        <div style={{ padding: '15px' }}>
+                            <div>
+                                <KeyboardDatePicker
+                                    margin="normal"
+                                    id="date-picker-dialog"
+                                    label="Date picker dialog"
+                                    format="MM/dd/yyyy"
+                                    value={this.state.selectedDate}
+                                    onChange={this.handleDateChange}
+                                    KeyboardButtonProps={{
+                                        'aria-label': 'change date',
+                                    }}
+                                />
+                            </div>
+                            <div>
+                                <KeyboardTimePicker
+                                    margin="normal"
+                                    id="time-picker"
+                                    label="Time picker"
+                                    value={this.state.selectedDate}
+                                    onChange={this.handleDateChange}
+                                    KeyboardButtonProps={{
+                                        'aria-label': 'change time',
+                                    }}
+                                />
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                <Button>Save</Button>
+                            </div>
+                        </div>
+                    </MuiPickersUtilsProvider>
                 </Dialog>
-            </div>
+            </div >
         );
     }
 }
