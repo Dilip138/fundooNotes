@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from '@material-ui/core/IconButton';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import Refresh from '@material-ui/icons/Refresh';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ViewAgenda from '@material-ui/icons/ViewAgenda';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import DrawerComponent from '../component/drawer.jsx'
+import DrawerComponent from '../component/drawer.jsx';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import CreateNotes from './createNotesComponent';
 import GetNoteComponent from '../component/getNoteComponent';
+import Profile from './signOutComponent';
 const theme = createMuiTheme({
     overrides: {
         MuiAppBar: {
@@ -130,7 +130,7 @@ class DashBoard extends Component {
                                     aria-haspopup="true"
                                     onClick={this.handleProfileMenuOpen}
                                 >
-                                    <AccountCircle style={{ color: "black" }} />
+                                    <Profile />
                                 </IconButton>
                             </div>
                         </Toolbar>

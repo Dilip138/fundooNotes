@@ -1,5 +1,5 @@
 import axios from "axios";
-import apiConstant from '../sercvice/apiConstatnt';
+import apiConstant from './apiConstatnt';
 
 export function userRegister(data) {
   console.log("Data", data);
@@ -63,6 +63,8 @@ export function trashNotes(data) {
   })
 }
 export function colorNotes(data) {
+  console.log("token", localStorage.getItem('token'));
+  
   console.log("data in service for color ", data, localStorage.getItem('token'));
   return axios.post(process.env.REACT_APP_BASE_URL + apiConstant.colorNotes, data, {
     headers: {

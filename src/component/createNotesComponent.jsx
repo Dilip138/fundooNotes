@@ -8,8 +8,9 @@ import AddAlertIcon from '@material-ui/icons/AddAlertOutlined';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { createNotes } from '../sercvice/userService';
+import { createNotes } from '../service/userService';
 import ColorComponent from '../component/colorComponent';
+import TakeReminders from '../component/reminderComponent';
 export default class TakeNotes extends Component {
     constructor() {
         super()
@@ -97,7 +98,7 @@ export default class TakeNotes extends Component {
                         <div className="imageAndClose">
                             <div className="imageIcon">
                                 <Tooltip title="Remind me">
-                                    <div><AddAlertIcon /></div>
+                                    <div><TakeReminders /></div>
                                 </Tooltip>
                                 <Tooltip title="Collborator">
                                     <div><PersonAddIcon /></div>

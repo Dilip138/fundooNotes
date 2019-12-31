@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { TextField, Button, Card, IconButton } from "@material-ui/core";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
-import {userForgot} from "../sercvice/userService";
+import {userForgot} from "../service/userService";
 class ForgotPassword extends Component {
   constructor(props) {
     super(props);

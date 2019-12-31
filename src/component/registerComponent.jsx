@@ -11,7 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import { Card, Button, IconButton } from "@material-ui/core";
 import Link from "@material-ui/core/Link";
-import { userRegister } from "../sercvice/userService";
+import { userRegister } from "../service/userService";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import { withRouter } from "react-router-dom";

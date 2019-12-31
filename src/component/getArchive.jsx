@@ -17,7 +17,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ColorLensIcon from '@material-ui/icons/ColorLensOutlined';
 import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
 import MoreMenu from '../component/moreComponent';
-import { getAllNotes } from '../sercvice/userService';
+import { getAllNotes } from '../service/userService';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 const theme = createMuiTheme({
     overrides: {
@@ -143,7 +143,7 @@ export default class Archive extends Component {
                                 if (key.isArchived === true && key.isDeleted !== true) {
                                     return (
                                         <div className="getCardNote">
-                                            <Card className="getcard" style={{ boxShadow: "0px 0px 7px 0px", border: "1px solid black", borderRadius: '10px' }}>
+                                            <Card className="getcard" style={{ boxShadow: "0px 0px 7px 0px", border: "1px solid black", borderRadius: '10px',backgroundColor:this.props.notecolor }}>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}

@@ -6,7 +6,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ColorLensIcon from '@material-ui/icons/ColorLensOutlined';
 import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { getAllNotes, editNote, archiveNotes, colorNotes } from '../sercvice/userService';
+import { getAllNotes, editNote, archiveNotes, colorNotes } from '../service/userService';
 import { withRouter } from "react-router-dom";
 import Dialog from '@material-ui/core/Dialog';
 import MoreMenu from '../component/moreComponent';
@@ -94,9 +94,8 @@ class GetNotes extends Component {
     }
     handleChangeColor = (color, noteId) => {
         let data = {
-            noteId: [noteId],
             color: color,
-            
+            noteIdList: [noteId]            
         }
         console.log("res in colorData", data);
         colorNotes(data).then(res => {
@@ -137,7 +136,7 @@ class GetNotes extends Component {
                                                         colorPatter={this.handleChangeColor}
                                                         noteId={key.id} /></div>
                                                     <div><ImageIcon /></div>
-                                                    <div onClick={() => this.handleArchiveNotes(key.id)}><ArchiveIcon /></div>
+                                                    <div style={{cursor:'pointer'}} onClick={() => this.handleArchiveNotes(key.id)} notecolor={key.color}><ArchiveIcon /></div>
                                                     <div><MoreMenu
                                                         noteId={key.id} />
                                                     </div>

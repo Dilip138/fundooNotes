@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { Card, InputBase } from '@material-ui/core';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { getAllNotes,trashNotes } from '../sercvice/userService';
+import { getAllNotes, trashNotes } from '../service/userService';
+import { Dialog } from '@material-ui/core';
 
 export default class MoreMenu extends Component {
   constructor(props) {
@@ -13,8 +15,21 @@ export default class MoreMenu extends Component {
     this.state = {
       anchorEl: false,
       notes: [],
+      open:false,
       isDeleted: false,
+      label:'',
     }
+  }
+  handleOpenDialogue = (e) => {
+    this.setState({
+      open:!this.state.open
+    })
+  }
+  handleChangeLabel = (event)=>{
+    const label = event.target.value
+    this.setState({
+      label:label
+    })
   }
   handleMenu = (e) => {
     this.setState({
@@ -62,8 +77,8 @@ export default class MoreMenu extends Component {
           <Paper>
             <ClickAwayListener onClickAway={this.handleClose}>
               <MenuList>
-                <MenuItem onClick={()=>this.handleTrash(this.props.noteId)}>Delete note</MenuItem>
-                <MenuItem onClick={this.handleClose}>Add label</MenuItem>
+                <MenuItem onClick={() => this.handleTrash(this.props.noteId)}>Delete note</MenuItem>
+                <MenuItem onClick={this.handleOpenDialogue}>Add label</MenuItem>
                 <MenuItem onClick={this.handleClose}>Add drawing</MenuItem>
                 <MenuItem onClick={this.handleClose}>Make a copy</MenuItem>
                 <MenuItem onClick={this.handleClose}>Show checkboxes</MenuItem>
@@ -72,6 +87,21 @@ export default class MoreMenu extends Component {
             </ClickAwayListener>
           </Paper>
         </Popper>
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleOpenDialogue}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description">
+          <div className="dialogLabel"style={{backgroundColor:'#303030'}}>
+            <div style={{color:'white',fontSize:'16px'}} >Label note</div>
+            <div>
+              <InputBase style={{color:'grey',fontSize:'15px'}}
+                placeholder="Enter label name"
+                value={this.state.label}
+                onChange={this.handleChangeLabel} />
+            </div>
+          </div>
+        </Dialog>
       </div>
     );
   }

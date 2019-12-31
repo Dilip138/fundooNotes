@@ -13,7 +13,7 @@ import DrawerComponent from '../component/drawer.jsx';
 import { Card, InputBase } from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForeverOutlined';
 import RestoreFromTrashIcon from '@material-ui/icons/RestoreFromTrash';
-import { getAllNotes } from '../sercvice/userService';
+import { getAllNotes } from '../service/userService';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 const theme = createMuiTheme({
     overrides: {
