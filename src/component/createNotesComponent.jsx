@@ -6,7 +6,6 @@ import EditIcon from '@material-ui/icons/EditOutlined';
 import ImageIcon from '@material-ui/icons/ImageOutlined';
 import AddAlertIcon from '@material-ui/icons/AddAlertOutlined';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
-import ColorLensIcon from '@material-ui/icons/ColorLensOutlined';
 import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { createNotes } from '../sercvice/userService';
@@ -38,9 +37,9 @@ export default class TakeNotes extends Component {
             description: description
         })
     }
-    handleColor = (col) => {
+    handleColor = (color) => {
         this.setState({
-            color: col
+            color: color
         })
     }
     handleClose = () => {
@@ -106,7 +105,6 @@ export default class TakeNotes extends Component {
                                 <Tooltip title="Change color">
                                     <div><ColorComponent
                                         colorPatter={this.handleColor}
-                                        noteId={""}
                                          /></div>
                                 </Tooltip>
                                 <Tooltip title="Add image">
