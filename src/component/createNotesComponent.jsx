@@ -31,16 +31,17 @@ export default class TakeNotes extends Component {
             reminder: '',
             // click: false,
             // selectedDate: new Date(),
-            //'2014-08-18T21:11:54'
+            // '2014-08-18T21:11:54'
         }
     }
     // handleDateChange = date => {
-    //     this.setState({ selectedDate: date });
+    //     this.setState({ selectedDate: date.toString.splice(3,10) });
     //     //console.log("remifvgfgvyghvb"+this.state.selectedDate)
     // };
     // handleReminder = (e) => {
     //     this.setState({
     //         anchorEl: this.state.anchorEl ? false : e.target,
+    //         reminder:this.state.selectedDate
     //     });
 
     // };
@@ -101,11 +102,11 @@ export default class TakeNotes extends Component {
     }
     handleReminder = (reminder) => {
         this.setState({
-            reminder:reminder
+            reminder: reminder
         })
     }
     // handleSave = () => {
-    //     let dateTime = this.state.selectedDate
+    //     let dateTime = this.state.reminder
     //     console.log("dateTime", dateTime)
     //     if (dateTime !== '') {
     //         this.setState({
@@ -148,12 +149,12 @@ export default class TakeNotes extends Component {
                         </div>
                         <div>
                             <InputBase
-                                value={this.props.value} />
+                                value={this.state.reminder} />
                         </div>
                         <div className="imageAndClose">
                             <div className="imageIcon">
                                 <Tooltip title="Remind me">
-                                    <div style={{ cursor: 'pointer' }} reminderProps={this.handleReminder}><TakeReminder /></div>
+                                    <div style={{ cursor: 'pointer' }} addReminder={this.handleReminder} noteId={" "}><TakeReminder /></div>
                                 </Tooltip>
                                 <Tooltip title="Collborator">
                                     <div><PersonAddIcon /></div>
@@ -176,8 +177,7 @@ export default class TakeNotes extends Component {
                         </div>
                     </Card>
                 </div>)}
-{/* 
-                <Popper open={this.state.anchorEl} anchorEl={this.state.anchorEl} style={{ zIndex: "999" }} >
+                {/* <Popper open={this.state.anchorEl} anchorEl={this.state.anchorEl} style={{ zIndex: "999" }} >
                     <Paper>
                         <ClickAwayListener onClickAway={this.handleListenerClose}>
                             <MenuList>

@@ -8,6 +8,7 @@ import MenuList from '@material-ui/core/MenuList';
 import DateFnsUtils from '@date-io/date-fns'
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker, } from '@material-ui/pickers';
 import { Dialog, Button } from '@material-ui/core';
+import {reminderNotes} from '../service/userService';
 
 export default class Takereminder extends Component {
     constructor(props) {
@@ -25,7 +26,11 @@ export default class Takereminder extends Component {
         });
     };
     handleDateChange = date => {
-        this.setState({ selectedDate: date });
+        this.setState({
+            selectedDate: date
+        });
+        this.props.addReminder(this.state.selectedDate)
+
         //console.log("remifvgfgvyghvb"+this.state.selectedDate)
     };
     handleReminder = (e) => {
@@ -40,15 +45,20 @@ export default class Takereminder extends Component {
         })
     }
     handleSave = () => {
-        let dateTime = this.state.selectedDate
-        console.log("dateTime", dateTime)
-        if (dateTime !== '') {
-            this.setState({
-                reminder: dateTime,
-                click: false
+        let data = {
+            noteIdList: [this.props.noteId],
+            reminder: this.state.selectedDate
+        }
+        // let dateTime = this.state.selectedDate
+        // console.log("dateTime", dateTime)
+        console.log("res in reminderData", data);
+        reminderNotes(data).then(res => {
+            console.log("res in reminderNotes", res);
+            this.props.reminderPropsToGetNotes(true)
+        })
+            .catch(err => {
+                console.log("err in reminderComponent", err);
             });
-            console.log("reminder", this.state.reminder);
-        };
     };
     render() {
         return (

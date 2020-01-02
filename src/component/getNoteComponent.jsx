@@ -11,6 +11,7 @@ import { withRouter } from "react-router-dom";
 import Dialog from '@material-ui/core/Dialog';
 import MoreMenu from '../component/moreComponent';
 import ColorComponent from '../component/colorComponent';
+import TakeReminder from '../component/reminderComponent'
 
 class GetNotes extends Component {
     constructor(props) {
@@ -106,18 +107,22 @@ class GetNotes extends Component {
                 console.log("err in colorNote component ", err);
             });
     }
-    handleReminder = (noteId) => {
-        let data = {
-            reminder: this.state.selectedDate,
-            noteIdList: [noteId]
-        }
-        console.log("res in reminderData", data);
-        reminderNotes(data).then(res => {
-            console.log("res in reminderNotes", res);
-        })
-            .catch(err => {
-                console.log("err in reminderComponent", err);
-            });
+    // handleReminder = (noteId) => {
+    //     let data = {
+    //         reminder: this.state.selectedDate,
+    //         noteIdList: [noteId]
+    //     }
+    //     console.log("res in reminderData", data);
+    //     reminderNotes(data).then(res => {
+    //         console.log("res in reminderNotes", res);
+            
+    //     })
+    //         .catch(err => {
+    //             console.log("err in reminderComponent", err);
+    //         });
+    // }
+    handleReminderGetnote = () => {
+        this.handleGetNotes()
     }
     render() {
         return (
@@ -144,8 +149,8 @@ class GetNotes extends Component {
                                                         onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
                                                 </div>
                                                 <div className="imageIconCard">
-                                                    <div><AddAlertIcon onClick={() => this.handleReminder(key.id)}
-                                                        noteId={key.id} />
+                                                    <div><TakeReminder  noteId={key.id} reminderPropsToGetNotes={this.handleReminderGetnote}
+                                                         />
                                                     </div>
                                                     <div><PersonAddIcon /></div>
                                                     <div><ColorComponent

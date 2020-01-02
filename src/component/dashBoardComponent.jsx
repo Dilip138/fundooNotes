@@ -15,7 +15,6 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import CreateNotes from './createNotesComponent';
 import GetNoteComponent from '../component/getNoteComponent';
 import Profile from './signOutComponent';
-import { styles } from "@material-ui/pickers/views/Clock/Clock";
 const theme = createMuiTheme({
     overrides: {
         MuiAppBar: {
