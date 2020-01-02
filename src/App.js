@@ -15,7 +15,7 @@ import reminders from './component/getReminders';
 import trash from './component/getTrash';
 import colorComponent from './component/colorComponent';
 import signOut from './component/signOutComponent';
-
+import takeReminder from './component/reminderComponent';
 function App() {
   return (
     <Router>
@@ -33,6 +33,7 @@ function App() {
         <Route path="/reminders" component={reminders}></Route>
         <Route path="/trash" component={trash}></Route>
         <Route path="/colorComponent" component={colorComponent}></Route>
+        <Route path="/takeReminder" component={takeReminder}></Route>
         <Route path="/signOut" component={signOut}></Route>
       </Switch>
     </Router>

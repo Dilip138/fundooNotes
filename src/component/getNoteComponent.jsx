@@ -6,7 +6,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ColorLensIcon from '@material-ui/icons/ColorLensOutlined';
 import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { getAllNotes, editNote, archiveNotes, colorNotes } from '../service/userService';
+import { getAllNotes, editNote, archiveNotes, colorNotes, reminderNotes } from '../service/userService';
 import { withRouter } from "react-router-dom";
 import Dialog from '@material-ui/core/Dialog';
 import MoreMenu from '../component/moreComponent';
@@ -23,6 +23,8 @@ class GetNotes extends Component {
             description: '',
             color: '',
             isArchived: false,
+            reminder: '',
+            selectedDate: new Date(),
         };
     };
     componentDidMount() {
@@ -55,7 +57,7 @@ class GetNotes extends Component {
             noteId: this.state.noteId,
             title: this.state.title,
             description: this.state.description,
-            color: this.state.color
+            color: this.state.color,
         }
         //console.log("res in editData",data)
         editNote(data).then(res => {
@@ -84,7 +86,6 @@ class GetNotes extends Component {
             noteIdList: [noteId]
         }
         console.log("res in noteData", noteId);
-
         archiveNotes(data).then(res => {
             console.log("res in archiveNotes", res)
         })
@@ -95,7 +96,7 @@ class GetNotes extends Component {
     handleChangeColor = (color, noteId) => {
         let data = {
             color: color,
-            noteIdList: [noteId]            
+            noteIdList: [noteId]
         }
         console.log("res in colorData", data);
         colorNotes(data).then(res => {
@@ -103,6 +104,19 @@ class GetNotes extends Component {
         })
             .catch(err => {
                 console.log("err in colorNote component ", err);
+            });
+    }
+    handleReminder = (noteId) => {
+        let data = {
+            reminder: this.state.selectedDate,
+            noteIdList: [noteId]
+        }
+        console.log("res in reminderData", data);
+        reminderNotes(data).then(res => {
+            console.log("res in reminderNotes", res);
+        })
+            .catch(err => {
+                console.log("err in reminderComponent", err);
             });
     }
     render() {
@@ -116,7 +130,7 @@ class GetNotes extends Component {
                                     return (
                                         key.isArchived === false && key.isDeleted === false &&
                                         <div className="getCardNote">
-                                            <Card className="getcard" style={{ boxShadow: "0px 0px 7px 0px", border: "1px solid black", borderRadius: '10px' ,backgroundColor:key.color}}>
+                                            <Card className="getcard" style={{ boxShadow: "0px 0px 7px 0px grey", border: "1px solid grey", borderRadius: '10px', backgroundColor: key.color }}>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}
@@ -130,13 +144,15 @@ class GetNotes extends Component {
                                                         onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
                                                 </div>
                                                 <div className="imageIconCard">
-                                                    <div><AddAlertIcon /></div>
+                                                    <div><AddAlertIcon onClick={() => this.handleReminder(key.id)}
+                                                        noteId={key.id} />
+                                                    </div>
                                                     <div><PersonAddIcon /></div>
                                                     <div><ColorComponent
                                                         colorPatter={this.handleChangeColor}
                                                         noteId={key.id} /></div>
                                                     <div><ImageIcon /></div>
-                                                    <div style={{cursor:'pointer'}} onClick={() => this.handleArchiveNotes(key.id)} notecolor={key.color}><ArchiveIcon /></div>
+                                                    <div style={{ cursor: 'pointer' }} onClick={() => this.handleArchiveNotes(key.id)} notecolor={key.color}><ArchiveIcon /></div>
                                                     <div><MoreMenu
                                                         noteId={key.id} />
                                                     </div>

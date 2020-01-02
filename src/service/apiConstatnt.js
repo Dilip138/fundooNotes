@@ -8,6 +8,7 @@ const apiConstant = {
     archiveNotes:"/notes/archiveNotes",
     trashNotes:"/notes/trashNotes",
     colorNotes:"/notes/changesColorNotes",
+    reminderNote:"/notes/addUpdateReminderNotes",
 }
 export default apiConstant;
    

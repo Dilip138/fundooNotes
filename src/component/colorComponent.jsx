@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/MenuList';
 import ColorLensIcon from '@material-ui/icons/ColorLensOutlined';
 import { Tooltip, IconButton } from '@material-ui/core';
 const colorPattern = [

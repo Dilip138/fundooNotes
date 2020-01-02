@@ -2,18 +2,20 @@ import React, { Component } from "react";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
-import IconButton from '@material-ui/core/IconButton';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import Refresh from '@material-ui/icons/Refresh';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ViewAgenda from '@material-ui/icons/ViewAgenda';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import DrawerComponent from '../component/drawer.jsx';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import CreateNotes from './createNotesComponent';
 import GetNoteComponent from '../component/getNoteComponent';
 import Profile from './signOutComponent';
+import { styles } from "@material-ui/pickers/views/Clock/Clock";
 const theme = createMuiTheme({
     overrides: {
         MuiAppBar: {
@@ -39,8 +41,14 @@ class DashBoard extends Component {
         super()
         this.state = {
             drawerOpen: false,
-           
+            open: false
+
         }
+    }
+    gridList = () => {
+        this.setState({
+            open:!this.state.open
+        })
     }
     openDrawer = () => {
         this.setState({
@@ -51,6 +59,7 @@ class DashBoard extends Component {
         window.location.reload()
     }
     render() {
+        let take = this.state.open ? ({width:'100%'}) : ({width:'50%'})
         return (
             <div className="root">
                 <MuiThemeProvider theme={theme}>
@@ -86,11 +95,17 @@ class DashBoard extends Component {
                                             <Refresh onClick={this.handleReload} />
                                         </IconButton>
                                     </div>
-                                    <div>
-                                        <IconButton>
-                                            <ViewAgenda />
-                                        </IconButton>
-                                    </div>
+                                    {!this.state.open ?
+                                        (<div>
+                                            <IconButton>
+                                                <DashboardIcon onClick={this.gridList}/>
+                                            </IconButton>
+                                        </div>) :
+                                        (<div>
+                                            <IconButton>
+                                                <ViewAgenda onClick={this.gridList}/>
+                                            </IconButton>
+                                        </div>)}
                                     <div>
                                         <IconButton>
                                             <SettingsIcon />
@@ -109,14 +124,14 @@ class DashBoard extends Component {
                         </Toolbar>
                         <DrawerComponent
                             drawerOpen={this.state.drawerOpen}
-                            // handleArchieve={this.handleArchieve}
-                            // handleReminders={this.handleReminders}
-                            // handleNotes={this.handleNotes}
+                        // handleArchieve={this.handleArchieve}
+                        // handleReminders={this.handleReminders}
+                        // handleNotes={this.handleNotes}
                         />
                     </AppBar>
                 </MuiThemeProvider>
                 <div><CreateNotes /></div>
-                <div><GetNoteComponent /></div>
+                <div style={take}><GetNoteComponent /></div>
             </div>
         );
     }

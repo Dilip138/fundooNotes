@@ -9,6 +9,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { createNotes } from '../service/userService';
+import TakeReminder from '../component/reminderComponent'
 import ColorComponent from '../component/colorComponent';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Paper from '@material-ui/core/Paper';
@@ -28,38 +29,31 @@ export default class TakeNotes extends Component {
             anchorEl: false,
             open: false,
             reminder: '',
-            click: false,
-            selectedDate: new Date('2014-08-18T21:11:54'),
+            // click: false,
+            // selectedDate: new Date(),
+            //'2014-08-18T21:11:54'
         }
     }
-    handleDateChange = date => {
-        this.setState({ selectedDate: date });
-    };
-    handleReminder = (e) => {
-        this.setState({
-            anchorEl: this.state.anchorEl ? false : e.target,
-        });
-    };
-    handleListenerClose = () => {
-        this.setState({
-            anchorEl: false
-        });
-    };
-    handleOpenDialogue = () => {
-        this.setState({
-            click: true
-        })
-    }
-    handleSave = () => {
-        let dateTime = this.state.selectedDate
-        console.warn(dateTime + " in take date")
-        if (dateTime !== '') {
-            this.setState({
-                reminder: dateTime,
-                click: false
-            });
-        };
-    };
+    // handleDateChange = date => {
+    //     this.setState({ selectedDate: date });
+    //     //console.log("remifvgfgvyghvb"+this.state.selectedDate)
+    // };
+    // handleReminder = (e) => {
+    //     this.setState({
+    //         anchorEl: this.state.anchorEl ? false : e.target,
+    //     });
+
+    // };
+    // handleListenerClose = () => {
+    //     this.setState({
+    //         anchorEl: false
+    //     });
+    // };
+    // handleOpenDialogue = () => {
+    //     this.setState({
+    //         click: true
+    //     })
+    // }
     handleOpen = () => {
         this.setState({
             open: true
@@ -87,12 +81,14 @@ export default class TakeNotes extends Component {
             open: false,
             title: '',
             description: '',
-            color: ''
+            color: '',
+            reminder: '',
         })
         let data = {
             title: this.state.title,
             description: this.state.description,
-            color: this.state.color
+            color: this.state.color,
+            reminder: this.state.reminder
         }
         console.log("=========>", data);
         createNotes(data)
@@ -103,6 +99,22 @@ export default class TakeNotes extends Component {
                 console.log("err in createNotes component ", err);
             });
     }
+    handleReminder = (reminder) => {
+        this.setState({
+            reminder:reminder
+        })
+    }
+    // handleSave = () => {
+    //     let dateTime = this.state.selectedDate
+    //     console.log("dateTime", dateTime)
+    //     if (dateTime !== '') {
+    //         this.setState({
+    //             reminder: dateTime,
+    //             click: false
+    //         });
+    //         console.log("reminder", this.state.reminder);
+    //     };
+    // };
     render() {
         return (
             <div>
@@ -136,20 +148,19 @@ export default class TakeNotes extends Component {
                         </div>
                         <div>
                             <InputBase
-                                value={this.state.reminder} />
+                                value={this.props.value} />
                         </div>
                         <div className="imageAndClose">
                             <div className="imageIcon">
                                 <Tooltip title="Remind me">
-                                    <div onClick={(e) => this.handleReminder(e)}><AddAlertIcon /></div>
+                                    <div style={{ cursor: 'pointer' }} reminderProps={this.handleReminder}><TakeReminder /></div>
                                 </Tooltip>
                                 <Tooltip title="Collborator">
                                     <div><PersonAddIcon /></div>
                                 </Tooltip>
                                 <Tooltip title="Change color">
                                     <div><ColorComponent
-                                        colorPatter={this.handleColor}
-                                    /></div>
+                                        colorPatter={this.handleColor} /></div>
                                 </Tooltip>
                                 <Tooltip title="Add image">
                                     <div><ImageIcon /></div>
@@ -165,7 +176,7 @@ export default class TakeNotes extends Component {
                         </div>
                     </Card>
                 </div>)}
-
+{/* 
                 <Popper open={this.state.anchorEl} anchorEl={this.state.anchorEl} style={{ zIndex: "999" }} >
                     <Paper>
                         <ClickAwayListener onClickAway={this.handleListenerClose}>
@@ -213,7 +224,7 @@ export default class TakeNotes extends Component {
                             </div>
                         </div>
                     </MuiPickersUtilsProvider>
-                </Dialog>
+                </Dialog> */}
             </div>
         );
     }

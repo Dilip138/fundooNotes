@@ -24,7 +24,7 @@ export function userForgot(data) {
 
 export function createNotes(data) {
   console.log("----------->", data);
-  return axios.post(process.env.REACT_APP_BASE_URL + apiConstant.createNotes , data, {
+  return axios.post(process.env.REACT_APP_BASE_URL + apiConstant.createNotes, data, {
     headers: {
       Authorization: localStorage.getItem('token')
     }
@@ -46,6 +46,7 @@ export function editNote(data) {
     }
   })
 }
+
 export function archiveNotes(data) {
   console.log("data in service for archive ", data, localStorage.getItem('token'));
   return axios.post(process.env.REACT_APP_BASE_URL + apiConstant.archiveNotes, data, {
@@ -54,6 +55,7 @@ export function archiveNotes(data) {
     }
   })
 }
+
 export function trashNotes(data) {
   console.log("data in service for trash ", data, localStorage.getItem('token'));
   return axios.post(process.env.REACT_APP_BASE_URL + apiConstant.trashNotes, data, {
@@ -62,11 +64,22 @@ export function trashNotes(data) {
     }
   })
 }
+
 export function colorNotes(data) {
   console.log("token", localStorage.getItem('token'));
-  
   console.log("data in service for color ", data, localStorage.getItem('token'));
   return axios.post(process.env.REACT_APP_BASE_URL + apiConstant.colorNotes, data, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  })
+}
+
+export function reminderNotes(data) {
+  console.log("token", localStorage.getItem('token'));
+
+  console.log("data in service for reminder ", data, localStorage.getItem('token'));
+  return axios.post(process.env.REACT_APP_BASE_URL + apiConstant.reminderNote, data, {
     headers: {
       Authorization: localStorage.getItem('token')
     }
