@@ -29,32 +29,32 @@ export default class TakeNotes extends Component {
             anchorEl: false,
             open: false,
             reminder: '',
-            // click: false,
-            // selectedDate: new Date(),
+            click: false,
+            selectedDate: new Date(),
             // '2014-08-18T21:11:54'
         }
     }
-    // handleDateChange = date => {
-    //     this.setState({ selectedDate: date.toString.splice(3,10) });
-    //     //console.log("remifvgfgvyghvb"+this.state.selectedDate)
-    // };
-    // handleReminder = (e) => {
-    //     this.setState({
-    //         anchorEl: this.state.anchorEl ? false : e.target,
-    //         reminder:this.state.selectedDate
-    //     });
+    handleDateChange = date => {
+        this.setState({ selectedDate: date});
+        //console.log("remifvgfgvyghvb"+this.state.selectedDate)
+    };
+    handleReminder = (e,value) => {
+        this.setState({
+            anchorEl: this.state.anchorEl ? false : e.target,
+            reminder:value
+        });
 
-    // };
-    // handleListenerClose = () => {
-    //     this.setState({
-    //         anchorEl: false
-    //     });
-    // };
-    // handleOpenDialogue = () => {
-    //     this.setState({
-    //         click: true
-    //     })
-    // }
+    };
+    handleListenerClose = () => {
+        this.setState({
+            anchorEl: false
+        });
+    };
+    handleOpenDialogue = () => {
+        this.setState({
+            click: true
+        })
+    }
     handleOpen = () => {
         this.setState({
             open: true
@@ -100,22 +100,23 @@ export default class TakeNotes extends Component {
                 console.log("err in createNotes component ", err);
             });
     }
-    handleReminder = (reminder) => {
-        this.setState({
-            reminder: reminder
-        })
-    }
-    // handleSave = () => {
-    //     let dateTime = this.state.reminder
-    //     console.log("dateTime", dateTime)
-    //     if (dateTime !== '') {
-    //         this.setState({
-    //             reminder: dateTime,
-    //             click: false
-    //         });
-    //         console.log("reminder", this.state.reminder);
-    //     };
-    // };
+    // handleReminder = (reminder) => {
+    //     this.setState({
+    //         reminder: reminder
+    //     })
+    //     console.log("reminder check",this.state.reminder)
+    // }
+    handleSave = () => {
+        let dateTime = this.state.selectedDate
+        console.log("dateTime", dateTime)
+        if (dateTime !== '') {
+            this.setState({
+                reminder: dateTime,
+                click: false
+            });
+            console.log("reminder", this.state.reminder);
+        };
+    };
     render() {
         return (
             <div>
@@ -154,7 +155,7 @@ export default class TakeNotes extends Component {
                         <div className="imageAndClose">
                             <div className="imageIcon">
                                 <Tooltip title="Remind me">
-                                    <div style={{ cursor: 'pointer' }} addReminder={this.handleReminder} noteId={" "}><TakeReminder /></div>
+                                    <div style={{ cursor: 'pointer' }} onClick={(e,value)=>this.handleReminder(e,value)} ><AddAlertIcon /></div>
                                 </Tooltip>
                                 <Tooltip title="Collborator">
                                     <div><PersonAddIcon /></div>
@@ -177,7 +178,7 @@ export default class TakeNotes extends Component {
                         </div>
                     </Card>
                 </div>)}
-                {/* <Popper open={this.state.anchorEl} anchorEl={this.state.anchorEl} style={{ zIndex: "999" }} >
+                <Popper open={this.state.anchorEl} anchorEl={this.state.anchorEl} style={{ zIndex: "999" }} >
                     <Paper>
                         <ClickAwayListener onClickAway={this.handleListenerClose}>
                             <MenuList>
@@ -200,7 +201,7 @@ export default class TakeNotes extends Component {
                                     id="date-picker-dialog"
                                     label="Date picker dialog"
                                     format="MM/dd/yyyy"
-                                    value={this.state.selectedDate}
+                                    value={this.state.selectedDate.toDateString().slice(0, 24)}
                                     onChange={this.handleDateChange}
                                     KeyboardButtonProps={{
                                         'aria-label': 'change date',
@@ -212,7 +213,7 @@ export default class TakeNotes extends Component {
                                     margin="normal"
                                     id="time-picker"
                                     label="Time picker"
-                                    value={this.state.selectedDate}
+                                    value={this.state.selectedDate.toDateString().slice(0, 24)}
                                     onChange={this.handleDateChange}
                                     KeyboardButtonProps={{
                                         'aria-label': 'change time',
@@ -224,7 +225,7 @@ export default class TakeNotes extends Component {
                             </div>
                         </div>
                     </MuiPickersUtilsProvider>
-                </Dialog> */}
+                </Dialog>
             </div>
         );
     }

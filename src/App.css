@@ -215,9 +215,7 @@
     display: inline-grid;
     justify-content: center;
 }
-.view1{
-    width: 180px;
-}
-.view2{
-    width: 350px;
+.colorPaper{
+    display: flex;
+    widows: 100px;
 }

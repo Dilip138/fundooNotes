@@ -29,7 +29,7 @@ export default class Takereminder extends Component {
         this.setState({
             selectedDate: date
         });
-        this.props.addReminder(this.state.selectedDate)
+        //this.props.addReminder(this.state.selectedDate)
 
         //console.log("remifvgfgvyghvb"+this.state.selectedDate)
     };

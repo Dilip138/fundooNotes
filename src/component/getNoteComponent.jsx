@@ -107,23 +107,23 @@ class GetNotes extends Component {
                 console.log("err in colorNote component ", err);
             });
     }
-    // handleReminder = (noteId) => {
-    //     let data = {
-    //         reminder: this.state.selectedDate,
-    //         noteIdList: [noteId]
-    //     }
-    //     console.log("res in reminderData", data);
-    //     reminderNotes(data).then(res => {
-    //         console.log("res in reminderNotes", res);
+    handleReminder = (reminder,noteId) => {
+        let data = {
+            reminder: reminder,
+            noteIdList: [noteId]
+        }
+        console.log("res in reminderData", data);
+        reminderNotes(data).then(res => {
+            console.log("res in reminderNotes", res);
             
-    //     })
-    //         .catch(err => {
-    //             console.log("err in reminderComponent", err);
-    //         });
-    // }
-    handleReminderGetnote = () => {
-        this.handleGetNotes()
+        })
+            .catch(err => {
+                console.log("err in reminderComponent", err);
+            });
     }
+    // handleReminderGetnote = () => {
+    //     this.handleGetNotes()
+    // }
     render() {
         return (
             <div>
@@ -148,8 +148,14 @@ class GetNotes extends Component {
                                                         multiline
                                                         onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
                                                 </div>
+                                                <div onClick={this.handleOpenDialogue}>
+                                                    <InputBase
+                                                        value={key.reminder}
+                                                        multiline
+                                                        onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
+                                                </div>
                                                 <div className="imageIconCard">
-                                                    <div><TakeReminder  noteId={key.id} reminderPropsToGetNotes={this.handleReminderGetnote}
+                                                    <div><AddAlertIcon  onClick={()=>this.handleReminder(key.id)}
                                                          />
                                                     </div>
                                                     <div><PersonAddIcon /></div>
