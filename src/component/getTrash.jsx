@@ -82,7 +82,7 @@ export default class Trash extends Component {
                                         </IconButton>
                                     </div>
                                     <div>
-                                        <img src={require('../assets/keep.jpeg')} style={{ width: '30px', height: '30px' }} />
+                                        <img src={require('../assets/keep.jpeg')} alt="logo" style={{ width: '30px', height: '30px' }} />
                                     </div>
                                     <div style={{ color: "black", cursor: "pointer" }}>
                                         <Typography className="title" variant="h6">

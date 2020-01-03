@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Card from '@material-ui/core/Card'
-import { TextField, Input, Button } from '@material-ui/core';
+import { TextField, Button } from '@material-ui/core';
 
 class ResetComponent extends Component {
   constructor(props) {

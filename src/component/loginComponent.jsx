@@ -20,6 +20,8 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 // import Input from "@material-ui/core/Input";
+const url = "http://fundoonotes.incubation.bridgelabz.com/"
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -93,6 +95,7 @@ class Login extends Component {
           console.log("res in login---------", res.data.id);
           localStorage.setItem("email", this.state.email);
           localStorage.setItem("token", res.data.id);
+          localStorage.setItem("imageUrl", url + res.data.imageUrl)
           this.setState({
             snackbarOpen: true,
             snackbarMsg: "Login successfully!!"
@@ -114,7 +117,7 @@ class Login extends Component {
       <div class="d-flex justify-content-center">
         <Card
           className="d-flex flex-column justify-content-center"
-          style={{ width: "35%", marginTop: "8%" ,height:"370px",boxShadow: '0px 0px 1px 0px' }}>
+          style={{ width: "35%", marginTop: "8%", height: "370px", boxShadow: '0px 0px 1px 0px' }}>
           <div className="d-flex justify-content-center" style=
             {{ font: "bold 25px Times New Roman" }}>
             <span class="text-primary" >F </span>

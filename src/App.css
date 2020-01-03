@@ -109,7 +109,7 @@
 .Take_Note {
     display: flex;
     justify-content: center;
-    width: 100%;
+    width: 82em;
 }
 
 .card_Note {
@@ -207,9 +207,8 @@
     padding: 10px;
 }
 .Profile{
-    background-color:gray;
-    min-width: 250px;
-    min-height: 200px;
+    min-width: 30em;
+    min-height: 15em;
     height: auto;
     margin-top: 20px;
     display: inline-grid;
@@ -217,5 +216,4 @@
 }
 .colorPaper{
     display: flex;
-    widows: 100px;
 }

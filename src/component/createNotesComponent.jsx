@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Card from "@material-ui/core/Card";
-import { InputBase, Tooltip, Input } from '@material-ui/core';
+import { InputBase, Tooltip } from '@material-ui/core';
 import CheckBoxIcon from '@material-ui/icons/CheckBoxOutlined';
 import EditIcon from '@material-ui/icons/EditOutlined';
 import ImageIcon from '@material-ui/icons/ImageOutlined';
@@ -9,7 +9,6 @@ import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { createNotes } from '../service/userService';
-import TakeReminder from '../component/reminderComponent'
 import ColorComponent from '../component/colorComponent';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Paper from '@material-ui/core/Paper';
@@ -100,12 +99,6 @@ export default class TakeNotes extends Component {
                 console.log("err in createNotes component ", err);
             });
     }
-    // handleReminder = (reminder) => {
-    //     this.setState({
-    //         reminder: reminder
-    //     })
-    //     console.log("reminder check",this.state.reminder)
-    // }
     handleSave = () => {
         let dateTime = this.state.selectedDate
         console.log("dateTime", dateTime)

@@ -13,9 +13,7 @@ import DeleteIcon from '@material-ui/icons/DeleteOutline';
 import {withRouter} from 'react-router-dom';
 
  class DrawerComponent extends Component {
-    constructor(props){
-        super(props)      
-    }
+   
     handleNotes =()=>{
         this.props.history.push("/dashboard");
     }   

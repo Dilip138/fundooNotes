@@ -33,18 +33,7 @@ class ForgotPassword extends Component {
         snackbarOpen: true,
         snackbarMsg: "Email can not empty..!!"
       });
-    } else if (
-      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)
-    ) {
-      console.log(
-        "entered",
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)
-      );
-      this.setState({
-        snackbarOpen: true,
-        snackbarMsg: "Invalid Email..!"
-      });
-    } else {
+    }else {
       console.log("Login true");
       let data = {
         email: this.state.email

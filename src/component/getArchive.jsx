@@ -86,7 +86,7 @@ export default class Archive extends Component {
                                         </IconButton>
                                     </div>
                                     <div>
-                                        <img src={require('../assets/keep.jpeg')} style={{ width: '30px', height: '30px' }} />
+                                        <img src={require('../assets/keep.jpeg')} alt="logo" style={{ width: '30px', height: '30px' }} />
                                     </div>
                                     <div style={{ color: "black", cursor: "pointer" }}>
                                         <Typography className="title" variant="h6">
@@ -140,7 +140,7 @@ export default class Archive extends Component {
                     <div className="trashNote">
                         {
                             this.state.notes.map(key => {
-                                if (key.isArchived === true && key.isDeleted !== true) {
+                                if (key.isArchived === true && key.isDeleted !== true ) {
                                     return (
                                         <div className="getCardNote">
                                             <Card className="getcard" style={{ boxShadow: "0px 0px 7px 0px", border: "1px solid black", borderRadius: '10px',backgroundColor:this.props.notecolor }}>

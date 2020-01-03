@@ -14,7 +14,7 @@ import DrawerComponent from '../component/drawer.jsx';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import CreateNotes from './createNotesComponent';
 import GetNoteComponent from '../component/getNoteComponent';
-import Profile from './signOutComponent';
+import Profile from './profileComponent';
 const theme = createMuiTheme({
     overrides: {
         MuiAppBar: {
@@ -58,7 +58,7 @@ class DashBoard extends Component {
         window.location.reload()
     }
     render() {
-        let take = this.state.open ? ({width:'100%'}) : ({width:'50%'})
+        let take = this.state.open ? ({width:'35em', marginLeft: "22em"}) : ({width:'81em'})
         return (
             <div className="root">
                 <MuiThemeProvider theme={theme}>
@@ -71,7 +71,7 @@ class DashBoard extends Component {
                                     </IconButton>
                                 </div>
                                 <div>
-                                    <img src={require('../assets/keep.jpeg')} style={{ width: '30px', height: '30px' }} />
+                                    <img src={require('../assets/keep.jpeg')} alt="logo" style={{ width: '30px', height: '30px' }} />
                                 </div>
                                 <div style={{ color: "black", cursor: "pointer" }}>
                                     <Typography className="title" variant="h6">
@@ -123,9 +123,6 @@ class DashBoard extends Component {
                         </Toolbar>
                         <DrawerComponent
                             drawerOpen={this.state.drawerOpen}
-                        // handleArchieve={this.handleArchieve}
-                        // handleReminders={this.handleReminders}
-                        // handleNotes={this.handleNotes}
                         />
                     </AppBar>
                 </MuiThemeProvider>

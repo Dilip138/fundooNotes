@@ -11,7 +11,6 @@ import { withRouter } from "react-router-dom";
 import Dialog from '@material-ui/core/Dialog';
 import MoreMenu from '../component/moreComponent';
 import ColorComponent from '../component/colorComponent';
-import TakeReminder from '../component/reminderComponent'
 
 class GetNotes extends Component {
     constructor(props) {
@@ -121,9 +120,6 @@ class GetNotes extends Component {
                 console.log("err in reminderComponent", err);
             });
     }
-    // handleReminderGetnote = () => {
-    //     this.handleGetNotes()
-    // }
     render() {
         return (
             <div>
@@ -133,9 +129,9 @@ class GetNotes extends Component {
                             {
                                 this.state.notes.map(key => {
                                     return (
-                                        key.isArchived === false && key.isDeleted === false &&
+                                        key.isArchived === false && key.isDeleted === false && 
                                         <div className="getCardNote">
-                                            <Card className="getcard" style={{ boxShadow: "0px 0px 7px 0px grey", border: "1px solid grey", borderRadius: '10px', backgroundColor: key.color }}>
+                                            <Card className="getcard" style={{ boxShadow: "0px 0px 7px 0px grey", border: "1px solid grey", borderRadius: '10px', backgroundColor: key.color}}>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}
@@ -155,7 +151,7 @@ class GetNotes extends Component {
                                                         onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
                                                 </div>
                                                 <div className="imageIconCard">
-                                                    <div><AddAlertIcon  onClick={()=>this.handleReminder(key.id)}
+                                                    <div><AddAlertIcon  onClick={()=>this.handleReminder(key.reminder,key.id)}
                                                          />
                                                     </div>
                                                     <div><PersonAddIcon /></div>

@@ -85,6 +85,11 @@ export function reminderNotes(data) {
     }
   })
 }
+export function imageUpload(data) {
+  console.log("login data", data);
+  console.log("token", localStorage.getItem("token"));
+  return axios.post(process.env.REACT_APP_BASE_URL + apiConstant.imageUpload, data);
+}
 
 
 

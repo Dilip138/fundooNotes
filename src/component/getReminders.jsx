@@ -54,6 +54,11 @@ export default class Reminders extends Component {
             drawerOpen: !this.state.drawerOpen
         })
     }
+    handleOpenDialogue = () => {
+        this.setState({
+            open: !this.state.open
+        })
+    }
     componentDidMount() {
         this.handleGetNotes()
     }
@@ -81,7 +86,7 @@ export default class Reminders extends Component {
                                         </IconButton>
                                     </div>
                                     <div>
-                                        <img src={require('../assets/keep.jpeg')} style={{ width: '30px', height: '30px' }} />
+                                        <img src={require('../assets/keep.jpeg')} alt="logo" style={{ width: '30px', height: '30px' }} />
                                     </div>
                                     <div style={{ color: "black", cursor: "pointer" }}>
                                         <Typography className="title" variant="h6">
@@ -135,9 +140,8 @@ export default class Reminders extends Component {
                     <div className="trashNote">
                         {
                             this.state.notes.map(key => {
-                                console.log("key",key);
-                                
-                                if (key.isArchived === false && key.isDeleted === false && key.reminder === true) {
+                                console.log("key", key);
+                                if (key.isArchived === false && key.isDeleted === true && key.reminder === true) {
                                     return (
                                         <div className="getCardNote">
                                             <Card className="getcard" style={{ boxShadow: "0px 0px 7px 0px", border: "1px solid black", borderRadius: '10px', backgroundColor: this.props.notecolor }}>
@@ -152,6 +156,12 @@ export default class Reminders extends Component {
                                                         value={key.description}
                                                         multiline
                                                     />
+                                                </div>
+                                                <div onClick={this.handleOpenDialogue}>
+                                                    <InputBase
+                                                        value={key.reminder}
+                                                        multiline
+                                                        onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
                                                 </div>
                                                 <div className="imageIconCard">
                                                     <div><AddAlertIcon /></div>

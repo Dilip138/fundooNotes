@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, InputBase } from '@material-ui/core';
+import { InputBase } from '@material-ui/core';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
