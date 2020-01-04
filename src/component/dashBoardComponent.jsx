@@ -46,7 +46,7 @@ class DashBoard extends Component {
     }
     gridList = () => {
         this.setState({
-            open:!this.state.open
+            open: !this.state.open
         })
     }
     openDrawer = () => {
@@ -58,7 +58,7 @@ class DashBoard extends Component {
         window.location.reload()
     }
     render() {
-        let take = this.state.open ? ({width:'35em', marginLeft: "22em"}) : ({width:'81em'})
+        let take = this.state.open ? ({ width: '35em', marginLeft: "22em" }) : ({ width: '81em' })
         return (
             <div className="root">
                 <MuiThemeProvider theme={theme}>
@@ -97,12 +97,12 @@ class DashBoard extends Component {
                                     {!this.state.open ?
                                         (<div>
                                             <IconButton>
-                                                <DashboardIcon onClick={this.gridList}/>
+                                                <DashboardIcon onClick={this.gridList} />
                                             </IconButton>
                                         </div>) :
                                         (<div>
                                             <IconButton>
-                                                <ViewAgenda onClick={this.gridList}/>
+                                                <ViewAgenda onClick={this.gridList} />
                                             </IconButton>
                                         </div>)}
                                     <div>
@@ -113,10 +113,7 @@ class DashBoard extends Component {
                                 </div>
                             </div>
                             <div>
-                                <IconButton
-                                    aria-haspopup="true"
-                                    onClick={this.handleProfileMenuOpen}
-                                >
+                                <IconButton  >
                                     <Profile />
                                 </IconButton>
                             </div>

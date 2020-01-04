@@ -211,9 +211,19 @@
     min-height: 15em;
     height: auto;
     margin-top: 20px;
-    display: inline-grid;
+    display: grid;
     justify-content: center;
 }
 .colorPaper{
     display: flex;
+}
+.profileUpload{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    justify-content: center;
+}
+.profilebutton{
+    display: flex;
+    justify-content: center;
 }

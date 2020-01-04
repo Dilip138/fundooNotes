@@ -77,7 +77,6 @@ export function colorNotes(data) {
 
 export function reminderNotes(data) {
   console.log("token", localStorage.getItem('token'));
-
   console.log("data in service for reminder ", data, localStorage.getItem('token'));
   return axios.post(process.env.REACT_APP_BASE_URL + apiConstant.reminderNote, data, {
     headers: {
@@ -86,9 +85,12 @@ export function reminderNotes(data) {
   })
 }
 export function imageUpload(data) {
-  console.log("login data", data);
-  console.log("token", localStorage.getItem("token"));
-  return axios.post(process.env.REACT_APP_BASE_URL + apiConstant.imageUpload, data);
+  console.log("token", localStorage.getItem('token'));
+  return axios.post(process.env.REACT_APP_BASE_URL + apiConstant.imageUpload, data, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  });
 }
 
 

@@ -9,7 +9,7 @@ const apiConstant = {
     trashNotes:"/notes/trashNotes",
     colorNotes:"/notes/changesColorNotes",
     reminderNote:"/notes/addUpdateReminderNotes",
-    imageUpload:"/user/uploadProfileImage"
+    imageUpload:"/user/uploadProfileImage",
 }
 export default apiConstant;
    

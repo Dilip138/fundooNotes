@@ -94,6 +94,8 @@ class Login extends Component {
         .then(res => {
           console.log("res in login---------", res.data.id);
           localStorage.setItem("email", this.state.email);
+          localStorage.setItem("firstName", res.data.firstName);
+          localStorage.setItem("lastName", res.data.lastName);
           localStorage.setItem("token", res.data.id);
           localStorage.setItem("imageUrl", url + res.data.imageUrl)
           this.setState({
