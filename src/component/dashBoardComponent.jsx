@@ -14,7 +14,7 @@ import DrawerComponent from '../component/drawer.jsx';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import CreateNotes from './createNotesComponent';
 import GetNoteComponent from '../component/getNoteComponent';
-import Profile from './profileComponent';
+import ProfileImgComponenet from './profileComponent';
 const theme = createMuiTheme({
     overrides: {
         MuiAppBar: {
@@ -114,7 +114,7 @@ class DashBoard extends Component {
                             </div>
                             <div>
                                 <IconButton  >
-                                    <Profile />
+                                    <ProfileImgComponenet/>
                                 </IconButton>
                             </div>
                         </Toolbar>

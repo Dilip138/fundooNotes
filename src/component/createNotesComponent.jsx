@@ -29,18 +29,24 @@ export default class TakeNotes extends Component {
             open: false,
             reminder: '',
             click: false,
+            openCheckBox:false,
             selectedDate: new Date(),
             // '2014-08-18T21:11:54'
         }
     }
+    handleOpenCheckBox = ()=>{
+        this.setState({
+            openCheckBox:true
+        })
+    }
     handleDateChange = date => {
-        this.setState({ selectedDate: date});
+        this.setState({ selectedDate: date });
         //console.log("remifvgfgvyghvb"+this.state.selectedDate)
     };
-    handleReminder = (e,value) => {
+    handleReminder = (e, value) => {
         this.setState({
             anchorEl: this.state.anchorEl ? false : e.target,
-            reminder:value
+            reminder: value
         });
 
     };
@@ -54,7 +60,7 @@ export default class TakeNotes extends Component {
             click: true
         })
     }
-    handleOpen = () => {
+    handleOpenInput = () => {
         this.setState({
             open: true
         })
@@ -115,13 +121,54 @@ export default class TakeNotes extends Component {
             <div>
                 {!this.state.open ? (
                     <div className="Take_Note" >
-                        <Card className="card_Note" onClick={this.handleOpen} style={{ boxShadow: "0px 0px 7px 0px" }}>
+                        <Card className="card_Note" style={{ boxShadow: "0px 0px 7px 0px" }}>
                             <div>
-                                <InputBase
+                                <InputBase onClick={this.handleOpenInput}
                                     placeholder="Take a note..." />
                             </div>
                             <div className="icon_Take">
-                                <div><CheckBoxIcon /></div>
+                                {!this.state.openCheckBox ?
+                                    (<div><CheckBoxIcon onClick={this.handleOpenCheckBox} /></div>) :
+                                    (<div className="Take_Note" >
+                                        <Card className="card_Notes" style={{ backgroundColor: this.state.color, boxShadow: "0px 0px 7px 0px" }}  >
+                                            <div>
+                                                <b><InputBase
+                                                    placeholder="Title"
+                                                    value={this.state.title}
+                                                    onChange={this.handleTitle} /></b>
+                                            </div>
+                                            <div className="inputNote">
+                                                <InputBase
+                                                    placeholder="+ List..."
+                                                    value={this.state.description}
+                                                    onChange={this.handleDescription} />
+                                            </div>
+                                            <div className="imageAndClose">
+                                                <div className="imageIcon">
+                                                    <Tooltip title="Remind me">
+                                                        <div style={{ cursor: 'pointer' }} onClick={(e, value) => this.handleReminder(e, value)} ><AddAlertIcon /></div>
+                                                    </Tooltip>
+                                                    <Tooltip title="Collborator">
+                                                        <div><PersonAddIcon /></div>
+                                                    </Tooltip>
+                                                    <Tooltip title="Change color">
+                                                        <div><ColorComponent
+                                                            colorPatter={this.handleColor} /></div>
+                                                    </Tooltip>
+                                                    <Tooltip title="Add image">
+                                                        <div><ImageIcon /></div>
+                                                    </Tooltip>
+                                                    <Tooltip title="Archive">
+                                                        <div><ArchiveIcon /></div>
+                                                    </Tooltip>
+                                                    <Tooltip title="more">
+                                                        <div><MoreVertIcon /></div>
+                                                    </Tooltip>
+                                                </div>
+                                                <div onClick={this.handleClose} style={{ cursor: 'pointer' }}>Close</div>
+                                            </div>
+                                        </Card>
+                                    </div>)}
                                 <div><EditIcon /></div>
                                 <div><ImageIcon /></div>
                             </div>
@@ -148,7 +195,7 @@ export default class TakeNotes extends Component {
                         <div className="imageAndClose">
                             <div className="imageIcon">
                                 <Tooltip title="Remind me">
-                                    <div style={{ cursor: 'pointer' }} onClick={(e,value)=>this.handleReminder(e,value)} ><AddAlertIcon /></div>
+                                    <div style={{ cursor: 'pointer' }} onClick={(e, value) => this.handleReminder(e, value)} ><AddAlertIcon /></div>
                                 </Tooltip>
                                 <Tooltip title="Collborator">
                                     <div><PersonAddIcon /></div>
