@@ -113,8 +113,7 @@ class GetNotes extends Component {
         }
         console.log("res in reminderData", data);
         reminderNotes(data).then(res => {
-            console.log("res in reminderNotes", res);
-            
+            console.log("res in reminderNotes", res);            
         })
             .catch(err => {
                 console.log("err in reminderComponent", err);

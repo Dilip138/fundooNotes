@@ -27,12 +27,13 @@ export default class TakeNotes extends Component {
             description: '',
             color: '',
             anchorEl: false,
+            anchorEl1: false,
             open: false,
             reminder: '',
             click: false,
             openCheckBox: false,
             selectedDate: new Date(),
-            checkList:[],
+            checkList: [],
             // '2014-08-18T21:11:54'
         }
     }
@@ -50,11 +51,20 @@ export default class TakeNotes extends Component {
             anchorEl: this.state.anchorEl ? false : e.target,
             reminder: value
         });
-
     };
+    handleMoreVertical = (e) => {
+        this.setState({
+            anchorEl1: this.state.anchorEl1 ? false : e.target,
+        });
+    }
     handleListenerClose = () => {
         this.setState({
-            anchorEl: true
+            anchorEl: false
+        });
+    };
+    handleListenerClose1 = () => {
+        this.setState({
+            anchorEl1: false
         });
     };
     handleOpenDialogue = () => {
@@ -206,7 +216,7 @@ export default class TakeNotes extends Component {
                                             <div><ArchiveIcon /></div>
                                         </Tooltip>
                                         <Tooltip title="more">
-                                            <div><MoreVertIcon /></div>
+                                            <div style={{cursor:'pointer'}}><MoreVertIcon onClick={(e) => this.handleMoreVertical(e)} /></div>
                                         </Tooltip>
                                     </div>
                                     <div onClick={this.handleClose} style={{ cursor: 'pointer' }}>Close</div>
@@ -275,6 +285,17 @@ export default class TakeNotes extends Component {
                         </div>
                     </MuiPickersUtilsProvider>
                 </Dialog>
+                <Popper open={this.state.anchorEl1} anchorEl={this.state.anchorEl1} style={{ zIndex: "999" }} >
+                    <Paper>
+                        <ClickAwayListener onClickAway={this.handleListenerClose1}>
+                            <MenuList>
+                                <MenuItem >Add label</MenuItem>
+                                <MenuItem >Add drawing</MenuItem>
+                                <MenuItem >Show checkboxes</MenuItem>
+                            </MenuList>
+                        </ClickAwayListener>
+                    </Paper>
+                </Popper>
             </div>
         );
     }
