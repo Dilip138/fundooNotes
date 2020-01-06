@@ -227,9 +227,7 @@ export default class TakeNotes extends Component {
                                             <Tooltip title="Archive">
                                                 <div><ArchiveIcon /></div>
                                             </Tooltip>
-                                            <Tooltip title="more">
-                                                <div style={{ cursor: 'pointer' }}><MoreVertIcon onClick={(e) => this.handleMoreVertical(e)} /></div>
-                                            </Tooltip>
+                                            <div style={{ cursor: 'pointer' }}><MoreVertIcon onClick={(e) => this.handleMoreVertical(e)} /></div>
                                         </div>
                                         <div onClick={this.handleClose} style={{ cursor: 'pointer' }}>Close</div>
                                     </div>

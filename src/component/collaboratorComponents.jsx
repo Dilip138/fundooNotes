@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Card, Dialog, Divider, Avatar, Button, Popper, InputBase, DialogTitle, DialogContent } from '@material-ui/core';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import { Card, Dialog, Divider, Avatar, Button, InputBase, DialogTitle, DialogContent } from '@material-ui/core';
+import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 export default class Collaborators extends Component {
@@ -46,15 +46,11 @@ export default class Collaborators extends Component {
                                         <div className="collaborator-avatar">
                                             <Avatar style={{ width: "35px", height: "35px" }}>
                                                 <img alt="pic"
-                                                    style={{
-                                                        width: "-webkit-fill-available",
-                                                        height: "-webkit-fill-available",
-                                                    }}
-                                                    src={localStorage.getItem('profileimage')}
+                                                    src={localStorage.getItem('imageUrl')}
                                                 />
                                             </Avatar>
                                         </div>
-                                        <div className="collaborator-name-email">
+                                        <div className="collaborator-email">
                                             <span style={{ fontFamily: 'Roboto' }}>
                                                 <b>{localStorage.getItem('firstName')}
                                                     {localStorage.getItem('lastName')}
@@ -66,9 +62,25 @@ export default class Collaborators extends Component {
                                             {localStorage.getItem('email')}
                                         </div>
                                     </div>
+                                    <div className="collaborator-avtar-email">
+                                        <div className="collaborator-avatar">
+                                            <Avatar style={{ width: "35px", height: "35px" }} />
+                                        </div>
+                                        <div>
+                                            <InputBase
+                                                placeholder="Person or email share with" />
+                                        </div>
+                                    </div>
+                                    <div className="collaborator-button">
+                                        <div>
+                                            <Button >cancel</Button>
+                                        </div>
+                                        <div>
+                                            <Button>save</Button>
+                                        </div>
+                                    </div>
                                 </div >
                             </DialogContent>
-
                         </Card>
                     </ClickAwayListener>
 
