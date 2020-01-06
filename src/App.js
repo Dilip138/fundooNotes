@@ -15,6 +15,7 @@ import reminders from './component/getReminders';
 import trash from './component/getTrash';
 import colorComponent from './component/colorComponent';
 import profile from './component/profileComponent';
+import collaborators from './component/collaboratorComponents';
 function App() {
   return (
     <Router>
@@ -33,6 +34,7 @@ function App() {
         <Route path="/trash" component={trash}></Route>
         <Route path="/colorComponent" component={colorComponent}></Route>
         <Route path="/profile" component={profile}></Route>
+        <Route path="/collaborators" component={collaborators}></Route>
       </Switch>
     </Router>
   );

@@ -19,6 +19,7 @@ import Divider from '@material-ui/core/Divider';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker, } from '@material-ui/pickers';
 import { Dialog, Button } from '@material-ui/core';
+import Collaborators from './collaboratorComponents';
 export default class TakeNotes extends Component {
     constructor() {
         super()
@@ -37,9 +38,9 @@ export default class TakeNotes extends Component {
             // '2014-08-18T21:11:54'
         }
     }
-    handleOpenCheckBox = () => {
+    handleOpenCheckBox = (e) => {
         this.setState({
-            openCheckBox: !this.state.openCheckBox
+            openCheckBox: this.state.openCheckBox ? false : e.target
         })
     }
     handleDateChange = date => {
@@ -72,9 +73,19 @@ export default class TakeNotes extends Component {
             click: true
         })
     }
-    handleOpenInput = () => {
+    handleListnerInput = () => {
         this.setState({
-            open: true
+            open: false
+        })
+    }
+    handleListnerInputCheckBox = () => {
+        this.setState({
+            openCheckBox: false
+        })
+    }
+    handleOpenInput = (e) => {
+        this.setState({
+            open: this.state.open ? false : e.target
         })
     }
     handleTitle = (event) => {
@@ -134,7 +145,7 @@ export default class TakeNotes extends Component {
             <div>
                 {this.state.openCheckBox ? (
                     <div className="Take_Note" >
-                        <ClickAwayListener onClickAway={this.handleListenerClose}>
+                        <ClickAwayListener onClickAway={this.handleListnerInputCheckBox}>
                             <Card className="card_Notes" style={{ backgroundColor: this.state.color, boxShadow: "0px 0px 7px 0px" }}  >
                                 <div>
                                     <b><InputBase
@@ -180,57 +191,59 @@ export default class TakeNotes extends Component {
                     :
                     this.state.open ?
                         (<div className="Take_Note" >
-                            <Card className="card_Notes" style={{ backgroundColor: this.state.color, boxShadow: "0px 0px 7px 0px" }}  >
-                                <div>
-                                    <b><InputBase
-                                        placeholder="Title"
-                                        value={this.state.title}
-                                        onChange={this.handleTitle} /></b>
-                                </div>
-                                <div className="inputNote">
-                                    <InputBase
-                                        placeholder="Take a note..."
-                                        value={this.state.description}
-                                        onChange={this.handleDescription} />
-                                </div>
-                                <div>
-                                    <InputBase
-                                        value={this.state.reminder} />
-                                </div>
-                                <div className="imageAndClose">
-                                    <div className="imageIcon">
-                                        <Tooltip title="Remind me">
-                                            <div style={{ cursor: 'pointer' }} onClick={(e, value) => this.handleReminder(e, value)} ><AddAlertIcon /></div>
-                                        </Tooltip>
-                                        <Tooltip title="Collborator">
-                                            <div><PersonAddIcon /></div>
-                                        </Tooltip>
-                                        <Tooltip title="Change color">
-                                            <div><ColorComponent
-                                                colorPatter={this.handleColor} /></div>
-                                        </Tooltip>
-                                        <Tooltip title="Add image">
-                                            <div><ImageIcon /></div>
-                                        </Tooltip>
-                                        <Tooltip title="Archive">
-                                            <div><ArchiveIcon /></div>
-                                        </Tooltip>
-                                        <Tooltip title="more">
-                                            <div style={{cursor:'pointer'}}><MoreVertIcon onClick={(e) => this.handleMoreVertical(e)} /></div>
-                                        </Tooltip>
+                            <ClickAwayListener onClickAway={this.handleListnerInput}>
+                                <Card className="card_Notes" style={{ backgroundColor: this.state.color, boxShadow: "0px 0px 7px 0px" }}  >
+                                    <div>
+                                        <b><InputBase
+                                            placeholder="Title"
+                                            value={this.state.title}
+                                            onChange={this.handleTitle} /></b>
                                     </div>
-                                    <div onClick={this.handleClose} style={{ cursor: 'pointer' }}>Close</div>
-                                </div>
-                            </Card>
+                                    <div className="inputNote">
+                                        <InputBase
+                                            placeholder="Take a note..."
+                                            value={this.state.description}
+                                            onChange={this.handleDescription} />
+                                    </div>
+                                    <div>
+                                        <InputBase
+                                            value={this.state.reminder} />
+                                    </div>
+                                    <div className="imageAndClose">
+                                        <div className="imageIcon">
+                                            <Tooltip title="Remind me">
+                                                <div style={{ cursor: 'pointer' }} onClick={(e, value) => this.handleReminder(e, value)} ><AddAlertIcon /></div>
+                                            </Tooltip>
+                                            <Tooltip title="Collborator">
+                                                <div><Collaborators /></div>
+                                            </Tooltip>
+                                            <Tooltip title="Change color">
+                                                <div><ColorComponent
+                                                    colorPatter={this.handleColor} /></div>
+                                            </Tooltip>
+                                            <Tooltip title="Add image">
+                                                <div><ImageIcon /></div>
+                                            </Tooltip>
+                                            <Tooltip title="Archive">
+                                                <div><ArchiveIcon /></div>
+                                            </Tooltip>
+                                            <Tooltip title="more">
+                                                <div style={{ cursor: 'pointer' }}><MoreVertIcon onClick={(e) => this.handleMoreVertical(e)} /></div>
+                                            </Tooltip>
+                                        </div>
+                                        <div onClick={this.handleClose} style={{ cursor: 'pointer' }}>Close</div>
+                                    </div>
+                                </Card>
+                            </ClickAwayListener>
                         </div>) :
                         <div className="Take_Note" >
                             <Card className="card_Note" style={{ boxShadow: "0px 0px 7px 0px" }}>
                                 <div>
-                                    <InputBase onClick={this.handleOpenInput}
+                                    <InputBase onClick={(e) => this.handleOpenInput(e)}
                                         placeholder="Take a note..." />
                                 </div>
                                 <div className="icon_Take">
-                                    <div><CheckBoxIcon onClick={this.handleOpenCheckBox} /></div>
+                                    <div><CheckBoxIcon onClick={(e) => this.handleOpenCheckBox(e)} /></div>
                                     <div><EditIcon /></div>
                                     <div><ImageIcon /></div>
                                 </div>
@@ -260,7 +273,7 @@ export default class TakeNotes extends Component {
                                     id="date-picker-dialog"
                                     label="Date picker dialog"
                                     format="MM/dd/yyyy"
-                                    value={this.state.selectedDate.toDateString().slice(0, 24)}
+                                    value={this.state.selectedDate}
                                     onChange={this.handleDateChange}
                                     KeyboardButtonProps={{
                                         'aria-label': 'change date',
@@ -272,7 +285,7 @@ export default class TakeNotes extends Component {
                                     margin="normal"
                                     id="time-picker"
                                     label="Time picker"
-                                    value={this.state.selectedDate.toDateString().slice(0, 24)}
+                                    value={this.state.selectedDate}
                                     onChange={this.handleDateChange}
                                     KeyboardButtonProps={{
                                         'aria-label': 'change time',

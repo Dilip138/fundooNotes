@@ -24,7 +24,6 @@ class GetNotes extends Component {
             color: '',
             isArchived: false,
             reminder: '',
-            selectedDate: new Date(),
         };
     };
     componentDidMount() {
