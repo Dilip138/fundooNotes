@@ -15,20 +15,20 @@ export default class MoreMenu extends Component {
     this.state = {
       anchorEl: false,
       notes: [],
-      open:false,
+      open: false,
       isDeleted: false,
-      label:'',
+      label: '',
     }
   }
   handleOpenDialogue = (e) => {
     this.setState({
-      open:!this.state.open
+      open: !this.state.open
     })
   }
-  handleChangeLabel = (event)=>{
+  handleChangeLabel = (event) => {
     const label = event.target.value
     this.setState({
-      label:label
+      label: label
     })
   }
   handleMenu = (e) => {
@@ -70,7 +70,7 @@ export default class MoreMenu extends Component {
   render() {
     return (
       <div>
-        <div onClick={(e) => this.handleMenu(e)}>
+        <div style={{ cursor: 'pointer' }} onClick={(e) => this.handleMenu(e)}>
           <MoreVertIcon />
         </div>
         <Popper open={this.state.anchorEl} anchorEl={this.state.anchorEl} style={{ zIndex: "999" }} >
@@ -92,10 +92,10 @@ export default class MoreMenu extends Component {
           onClose={this.handleOpenDialogue}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description">
-          <div className="dialogLabel"style={{backgroundColor:'#303030'}}>
-            <div style={{color:'white',fontSize:'16px'}} >Label note</div>
+          <div className="dialogLabel" style={{ backgroundColor: '#303030' }}>
+            <div style={{ color: 'white', fontSize: '16px' }} >Label note</div>
             <div>
-              <InputBase style={{color:'grey',fontSize:'15px'}}
+              <InputBase style={{ color: 'grey', fontSize: '15px' }}
                 placeholder="Enter label name"
                 value={this.state.label}
                 onChange={this.handleChangeLabel} />

@@ -28,7 +28,7 @@ export default class TakeNotes extends Component {
             description: '',
             color: '',
             anchorEl: false,
-            anchorEl1: false,
+            anchorElLabel: false,
             open: false,
             reminder: '',
             click: false,
@@ -55,7 +55,7 @@ export default class TakeNotes extends Component {
     };
     handleMoreVertical = (e) => {
         this.setState({
-            anchorEl1: this.state.anchorEl1 ? false : e.target,
+            anchorElLabel: this.state.anchorElLabel ? false : e.target,
         });
     }
     handleListenerClose = () => {
@@ -65,7 +65,7 @@ export default class TakeNotes extends Component {
     };
     handleListenerClose1 = () => {
         this.setState({
-            anchorEl1: false
+            anchorElLabel: false
         });
     };
     handleOpenDialogue = () => {
@@ -214,7 +214,7 @@ export default class TakeNotes extends Component {
                                             <Tooltip title="Remind me">
                                                 <div style={{ cursor: 'pointer' }} onClick={(e, value) => this.handleReminder(e, value)} ><AddAlertIcon /></div>
                                             </Tooltip>
-                                                <div><Collaborators /></div>
+                                            <div><Collaborators /></div>
                                             <Tooltip title="Change color">
                                                 <div><ColorComponent
                                                     colorPatter={this.handleColor} /></div>
@@ -294,7 +294,7 @@ export default class TakeNotes extends Component {
                         </div>
                     </MuiPickersUtilsProvider>
                 </Dialog>
-                <Popper open={this.state.anchorEl1} anchorEl={this.state.anchorEl1} style={{ zIndex: "999" }} >
+                <Popper open={this.state.anchorElLabel} anchorEl={this.state.anchorElLabel} style={{ zIndex: "999" }} >
                     <Paper>
                         <ClickAwayListener onClickAway={this.handleListenerClose1}>
                             <MenuList>

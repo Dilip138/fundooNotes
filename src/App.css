@@ -71,11 +71,11 @@
     margin-top: 6%;
 }
 
-@media only screen and(min-width:600px) {
+/* @media only screen and(min-width:600px) {
     .allNotes {
         margin-left: 240px;
     }
-}
+} */
 
 /** appBar design **/
 
@@ -163,23 +163,22 @@
 .allNotes {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
+    /* flex-wrap: wrap;
+    width: 100%; */
 }
 
 .notesAll_ {
     display: flex;
     justify-content: center;
-    width: 80%;
+    /* width: 80%; */
     flex-wrap: wrap;
 }
 
 .getcard {
-    width: 300px;
-    min-height: 100px;
-    height: auto;
-    margin: 10px;
+    margin: 8px;
     padding: 15px;
+    box-shadow: 0px 1px 7px 0px;
+    border: 1px solid gray;
 }
 
 .getcard:hover>.imageIconCard {
@@ -256,4 +255,106 @@
 
 .collaborator-personOremail {
     margin-left: 12px;
+}
+
+/* -----------------------DashBoard----------------------- */
+
+@media only screen and (min-width: 360px) {
+    .getcard {
+        width: 349px;
+    }
+    .card_Note {
+        width: 21em;
+        margin-left: .8em;
+    }
+    .Take_Note {
+        display: inherit;
+        justify-content: inherit;
+        margin-top: 24%;
+    }
+}
+
+@media only screen and (min-width: 411px) {
+    .getcard {
+        width: 400px;
+    }
+    .card_Note {
+        width: 21em;
+        margin-left: 2.3em;
+    }
+    .Take_Note {
+        display: inherit;
+        justify-content: inherit;
+        margin-top: 24%;
+        width: 0px;
+    }
+}
+
+@media only screen and (min-width: 414px) {
+    .getcard {
+        width: 410px;
+    }
+    .card_Note {
+        width: 23em;
+        margin-left: 5em;
+    }
+    .Take_Note {
+        display: inherit;
+        justify-content: inherit;
+        margin-top: 24%;
+        width: 0px;
+    }
+}
+
+@media only screen and (min-width: 320px) {
+    .getcard {
+        width: 310px;
+    }
+    .card_Note {
+        width: 18em;
+        margin-left: 1.1em;
+    }
+    .Take_Note {
+        display: flex;
+        justify-content: center;
+        margin-top: 24%;
+        width: 19em;
+    }
+}
+
+@media only screen and (min-width: 375px) {
+    .getcard {
+        width: 360px;
+    }
+    .card_Note {
+        width: 21em;
+        margin-left: 1.1em;
+    }
+    .Take_Note {
+        display: inherit;
+        justify-content: inherit;
+        margin-top: 24%;
+        width: 0px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .getcard {
+        width: 360px;
+    }
+    .card_Note {
+        width: 32em;
+    }
+    .Take_Note {
+        display: flex;
+        justify-content: center;
+        margin-top: 4%;
+        width: 100%;
+    }
+    .search {
+        min-width: 14em;
+    }
+    .notesAll_ {
+        width: 100%;
+    }
 }

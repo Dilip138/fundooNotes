@@ -8,7 +8,15 @@ export default class Collaborators extends Component {
         super()
         this.state = {
             open: false,
+            email: '',
+            collaborator:[],
         }
+    }
+    handleChangeEmail = (event) => {
+        const email = event.target.value
+        this.setState({
+            email: email
+        })
     }
     handleOpenDialogue = () => {
         this.setState({
@@ -25,65 +33,73 @@ export default class Collaborators extends Component {
             open: false
         })
     }
+    handleCancel = () => {
+        this.setState({
+            open: false
+        })
+    }
+    handleSave = () => {
+
+    }
     render() {
         return (
-            <div>
-                {/* <ClickAwayListener onClickAway={this.handleListenerClose}> */}
-                    <div>
-                        <PersonAddIcon onClick={(e) => this.handleColloborator(e)} cursor="pointer" />
-                    </div>
-                {/* </ClickAwayListener> */}
+            <div className="main_collaborator">
+                <div>
+                    <PersonAddIcon onClick={(e) => this.handleColloborator(e)} cursor="pointer" />
+                </div>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleOpenDialogue}>
-                    <Card className="dialogCard">
-                        <DialogTitle>
-                            Collaborators
+                    <ClickAwayListener onClickAway={this.handleListenerClose}>
+                        <Card className="dialogCard">
+                            <DialogTitle>
+                                Collaborators
                                 </DialogTitle>
-                        <Divider />
-                        <DialogContent>
-                            <div>
-                                <div className="collaborator-avtar-email">
-                                    <div className="collaborator-avatar">
-                                        <Avatar style={{ width: "35px", height: "35px" }}>
-                                            <img alt="pic"
-                                                src={localStorage.getItem('imageUrl')}
-                                            />
-                                        </Avatar>
+                            <Divider />
+                            <DialogContent>
+                                <div>
+                                    <div className="collaborator-avtar-email">
+                                        <div className="collaborator-avatar">
+                                            <Avatar style={{ width: "35px", height: "35px" }}>
+                                                <img alt="pic"
+                                                    src={localStorage.getItem('imageUrl')}
+                                                />
+                                            </Avatar>
+                                        </div>
+                                        <div className="collaborator-email">
+                                            <span style={{ fontFamily: 'Roboto' }}>
+                                                <b>{localStorage.getItem('firstName')}
+                                                    {localStorage.getItem('lastName')}
+                                                </b>
+                                                <span style={{ fontFamily: "Roboto arial sansSerif", paddingLeft: "10px" }}>
+                                                    (owner)</span>
+                                            </span>
+                                            <br />
+                                            {localStorage.getItem('email')}
+                                        </div>
                                     </div>
-                                    <div className="collaborator-email">
-                                        <span style={{ fontFamily: 'Roboto' }}>
-                                            <b>{localStorage.getItem('firstName')}
-                                                {localStorage.getItem('lastName')}
-                                            </b>
-                                            <span style={{ fontFamily: "Roboto arial sansSerif", paddingLeft: "10px" }}>
-                                                (owner)</span>
-                                        </span>
-                                        <br />
-                                        {localStorage.getItem('email')}
+                                    <div className="collaborator-avtar-email">
+                                        <div className="collaborator-avatar">
+                                            <Avatar style={{ width: "35px", height: "35px" }} />
+                                        </div>
+                                        <div className="collaborator-personOremail">
+                                            <InputBase
+                                                placeholder="Person or email share with"
+                                                onChange={this.handleChange} />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="collaborator-avtar-email">
-                                    <div className="collaborator-avatar">
-                                        <Avatar style={{ width: "35px", height: "35px" }} />
-                                    </div>
-                                    <div className="collaborator-personOremail">
-                                        <InputBase
-                                            placeholder="Person or email share with" />
-                                    </div>
-                                </div>
-
+                                </div >
                                 <div className="collaborator-button">
                                     <div>
-                                        <Button >cancel</Button>
+                                        <Button onClick={this.handleCancel} >cancel</Button>
                                     </div>
                                     <div>
-                                        <Button>save</Button>
+                                        <Button onClick={this.handleSave}>save</Button>
                                     </div>
                                 </div>
-                            </div >
-                        </DialogContent>
-                    </Card>
+                            </DialogContent>
+                        </Card>
+                    </ClickAwayListener>
                 </Dialog>
             </div>
         );

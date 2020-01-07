@@ -11,6 +11,7 @@ import { withRouter } from "react-router-dom";
 import Dialog from '@material-ui/core/Dialog';
 import MoreMenu from '../components/moreComponent';
 import ColorComponent from '../components/colorComponent';
+import Collaborators from '../components/collaboratorComponents';
 
 class GetNotes extends Component {
     constructor(props) {
@@ -105,14 +106,14 @@ class GetNotes extends Component {
                 console.log("err in colorNote component ", err);
             });
     }
-    handleReminder = (reminder,noteId) => {
+    handleReminder = (reminder, noteId) => {
         let data = {
             reminder: reminder,
             noteIdList: [noteId]
         }
         console.log("res in reminderData", data);
         reminderNotes(data).then(res => {
-            console.log("res in reminderNotes", res);            
+            console.log("res in reminderNotes", res);
         })
             .catch(err => {
                 console.log("err in reminderComponent", err);
@@ -127,9 +128,9 @@ class GetNotes extends Component {
                             {
                                 this.state.notes.map(key => {
                                     return (
-                                        key.isArchived === false && key.isDeleted === false && 
+                                        key.isArchived === false && key.isDeleted === false &&
                                         <div className="getCardNote">
-                                            <Card className="getcard" style={{ boxShadow: "0px 0px 7px 0px grey", border: "1px solid grey", borderRadius: '10px', backgroundColor: key.color}}>
+                                            <Card className="getcard" style={{  borderRadius:'10px',backgroundColor: key.color}}>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}
@@ -149,19 +150,16 @@ class GetNotes extends Component {
                                                         onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
                                                 </div>
                                                 <div className="imageIconCard">
-                                                    <div><AddAlertIcon  onClick={()=>this.handleReminder(key.reminder,key.id)}
-                                                         />
+                                                    <div style={{ cursor: 'pointer' }}><AddAlertIcon onClick={() => this.handleReminder(key.reminder, key.id)} />
                                                     </div>
-                                                    <div><PersonAddIcon /></div>
+                                                    <div><Collaborators /></div>
                                                     <div><ColorComponent
                                                         colorPatter={this.handleChangeColor}
                                                         noteId={key.id} /></div>
                                                     <div><ImageIcon /></div>
                                                     <div style={{ cursor: 'pointer' }} onClick={() => this.handleArchiveNotes(key.id)} notecolor={key.color}><ArchiveIcon /></div>
-                                                    <div><MoreMenu
-                                                        noteId={key.id} />
+                                                    <div><MoreMenu noteId={key.id} />
                                                     </div>
-
                                                 </div>
                                             </Card>
                                         </div>

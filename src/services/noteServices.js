@@ -63,3 +63,11 @@ export function createNotes(data) {
       }
     })
   }
+
+  export function addCollaborators(data){
+    return axios.post(process.env.React_App_BASE_URL + apiConstant.addCollaborators,data,{
+      headers:{
+        Authorization:localStorage.getItem('token')
+      }
+    })
+  }
