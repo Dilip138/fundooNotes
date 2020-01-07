@@ -6,11 +6,11 @@ import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ColorLensIcon from '@material-ui/icons/ColorLensOutlined';
 import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { getAllNotes, editNote, archiveNotes, colorNotes, reminderNotes } from '../service/userService';
+import { getAllNotes, editNote, archiveNotes, colorNotes, reminderNotes } from '../services/noteServices';
 import { withRouter } from "react-router-dom";
 import Dialog from '@material-ui/core/Dialog';
-import MoreMenu from '../component/moreComponent';
-import ColorComponent from '../component/colorComponent';
+import MoreMenu from '../components/moreComponent';
+import ColorComponent from '../components/colorComponent';
 
 class GetNotes extends Component {
     constructor(props) {

@@ -10,14 +10,14 @@ import Refresh from '@material-ui/icons/Refresh';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ViewAgenda from '@material-ui/icons/ViewAgenda';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import DrawerComponent from '../component/drawer.jsx'
+import DrawerComponent from '../components/drawer.jsx';
+import ImageIcon from '@material-ui/icons/ImageOutlined';
+import AddAlertIcon from '@material-ui/icons/AddAlertOutlined';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ColorLensIcon from '@material-ui/icons/ColorLensOutlined';
 import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
-import MoreMenu from '../component/moreComponent';
-import ImageIcon from '@material-ui/icons/ImageOutlined';
-import AddAlertIcon from '@material-ui/icons/AddAlertOutlined';
-import { getAllNotes } from '../service/userService';
+import MoreMenu from '../components/moreComponent';
+import { getAllNotes } from '../services/noteServices';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 const theme = createMuiTheme({
     overrides: {
@@ -40,7 +40,7 @@ const theme = createMuiTheme({
         }
     }
 })
-export default class Reminders extends Component {
+export default class Archive extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -90,7 +90,7 @@ export default class Reminders extends Component {
                                     </div>
                                     <div style={{ color: "black", cursor: "pointer" }}>
                                         <Typography className="title" variant="h6">
-                                            Reminders </Typography>
+                                            Archive </Typography>
                                     </div>
                                 </div>
                                 <div className="searchAndIcon">
@@ -140,11 +140,10 @@ export default class Reminders extends Component {
                     <div className="trashNote">
                         {
                             this.state.notes.map(key => {
-                                console.log("key", key);
-                                if (key.isArchived === false && key.isDeleted === true && key.reminder === true) {
+                                if (key.isArchived === true && key.isDeleted !== true ) {
                                     return (
                                         <div className="getCardNote">
-                                            <Card className="getcard" style={{ boxShadow: "0px 0px 7px 0px", border: "1px solid black", borderRadius: '10px', backgroundColor: this.props.notecolor }}>
+                                            <Card className="getcard" style={{ boxShadow: "0px 0px 7px 0px", border: "1px solid black", borderRadius: '10px',backgroundColor:this.props.notecolor }}>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}
@@ -157,21 +156,15 @@ export default class Reminders extends Component {
                                                         multiline
                                                     />
                                                 </div>
-                                                <div onClick={this.handleOpenDialogue}>
-                                                    <InputBase
-                                                        value={key.reminder}
-                                                        multiline
-                                                        onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
-                                                </div>
                                                 <div className="imageIconCard">
-                                                    <div><AddAlertIcon /></div>
-                                                    <div><PersonAddIcon /></div>
-                                                    <div><ColorLensIcon /></div>
-                                                    <div><ImageIcon /></div>
-                                                    <div><ArchiveIcon /></div>
-                                                    <div><MoreMenu /></div>
+                                                <div><AddAlertIcon /></div>
+                                                <div><PersonAddIcon /></div>
+                                                <div><ColorLensIcon /></div>
+                                                <div><ImageIcon /></div>
+                                                <div><ArchiveIcon /></div>
+                                                <div><MoreMenu /></div>
 
-                                                </div>
+                                            </div>
                                             </Card>
                                         </div>
                                     )
@@ -181,7 +174,6 @@ export default class Reminders extends Component {
                     </div>
                 </div>
             </div>
-
         );
     }
 }

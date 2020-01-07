@@ -12,4 +12,3 @@ const apiConstant = {
     imageUpload:"/user/uploadProfileImage",
 }
 export default apiConstant;
-   

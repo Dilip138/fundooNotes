@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Popper, Button, Card } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
-import { imageUpload } from '../service/userService';
+import { imageUpload } from '../services/userService';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 const url = "http://fundoonotes.incubation.bridgelabz.com/"
 class ProfileImgComponenet extends Component {
@@ -45,10 +45,6 @@ class ProfileImgComponenet extends Component {
         localStorage.clear()
         this.props.history.push('/')
     }
-    // handleProfileUpload = async (e) => {
-    //     console.log("profile upload ", e.target.files[0]);
-
-    // }
     render() {
         const { anchorEl } = this.state;
         return (

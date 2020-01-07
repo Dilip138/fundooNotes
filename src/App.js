@@ -1,21 +1,21 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Login from "./component/loginComponent";
-import Register from "./component/registerComponent";
-import ForgotPassword from './component/forgotComponent';
+import Login from "./components/loginComponent";
+import Register from "./components/registerComponent";
+import ForgotPassword from './components/forgotComponent';
 import "./App.css";
-import ResetPassword from './component/resetComponent';
-import dashBoard from './component/dashBoardComponent';
-import drawer from './component/drawer'
-import createNotes from './component/createNotesComponent';
-import getNotes from './component/getNoteComponent';
-import moreMenu from './component/moreComponent';
-import archive from './component/getArchive';
-import reminders from './component/getReminders';
-import trash from './component/getTrash';
-import colorComponent from './component/colorComponent';
-import profile from './component/profileComponent';
-import collaborators from './component/collaboratorComponents';
+import ResetPassword from './components/resetComponent';
+import dashBoard from './components/dashBoardComponent';
+import drawer from './components/drawer'
+import createNotes from './components/createNotesComponent';
+import getNotes from './components/getNoteComponent';
+import moreMenu from './components/moreComponent';
+import archive from './components/getArchive';
+import reminders from './components/getReminders';
+import trash from './components/getTrash';
+import colorComponent from './components/colorComponent';
+import profile from './components/profileComponent';
+import collaborators from './components/collaboratorComponents';
 function App() {
   return (
     <Router>

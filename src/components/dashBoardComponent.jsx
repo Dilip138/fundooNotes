@@ -10,10 +10,10 @@ import Refresh from '@material-ui/icons/Refresh';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ViewAgenda from '@material-ui/icons/ViewAgenda';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import DrawerComponent from '../component/drawer.jsx';
+import DrawerComponent from '../components/drawer.jsx';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import CreateNotes from './createNotesComponent';
-import GetNoteComponent from '../component/getNoteComponent';
+import GetNoteComponent from '../components/getNoteComponent';
 import ProfileImgComponenet from './profileComponent';
 const theme = createMuiTheme({
     overrides: {

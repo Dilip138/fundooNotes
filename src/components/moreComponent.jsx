@@ -6,7 +6,7 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { getAllNotes, trashNotes } from '../service/userService';
+import { getAllNotes, trashNotes } from '../services/noteServices';
 import { Dialog } from '@material-ui/core';
 
 export default class MoreMenu extends Component {

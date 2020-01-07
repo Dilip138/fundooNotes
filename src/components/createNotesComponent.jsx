@@ -8,8 +8,8 @@ import AddAlertIcon from '@material-ui/icons/AddAlertOutlined';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { createNotes } from '../service/userService';
-import ColorComponent from '../component/colorComponent';
+import { createNotes } from '../services/noteServices';
+import ColorComponent from './colorComponent';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
@@ -191,7 +191,7 @@ export default class TakeNotes extends Component {
                     :
                     this.state.open ?
                         (<div className="Take_Note" >
-                            <ClickAwayListener onClickAway={this.handleListnerInput}>
+                            {/* <ClickAwayListener onClickAway={this.handleListnerInput}> */}
                                 <Card className="card_Notes" style={{ backgroundColor: this.state.color, boxShadow: "0px 0px 7px 0px" }}  >
                                     <div>
                                         <b><InputBase
@@ -214,9 +214,7 @@ export default class TakeNotes extends Component {
                                             <Tooltip title="Remind me">
                                                 <div style={{ cursor: 'pointer' }} onClick={(e, value) => this.handleReminder(e, value)} ><AddAlertIcon /></div>
                                             </Tooltip>
-                                            <Tooltip title="Collborator">
                                                 <div><Collaborators /></div>
-                                            </Tooltip>
                                             <Tooltip title="Change color">
                                                 <div><ColorComponent
                                                     colorPatter={this.handleColor} /></div>
@@ -232,7 +230,7 @@ export default class TakeNotes extends Component {
                                         <div onClick={this.handleClose} style={{ cursor: 'pointer' }}>Close</div>
                                     </div>
                                 </Card>
-                            </ClickAwayListener>
+                            {/* </ClickAwayListener> */}
                         </div>) :
                         <div className="Take_Note" >
                             <Card className="card_Note" style={{ boxShadow: "0px 0px 7px 0px" }}>

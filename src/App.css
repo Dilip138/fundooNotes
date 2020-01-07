@@ -6,12 +6,13 @@
     /* margin: 4rem 25rem; */
     padding: 60px;
 }
-.fundooAcount{
+
+.fundooAcount {
     color: black;
     font-size: 20px;
     font-family: 'Times New Roman';
     text-align: center;
-     margin-top: 5%
+    margin-top: 5%
 }
 
 #signup {
@@ -152,7 +153,7 @@
     width: 60%;
 }
 
-.imageIconCard{
+.imageIconCard {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -165,13 +166,14 @@
     flex-wrap: wrap;
     width: 100%;
 }
-.notesAll_{
+
+.notesAll_ {
     display: flex;
     justify-content: center;
     width: 80%;
     flex-wrap: wrap;
-
 }
+
 .getcard {
     width: 300px;
     min-height: 100px;
@@ -179,34 +181,40 @@
     margin: 10px;
     padding: 15px;
 }
-.getcard:hover>.imageIconCard{
+
+.getcard:hover>.imageIconCard {
     visibility: visible;
 }
-.dialogCard{
-    width:35em;
+
+.dialogCard {
+    width: 35em;
     min-height: 140px;
     height: auto;
     padding: 10px;
 }
-.trashNote{
+
+.trashNote {
     display: flex;
     justify-content: center;
     width: 80%;
     flex-wrap: wrap;
     margin-top: 8em;
 }
-.imageIconTrash{
+
+.imageIconTrash {
     display: flex;
     justify-content: space-between;
     width: 70px;
 }
-.dialogLabel{
-    width:15em;
+
+.dialogLabel {
+    width: 15em;
     min-height: 110px;
     height: auto;
     padding: 10px;
 }
-.Profile{
+
+.Profile {
     min-width: 30em;
     min-height: 15em;
     height: auto;
@@ -214,20 +222,38 @@
     display: grid;
     justify-content: center;
 }
-.colorPaper{
+
+.colorPaper {
     display: flex;
 }
-.profileUpload{
+
+.profileUpload {
     display: flex;
     align-items: center;
     margin-top: 20px;
     justify-content: center;
     margin-left: 85px;
 }
-.profilebutton{
+
+.profilebutton {
     display: flex;
     justify-content: center;
 }
-.collaborator-avtar-email{
+
+.collaborator-avtar-email {
     display: flex;
+    margin-top: 10px;
+}
+
+.collaborator-button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.collaborator-email {
+    margin-left: 12px;
+}
+
+.collaborator-personOremail {
+    margin-left: 12px;
 }

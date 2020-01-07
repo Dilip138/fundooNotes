@@ -9,11 +9,11 @@ import Refresh from '@material-ui/icons/Refresh';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ViewAgenda from '@material-ui/icons/ViewAgenda';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import DrawerComponent from '../component/drawer.jsx';
+import DrawerComponent from '../components/drawer.jsx';
 import { Card, InputBase } from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForeverOutlined';
 import RestoreFromTrashIcon from '@material-ui/icons/RestoreFromTrash';
-import { getAllNotes } from '../service/userService';
+import { getAllNotes } from '../services/noteServices';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 const theme = createMuiTheme({
     overrides: {
