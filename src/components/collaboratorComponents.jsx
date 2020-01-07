@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import { Card, Dialog, Divider, Avatar, Button, InputBase, DialogTitle, DialogContent } from '@material-ui/core';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import { searchUserList, addCollaborators } from '../services/noteServices';
 
 export default class Collaborators extends Component {
     constructor() {
         super()
         this.state = {
             open: false,
-            email: '',
-            collaborator:[],
+            collaborator: [],
+            searchUserEmail: '',
+            collaboratorImage: [],
         }
     }
     handleChangeEmail = (event) => {
@@ -38,8 +40,28 @@ export default class Collaborators extends Component {
             open: false
         })
     }
+    handleSearchUserEmail = (value) => {
+        let data = {
+            searchUserEmail: this.state.searchUserEmail
+        }
+        searchUserList(data).then(res => {
+            this.setState({
+                searchUserEmail: value
+            })
+            console.log("res in searchEmail", res)
+        })
+    }
     handleSave = () => {
-
+        let data = this.state.collaborator.map(key => {
+            console.log("res in data", data)
+            return key
+        })
+        addCollaborators(data, this.props.noteId).then(res => {
+            console.log("res in collaborator", res)
+            this.setState({
+                open: false
+            })
+        })
     }
     render() {
         return (
@@ -78,6 +100,20 @@ export default class Collaborators extends Component {
                                             {localStorage.getItem('email')}
                                         </div>
                                     </div>
+                                    {this.state.collaboratorImage.map(key => {
+                                        return (
+                                            <div className="collaborator-avtar-email">
+                                                <div className="collaborator-avatar">
+                                                    <Avatar style={{ width: "35px", height: "35px" }}>
+                                                        <img alt="pic"
+                                                            src={key.collaborator}
+                                                        />
+                                                    </Avatar>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                 }
                                     <div className="collaborator-avtar-email">
                                         <div className="collaborator-avatar">
                                             <Avatar style={{ width: "35px", height: "35px" }} />
@@ -85,7 +121,7 @@ export default class Collaborators extends Component {
                                         <div className="collaborator-personOremail">
                                             <InputBase
                                                 placeholder="Person or email share with"
-                                                onChange={this.handleChange} />
+                                                onChange={this.handleSearchUserEmail} />
                                         </div>
                                     </div>
                                 </div >
