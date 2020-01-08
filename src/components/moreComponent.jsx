@@ -88,7 +88,7 @@ render() {
             <MenuList>
               <MenuItem onClick={() => this.handleTrash(this.props.noteId)}>Delete note</MenuItem>
               <MenuItem><CreateLabelComponent propsToCraeteLabel={this.state.anchorEl} noteIdLabel={this.props.noteId}
-                createLabelPropsToMore={this.handleCreate} craeteLabelToMore={this.handleMenuLabel} noteLabel={this.props.noteLabel} />Changelabel</MenuItem>
+                createLabelPropsToMore={this.handleCreate} craeteLabelToMore={this.handleMenuLabel} noteLabel={this.props.noteLabel} /></MenuItem>
               <MenuItem onClick={this.handleQuestion}>Ask a question</MenuItem>
               <MenuItem onClick={this.handleClose}>Make a copy</MenuItem>
               <MenuItem onClick={this.handleClose}>Show checkboxes</MenuItem>

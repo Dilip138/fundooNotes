@@ -15,12 +15,14 @@ export default class CraeteLabel extends Component {
             label: '',
             labelData: [],
             isDeleted: false,
+            clear:false
         }
     }
     handleMoreVertical = (e) => {
         this.setState({
             anchorElLabel: this.state.anchorElLabel ? false : e.target,
         });
+        // this.props.craeteLabelToMore(true)
     }
     handleListenerClose = () => {
         this.setState({
@@ -43,7 +45,7 @@ export default class CraeteLabel extends Component {
             label: this.state.label,
             userId: localStorage.getItem('userId')
         }
-        addNoteLabels(data,this.props.noteId).then(res => {
+        addNoteLabels(data, this.props.noteIdLabel).then(res => {
             console.log("res in labeldata", res)
             this.setState({
                 createLabel: res.data.label
@@ -103,9 +105,11 @@ export default class CraeteLabel extends Component {
                                         <div>
                                             <SearchIcon style={{ color: "black" }} />
                                         </div>
-                                        {data}
+                                        <div> {data}</div>
+
                                         <div>
-                                            <Button onClick={this.handleCreateLabel}><span>+create : "{this.state.label}"</span></Button>
+                                            {this.state.clear ?
+                                                (<button onClick={this.handleCreateLabel}><span>+ create {this.state.label}</span></button>) : (null)}
                                         </div>
                                     </div>
                                 </div>

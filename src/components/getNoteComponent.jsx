@@ -119,6 +119,11 @@ class GetNotes extends Component {
                 console.log("err in reminderComponent", err);
             });
     }
+    handleCreateLabel = (isLabel)=>{
+        if(isLabel){
+            this.handleGetNotes()
+        }
+    }
     render() {
         return (
             <div>
@@ -158,7 +163,9 @@ class GetNotes extends Component {
                                                         noteId={key.id} /></div>
                                                     <div><ImageIcon /></div>
                                                     <div style={{ cursor: 'pointer' }} onClick={() => this.handleArchiveNotes(key.id)} notecolor={key.color}><ArchiveIcon /></div>
-                                                    <div><MoreMenu noteId={key.id} />
+                                                    <div><MoreMenu 
+                                                    noteId={key.id} 
+                                                    createLabelPropsTogetNote={this.handleCreateLabel}/>
                                                     </div>
                                                 </div>
                                             </Card>
