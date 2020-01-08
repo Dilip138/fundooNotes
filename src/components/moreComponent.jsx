@@ -95,8 +95,8 @@ export default class MoreMenu extends Component {
           onClose={this.handleOpenDialogue}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description">
-          <div className="dialogLabel" style={{ backgroundColor: '#303030' }}>
-            <div style={{ color: 'white', fontSize: '16px' }} >Label note</div>
+          <div className="dialogLabel">
+            <div style={{ color: 'black', fontSize: '16px' }} >Label note</div>
             <div>
               <InputBase style={{ color: 'grey', fontSize: '15px' }}
                 placeholder="Enter label name"

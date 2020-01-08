@@ -207,10 +207,9 @@
 }
 
 .dialogLabel {
-    width: 15em;
+    width: 225px;
     min-height: 110px;
-    height: auto;
-    padding: 10px;
+    margin: 12px;
 }
 
 .Profile {

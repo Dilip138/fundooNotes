@@ -97,6 +97,7 @@ class Login extends Component {
           localStorage.setItem("firstName", res.data.firstName);
           localStorage.setItem("lastName", res.data.lastName);
           localStorage.setItem("token", res.data.id);
+          localStorage.setItem("userId",res.data.userId)
           localStorage.setItem("imageUrl", url + res.data.imageUrl)
           this.setState({
             snackbarOpen: true,
