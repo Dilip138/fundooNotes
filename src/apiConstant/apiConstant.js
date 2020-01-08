@@ -11,6 +11,7 @@ const apiConstant = {
     reminderNote: "/notes/addUpdateReminderNotes",
     imageUpload: "/user/uploadProfileImage",
     addCollaborators: " /notes/{id}/AddcollaboratorsNotes",
-    searchUserList:"/user/searchUserList"
+    searchUserList:"/user/searchUserList",
+    addNoteLabels:"/noteLabels",
 }
 export default apiConstant;

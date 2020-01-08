@@ -4,6 +4,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SearchIcon from '@material-ui/icons/Search';
+import { addNoteLabels } from '../services/noteServices'
 
 export default class CraeteLabel extends Component {
     constructor(props) {
@@ -13,7 +14,7 @@ export default class CraeteLabel extends Component {
             open: false,
             label: '',
             labelData: [],
-            isDeleted:false,
+            isDeleted: false,
         }
     }
     handleMoreVertical = (e) => {
@@ -37,11 +38,17 @@ export default class CraeteLabel extends Component {
         })
     }
     handleCreateLabel = () => {
-        let data ={
-            isDeleted:false,
-            label:this.state.label,
-            userId:localStorage.getItem('userId')
-        }        
+        let data = {
+            isDeleted: false,
+            label: this.state.label,
+            userId: localStorage.getItem('userId')
+        }
+        addNoteLabels(data,this.props.noteId).then(res => {
+            console.log("res in labeldata", res)
+            this.setState({
+                createLabel: res.data.label
+            })
+        })
     }
     render() {
         let data = this.state.labelData.map(key => {

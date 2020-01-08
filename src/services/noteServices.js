@@ -64,6 +64,14 @@ export function reminderNotes(data) {
   })
 }
 
+export function addNoteLabels(data) {
+  return axios.post(process.env.React_App_BASE_URL + apiConstant.addNoteLabels, data, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  })
+}
+
 export function addCollaborators(data) {
   return axios.post(process.env.React_App_BASE_URL + apiConstant.addCollaborators, data, {
     headers: {

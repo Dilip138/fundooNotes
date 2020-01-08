@@ -8,6 +8,7 @@ import MenuList from '@material-ui/core/MenuList';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { getAllNotes, trashNotes } from '../services/noteServices';
 import { Dialog } from '@material-ui/core';
+import CreateLabelComponent from '../components/createLabelComponent';
 
 export default class MoreMenu extends Component {
   constructor(props) {
@@ -26,12 +27,6 @@ export default class MoreMenu extends Component {
   handleOpenDialogue = (e) => {
     this.setState({
       open: !this.state.open
-    })
-  }
-  handleChangeLabel = (event) => {
-    const label = event.target.value
-    this.setState({
-      label: label
     })
   }
   handleMenu = (e) => {
@@ -70,42 +65,39 @@ export default class MoreMenu extends Component {
         console.log("err in trshNote component ", err);
       });
   }
-  render() {
-    return (
-      <div>
-        <div style={{ cursor: 'pointer' }} onClick={(e) => this.handleMenu(e)}>
-          <MoreVertIcon />
-        </div>
-        <Popper open={this.state.anchorEl} anchorEl={this.state.anchorEl} style={{ zIndex: "999" }} >
-          <Paper>
-            <ClickAwayListener onClickAway={this.handleClose}>
-              <MenuList>
-                <MenuItem onClick={() => this.handleTrash(this.props.noteId)}>Delete note</MenuItem>
-                <MenuItem onClick={this.handleOpenDialogue}>Add label</MenuItem>
-                <MenuItem onClick={this.handleQuestion}>Ask a question</MenuItem>
-                <MenuItem onClick={this.handleClose}>Make a copy</MenuItem>
-                <MenuItem onClick={this.handleClose}>Show checkboxes</MenuItem>
-                <MenuItem onClick={this.handleClose}>Copy to Google Docs</MenuItem>
-              </MenuList>
-            </ClickAwayListener>
-          </Paper>
-        </Popper>
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleOpenDialogue}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description">
-          <div className="dialogLabel">
-            <div style={{ color: 'black', fontSize: '16px' }} >Label note</div>
-            <div>
-              <InputBase style={{ color: 'grey', fontSize: '15px' }}
-                placeholder="Enter label name"
-                value={this.state.label}
-                onChange={this.handleChangeLabel} />
-            </div>
-          </div>
-        </Dialog>
-      </div>
-    );
+  handleMenuLabel = (istrue)=> {
+  this.props.createLabelToGetNote(istrue)
+  if (true) {
+    this.setState({
+      anchorEl: false
+    })
   }
+}
+handleCreate = (islabel) => {
+  this.props.craeteLabelToGetNote(islabel)
+}
+render() {
+  return (
+    <div>
+      <div style={{ cursor: 'pointer' }} onClick={(e) => this.handleMenu(e)}>
+        <MoreVertIcon />
+      </div>
+      <Popper open={this.state.anchorEl} anchorEl={this.state.anchorEl} style={{ zIndex: "999" }} >
+        <Paper>
+          <ClickAwayListener onClickAway={this.handleClose}>
+            <MenuList>
+              <MenuItem onClick={() => this.handleTrash(this.props.noteId)}>Delete note</MenuItem>
+              <MenuItem><CreateLabelComponent propsToCraeteLabel={this.state.anchorEl} noteIdLabel={this.props.noteId}
+                createLabelPropsToMore={this.handleCreate} craeteLabelToMore={this.handleMenuLabel} noteLabel={this.props.noteLabel} />Changelabel</MenuItem>
+              <MenuItem onClick={this.handleQuestion}>Ask a question</MenuItem>
+              <MenuItem onClick={this.handleClose}>Make a copy</MenuItem>
+              <MenuItem onClick={this.handleClose}>Show checkboxes</MenuItem>
+              <MenuItem onClick={this.handleClose}>Copy to Google Docs</MenuItem>
+            </MenuList>
+          </ClickAwayListener>
+        </Paper>
+      </Popper>
+    </div>
+  );
+}
 }
