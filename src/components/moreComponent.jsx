@@ -20,6 +20,9 @@ export default class MoreMenu extends Component {
       label: '',
     }
   }
+  handleQuestion = () => {
+    this.props.history.push('question')
+  }
   handleOpenDialogue = (e) => {
     this.setState({
       open: !this.state.open
@@ -79,7 +82,7 @@ export default class MoreMenu extends Component {
               <MenuList>
                 <MenuItem onClick={() => this.handleTrash(this.props.noteId)}>Delete note</MenuItem>
                 <MenuItem onClick={this.handleOpenDialogue}>Add label</MenuItem>
-                <MenuItem onClick={this.handleClose}>Add drawing</MenuItem>
+                <MenuItem onClick={this.handleQuestion}>Ask a question</MenuItem>
                 <MenuItem onClick={this.handleClose}>Make a copy</MenuItem>
                 <MenuItem onClick={this.handleClose}>Show checkboxes</MenuItem>
                 <MenuItem onClick={this.handleClose}>Copy to Google Docs</MenuItem>

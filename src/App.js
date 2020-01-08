@@ -16,11 +16,12 @@ import trash from './components/getTrash';
 import colorComponent from './components/colorComponent';
 import profile from './components/profileComponent';
 import collaborators from './components/collaboratorComponents';
+import askQuestion from './components/askQuestionComponent';
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" exact component={Login}></Route>
+        <Route path="/" exact={true} component={Login}></Route>
         <Route path="/register" component={Register}></Route>
         <Route path="/forgot" component={ForgotPassword}></Route>
         <Route path="/resetpassword/:id" component={ResetPassword}></Route>
@@ -35,6 +36,7 @@ function App() {
         <Route path="/colorComponent" component={colorComponent}></Route>
         <Route path="/profile" component={profile}></Route>
         <Route path="/collaborators" component={collaborators}></Route>
+        <Route path="/askQuestion" component={askQuestion}></Route>
       </Switch>
     </Router>
   );

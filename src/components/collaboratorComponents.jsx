@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Card, Dialog, Divider, Avatar, Button, InputBase, DialogTitle, DialogContent } from '@material-ui/core';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { searchUserList, addCollaborators } from '../services/noteServices';
+import { addCollaborators } from '../services/noteServices';
+import { searchUserList } from '../services/userService';
 
 export default class Collaborators extends Component {
     constructor() {
@@ -12,13 +13,8 @@ export default class Collaborators extends Component {
             collaborator: [],
             searchUserEmail: '',
             collaboratorImage: [],
+            email: '',
         }
-    }
-    handleChangeEmail = (event) => {
-        const email = event.target.value
-        this.setState({
-            email: email
-        })
     }
     handleOpenDialogue = () => {
         this.setState({
@@ -41,25 +37,27 @@ export default class Collaborators extends Component {
         })
     }
     handleSearchUserEmail = (value) => {
-        let data = {
-            searchUserEmail: this.state.searchUserEmail
-        }
-        searchUserList(data).then(res => {
-            this.setState({
-                searchUserEmail: value
-            })
-            console.log("res in searchEmail", res)
+        this.setState({
+            searchUserEmail: value
         })
     }
     handleSave = () => {
-        let data = this.state.collaborator.map(key => {
-            console.log("res in data", data)
-            return key
-        })
-        addCollaborators(data, this.props.noteId).then(res => {
-            console.log("res in collaborator", res)
+        let searchUserData = {
+            searchUserEmail: this.state.searchUserEmail
+        }
+        searchUserList(searchUserData).then(res => {
             this.setState({
-                open: false
+                searchData: res.data.data.details
+            })
+            console.log("res in searchEmail", res)
+            let data = {
+                email: res.data.data.details[0].email
+            }
+            addCollaborators(data, this.props.noteId).then(res => {
+                console.log("res in collaborator", res)
+                this.setState({
+                    open: false
+                })
             })
         })
     }
@@ -106,14 +104,14 @@ export default class Collaborators extends Component {
                                                 <div className="collaborator-avatar">
                                                     <Avatar style={{ width: "35px", height: "35px" }}>
                                                         <img alt="pic"
-                                                            src={key.collaborator}
+                                                            src={key.collaborators}
                                                         />
                                                     </Avatar>
                                                 </div>
                                             </div>
                                         )
                                     })
-                                 }
+                                    }
                                     <div className="collaborator-avtar-email">
                                         <div className="collaborator-avatar">
                                             <Avatar style={{ width: "35px", height: "35px" }} />

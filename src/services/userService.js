@@ -31,4 +31,12 @@ export function imageUpload(data) {
   });
 }
 
+export function searchUserList(data) {
+  return axios.post(process.env.React_App_BASE_URL + apiConstant.searchUserList, data, {
+    headers: {
+      'Authorization': localStorage.getItem('token')
+    }
+  })
+}
+
 
