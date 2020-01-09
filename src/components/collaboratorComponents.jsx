@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, Dialog, Divider, Avatar, Button, InputBase, DialogTitle, DialogContent } from '@material-ui/core';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import DoneIcon from '@material-ui/icons/Done';
 import { addCollaborators } from '../services/noteServices';
 import { searchUserList } from '../services/userService';
 
@@ -10,11 +11,16 @@ export default class Collaborators extends Component {
         super()
         this.state = {
             open: false,
-            collaborator: [],
-            searchUserEmail: '',
-            collaboratorImage: [],
+            searchData: '',
+            collaboratorData: [],
             email: '',
+            trueSign: false,
         }
+    }
+    handleSign = () => {
+        this.setState({
+            trueSign: true
+        })
     }
     handleOpenDialogue = () => {
         this.setState({
@@ -56,6 +62,7 @@ export default class Collaborators extends Component {
             addCollaborators(data, this.props.noteId).then(res => {
                 console.log("res in collaborator", res)
                 this.setState({
+
                     open: false
                 })
             })
@@ -98,7 +105,7 @@ export default class Collaborators extends Component {
                                             {localStorage.getItem('email')}
                                         </div>
                                     </div>
-                                    {this.state.collaboratorImage.map(key => {
+                                    {this.state.collaboratorData.map(key => {
                                         return (
                                             <div className="collaborator-avtar-email">
                                                 <div className="collaborator-avatar">
@@ -118,8 +125,12 @@ export default class Collaborators extends Component {
                                         </div>
                                         <div className="collaborator-personOremail">
                                             <InputBase
+                                                onKeyDown={this.handleSign}
                                                 placeholder="Person or email share with"
                                                 onChange={this.handleSearchUserEmail} />
+                                            <div>
+                                                {this.state.trueSign ? <DoneIcon /> : (null)}
+                                            </div>
                                         </div>
                                     </div>
                                 </div >

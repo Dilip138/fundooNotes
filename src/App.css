@@ -253,6 +253,25 @@
 
 .collaborator-personOremail {
     margin-left: 12px;
+    display: flex;
+}
+
+.editor {
+    display: 'flex';
+    border: 1px solid gray;
+    flex-direction: 'column';
+    margin-top: '15px';
+    width: 70%;
+    align-items:'center';
+    
+}
+
+.cardQuestion {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 8px;
+    width: 70%;
+    align-items:'center'
 }
 
 /* -----------------------DashBoard----------------------- */
