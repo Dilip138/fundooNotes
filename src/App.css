@@ -163,14 +163,14 @@
 .allNotes {
     display: flex;
     justify-content: center;
-    /* flex-wrap: wrap;
-    width: 100%; */
+    /* flex-wrap: wrap; */
+    /* width: 93%; */
 }
 
 .notesAll_ {
     display: flex;
     justify-content: center;
-    /* width: 80%; */
+    /* width: 93%; */
     flex-wrap: wrap;
 }
 
@@ -206,12 +206,6 @@
     width: 70px;
 }
 
-.dialogLabel {
-    width: 225px;
-    min-height: 110px;
-    margin: 12px;
-}
-
 .Profile {
     min-width: 30em;
     min-height: 15em;
@@ -236,6 +230,15 @@
 .profilebutton {
     display: flex;
     justify-content: center;
+}
+
+.dialogLabel {
+    width: 200px;
+    margin: 12px;
+}
+
+.LabelCard {
+    display: flex;
 }
 
 .collaborator-avtar-email {

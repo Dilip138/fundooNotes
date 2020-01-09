@@ -135,7 +135,7 @@ class GetNotes extends Component {
                                     return (
                                         key.isArchived === false && key.isDeleted === false &&
                                         <div className="getCardNote">
-                                            <Card className="getcard" style={{  borderRadius:'10px',backgroundColor: key.color}}>
+                                            <Card className="getcard" style={{  borderRadius:'10px',backgroundColor: key.color,width:'20em'}}>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}

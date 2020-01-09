@@ -20,7 +20,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker, } from '@material-ui/pickers';
 import { Dialog, Button } from '@material-ui/core';
 import Collaborators from './collaboratorComponents';
-import LabelComponent from './createLabelComponent';
+import MoreComponent from './moreComponent';
 export default class TakeNotes extends Component {
     constructor() {
         super()
@@ -54,11 +54,6 @@ export default class TakeNotes extends Component {
             reminder: value
         });
     };
-    // handleMoreVertical = (e) => {
-    //     this.setState({
-    //         anchorElLabel: this.state.anchorElLabel ? false : e.target,
-    //     });
-    // }
     handleListenerClose = () => {
         this.setState({
             anchorEl: false
@@ -226,7 +221,7 @@ export default class TakeNotes extends Component {
                                             <Tooltip title="Archive">
                                                 <div><ArchiveIcon /></div>
                                             </Tooltip>
-                                            <div ><LabelComponent /></div>
+                                            <div ><MoreComponent /></div>
                                         </div>
                                         <div onClick={this.handleClose} style={{ cursor: 'pointer' }}>Close</div>
                                     </div>
@@ -295,17 +290,6 @@ export default class TakeNotes extends Component {
                         </div>
                     </MuiPickersUtilsProvider>
                 </Dialog>
-                {/* <Popper open={this.state.anchorElLabel} anchorEl={this.state.anchorElLabel} style={{ zIndex: "999" }} >
-                    <Paper>
-                        <ClickAwayListener onClickAway={this.handleListenerClose1}>
-                            <MenuList>
-                                <MenuItem >Add label</MenuItem>
-                                <MenuItem >Add drawing</MenuItem>
-                                <MenuItem >Show checkboxes</MenuItem>
-                            </MenuList>
-                        </ClickAwayListener>
-                    </Paper>
-                </Popper> */}
             </div>
         );
     }

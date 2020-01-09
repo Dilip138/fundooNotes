@@ -12,6 +12,7 @@ const apiConstant = {
     imageUpload: "/user/uploadProfileImage",
     addCollaborators: " /notes/{id}/AddcollaboratorsNotes",
     searchUserList:"/user/searchUserList",
-    addNoteLabels:"/noteLabels",
+    createLabels:"/noteLabels",
+    getNoteLabel:"/noteLabels/getNoteLabelList",
 }
 export default apiConstant;

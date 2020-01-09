@@ -18,16 +18,10 @@ export default class MoreMenu extends Component {
       notes: [],
       open: false,
       isDeleted: false,
-      label: '',
     }
   }
   handleQuestion = () => {
     this.props.history.push('question')
-  }
-  handleOpenDialogue = (e) => {
-    this.setState({
-      open: !this.state.open
-    })
   }
   handleMenu = (e) => {
     this.setState({
@@ -65,39 +59,38 @@ export default class MoreMenu extends Component {
         console.log("err in trshNote component ", err);
       });
   }
-  handleMenuLabel = (istrue)=> {
-  this.props.createLabelToGetNote(istrue)
-  if (true) {
-    this.setState({
-      anchorEl: false
-    })
+  // handleMenuLabel = (istrue) => {
+  //   this.props.createLabelToGetNote(istrue)
+  //   if (true) {
+  //     this.setState({
+  //       anchorEl: false
+  //     })
+  //   }
+  // }
+  handleCreate = (islabel) => {
+    this.props.createLabelPropsTogetNote(islabel)
   }
-}
-handleCreate = (islabel) => {
-  this.props.craeteLabelToGetNote(islabel)
-}
-render() {
-  return (
-    <div>
-      <div style={{ cursor: 'pointer' }} onClick={(e) => this.handleMenu(e)}>
-        <MoreVertIcon />
-      </div>
-      <Popper open={this.state.anchorEl} anchorEl={this.state.anchorEl} style={{ zIndex: "999" }} >
-        <Paper>
-          <ClickAwayListener onClickAway={this.handleClose}>
+  render() {
+    return (
+      <div>
+
+        <div style={{ cursor: 'pointer' }} onClick={(e) => this.handleMenu(e)}>          
+            <MoreVertIcon />         
+        </div>       
+        <Popper open={this.state.anchorEl} anchorEl={this.state.anchorEl} style={{ zIndex: "999" }} >
+          <Paper>
+          {/* <ClickAwayListener onClickAway={this.handleClose}> */}
             <MenuList>
               <MenuItem onClick={() => this.handleTrash(this.props.noteId)}>Delete note</MenuItem>
-              <MenuItem><CreateLabelComponent propsToCraeteLabel={this.state.anchorEl} noteIdLabel={this.props.noteId}
-                createLabelPropsToMore={this.handleCreate} craeteLabelToMore={this.handleMenuLabel} noteLabel={this.props.noteLabel} /></MenuItem>
+              <MenuItem><CreateLabelComponent noteIdLabel={this.props.noteId} createLabelPropsToMore={this.handleCreate}  /></MenuItem>
               <MenuItem onClick={this.handleQuestion}>Ask a question</MenuItem>
               <MenuItem onClick={this.handleClose}>Make a copy</MenuItem>
-              <MenuItem onClick={this.handleClose}>Show checkboxes</MenuItem>
-              <MenuItem onClick={this.handleClose}>Copy to Google Docs</MenuItem>
             </MenuList>
-          </ClickAwayListener>
-        </Paper>
-      </Popper>
-    </div>
-  );
-}
+            {/* </ClickAwayListener> */}
+          </Paper>
+        </Popper>
+       
+      </div >
+    );
+  }
 }

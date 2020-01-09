@@ -65,7 +65,27 @@ export function reminderNotes(data) {
 }
 
 export function addNoteLabels(data) {
-  return axios.post(process.env.React_App_BASE_URL + apiConstant.addNoteLabels, data, {
+  console.log("label data in services", data);
+
+  return axios.post(process.env.REACT_APP_BASE_URL + apiConstant.createLabels, data, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  })
+}
+
+export function getNoteLabels() {
+  return axios.get(process.env.REACT_APP_BASE_URL + apiConstant.getNoteLabel, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  })
+}
+
+export function noteLabels(data) {
+  const noteId = data.noteId
+  const lableId = data.lableId
+  return axios.post(process.env.REACT_APP_BASE_URL + `/notes/${noteId}/addLabelToNotes/${lableId}/add`, data, {
     headers: {
       Authorization: localStorage.getItem('token')
     }
