@@ -59,37 +59,28 @@ export default class MoreMenu extends Component {
         console.log("err in trshNote component ", err);
       });
   }
-  // handleMenuLabel = (istrue) => {
-  //   this.props.createLabelToGetNote(istrue)
-  //   if (true) {
-  //     this.setState({
-  //       anchorEl: false
-  //     })
-  //   }
-  // }
-  handleCreate = (islabel) => {
-    this.props.createLabelPropsTogetNote(islabel)
+  handleCreate = (isTrue) => {
+    this.props.createLabelPropsTogetNote(isTrue)
   }
   render() {
     return (
-      <div>
-
-        <div style={{ cursor: 'pointer' }} onClick={(e) => this.handleMenu(e)}>          
-            <MoreVertIcon />         
-        </div>       
+      <div className="moreComponent">
+        <div style={{ cursor: 'pointer' }} onClick={(e) => this.handleMenu(e)}>
+          <MoreVertIcon />
+        </div>
         <Popper open={this.state.anchorEl} anchorEl={this.state.anchorEl} style={{ zIndex: "999" }} >
           <Paper>
-          {/* <ClickAwayListener onClickAway={this.handleClose}> */}
+            {/* <ClickAwayListener onClickAway={this.handleClose}> */}
             <MenuList>
               <MenuItem onClick={() => this.handleTrash(this.props.noteId)}>Delete note</MenuItem>
-              <MenuItem><CreateLabelComponent noteIdLabel={this.props.noteId} createLabelPropsToMore={this.handleCreate}  /></MenuItem>
+              <MenuItem><CreateLabelComponent noteIdLabel={this.props.noteId} /></MenuItem>
               <MenuItem onClick={this.handleQuestion}>Ask a question</MenuItem>
               <MenuItem onClick={this.handleClose}>Make a copy</MenuItem>
             </MenuList>
             {/* </ClickAwayListener> */}
           </Paper>
         </Popper>
-       
+
       </div >
     );
   }

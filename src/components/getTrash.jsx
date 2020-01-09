@@ -139,7 +139,7 @@ export default class Trash extends Component {
                                 if (key.isDeleted === true) {
                                     return (
                                         <div className="getCardNote">
-                                            <Card className="getcard" style={{ boxShadow: "0px 0px 7px 0px", border: "1px solid black", borderRadius: '10px' }}>
+                                            <Card className="getcard" style={{borderRadius: '10px',width:'20em' }}>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}

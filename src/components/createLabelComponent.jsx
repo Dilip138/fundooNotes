@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Popper, Paper, ClickAwayListener, InputBase, Checkbox, List, Divider, } from '@material-ui/core';
+import { Popper, Paper, ClickAwayListener, InputBase, Checkbox, List, Divider, Menu, } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { addNoteLabels, getNoteLabels, noteLabels } from '../services/noteServices';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
@@ -39,7 +39,6 @@ export default class CraeteLabel extends Component {
         this.setState({
             anchorElLabel: this.state.anchorElLabel ? false : e.target,
         });
-        // this.props.craeteLabelToMore(true)
     }
     handleListenerClose = () => {
         this.setState({
@@ -89,7 +88,6 @@ export default class CraeteLabel extends Component {
         }
         noteLabels(data).then(res => {
             console.log("res in noteLabels data", res);
-            //this.props.createLabelPropsToMore(true)
         })
     }
     render() {
@@ -107,28 +105,27 @@ export default class CraeteLabel extends Component {
             )
         })
         return (
-            <div className="LabelCard">
-                {/* <ClickAwayListener onClickAway={this.handleListenerClose}> */}
+            <div className="labelCard">
                 <div onClick={(e) => this.handleMoreVertical(e)} className="">Add label</div>
-                {/* </ClickAwayListener> */}
                 <MuiThemeProvider theme={theme}>
-                    <Popper open={this.state.anchorElLabel} anchorEl={this.state.anchorElLabel} style={{ zIndex: "999", marginTop: '6em' }} onKeyDown={this.handleClear} >
-                        <Paper>
+                    <Menu open={this.state.anchorElLabel} anchorEl={this.state.anchorElLabel} style={{ zIndex: "999"}} onKeyDown={this.handleClear} >
                             <div className="dialogLabel">
                                 <div>
                                     <p>Label note</p>
                                 </div>
-                                <div style={{ display: 'flex' }}>
-                                    <div>
-                                        <InputBase
-                                            placeholder="Enter label name"
-                                            value={this.state.label}
-                                            onChange={this.handleChangeLabel} />
+                                <ClickAwayListener onClickAway={this.handleListenerClose}>
+                                    <div style={{ display: 'flex' }}>
+                                        <div>
+                                            <InputBase
+                                                placeholder="Enter label name"
+                                                value={this.state.label}
+                                                onChange={this.handleChangeLabel} />
+                                        </div>
+                                        <div>
+                                            <SearchIcon style={{ color: "black",alignItems:'center'}} />
+                                        </div>
                                     </div>
-                                    <div>
-                                        <SearchIcon style={{ color: "black" }} />
-                                    </div>
-                                </div>
+                                </ClickAwayListener>
                                 <div> {labelData}</div>
                                 <div classNam="createLabel">
                                     {this.state.clear ?
@@ -136,8 +133,7 @@ export default class CraeteLabel extends Component {
                                         : (null)}
                                 </div>
                             </div>
-                        </Paper>
-                    </Popper>
+                    </Menu>
                 </MuiThemeProvider>
             </div>
         );

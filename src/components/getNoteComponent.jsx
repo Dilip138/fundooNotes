@@ -119,8 +119,8 @@ class GetNotes extends Component {
                 console.log("err in reminderComponent", err);
             });
     }
-    handleCreateLabel = (isLabel)=>{
-        if(isLabel){
+    handleCreateLabel = (isTrue)=>{
+        if(isTrue){
             this.handleGetNotes()
         }
     }
