@@ -118,10 +118,10 @@ export default class AskQuestion extends Component {
           </AppBar>
         </MuiThemeProvider>
         <Card className="cardQuestion">
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            Selected Note
+          <div  className="selectNoteQues">
+            <h6>Selected Note</h6>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="closeQues">
             <Button>Close</Button>
           </div>
         </Card>

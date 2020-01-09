@@ -256,22 +256,36 @@
     display: flex;
 }
 
-.editor {
-    display: 'flex';
-    border: 1px solid gray;
-    flex-direction: 'column';
-    margin-top: '15px';
-    width: 70%;
-    align-items:'center';
-    
-}
-
 .cardQuestion {
     display: flex;
     justify-content: space-between;
     border-radius: 8px;
-    width: 70%;
-    align-items:'center'
+    width: 50%;
+    margin-top: 7em;
+    margin-left: 20em;
+    height: 3.5em;
+}
+
+.editor {
+    display: 'flex';
+    border: 1px solid gray;
+    flex-direction: 'column';
+    width: 72%;
+    margin-top: 4em;
+    margin-left: 12em;
+    height: 20em;
+}
+
+.selectNoteQues {
+    display: flex;
+    align-self: center;
+    margin-left: 15px;
+}
+
+.closeQues {
+    display: flex;
+    align-items: 'center';
+    margin-left: 15px;
 }
 
 /* -----------------------DashBoard----------------------- */
