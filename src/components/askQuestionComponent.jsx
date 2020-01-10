@@ -54,7 +54,7 @@ export default class AskQuestion extends Component {
   }
   render() {
     return (
-      <div className="root">
+      <div className="root" style={{backgroundColor:'gray'}}>
         <MuiThemeProvider theme={theme}>
           <AppBar>
             <Toolbar>

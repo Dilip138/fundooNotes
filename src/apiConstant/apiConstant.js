@@ -10,7 +10,7 @@ const apiConstant = {
     colorNotes: "/notes/changesColorNotes",
     reminderNote: "/notes/addUpdateReminderNotes",
     imageUpload: "/user/uploadProfileImage",
-    searchUserList:"/user/searchUserList",
+    // searchUserList:"/user/searchUserList",
     createLabels:"/noteLabels",
     getNoteLabel:"/noteLabels/getNoteLabelList",
     getUserList:"/user",

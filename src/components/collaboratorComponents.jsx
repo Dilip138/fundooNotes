@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Card, Dialog, Divider, Avatar, Button, InputBase, DialogTitle, DialogContent, List, ListItem } from '@material-ui/core';
+import { Card, Dialog, Divider, Avatar, Button, InputBase, DialogTitle, DialogContent, List, ListItem, ListItemText, Checkbox } from '@material-ui/core';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import DoneIcon from '@material-ui/icons/Done';
 import ClearIcon from '@material-ui/icons/Clear';
-import { addCollaborators } from '../services/noteServices';
+import { getAllNotes, addCollaborators } from '../services/noteServices';
 import { searchUserList, getuserList } from '../services/userService';
 
 const firstName = localStorage.getItem('firstName')
@@ -19,7 +19,9 @@ export default class Collaborators extends Component {
             searchText: '',
             trueSign: false,
             allUserEmail: [],
+            notes: [],
             listUser: [],
+            searchData: '',
             // collaborators:this.props.collaboratorToGetNote
         }
     }
@@ -44,7 +46,7 @@ export default class Collaborators extends Component {
             open: true
         })
     }
-    handleColloborator = (e) => {
+    handleCollaborator = (e) => {
         this.setState({
             open: this.state.open ? false : e.target,
         })
@@ -60,59 +62,80 @@ export default class Collaborators extends Component {
         })
     }
     handleOnChangeUser = (event) => {
-        let searchCharacter = event.target.value
-        let listUser = [];
-        if (searchCharacter.length > 0) {
-            let regex = new RegExp(`^${searchCharacter}`, 'i');
-            listUser = this.state.allUserEmail.sort().filter(v => regex.test(v))
-        }
+        const searchText = event.target.value
+        // let listUser = [];
+        // if (value.length > 0) {
+        //     let regex = new RegExp(`^${value}`, 'i');
+        //     listUser = this.state.allUserEmail.sort().filter(v => regex.test(v))
+        // }
         this.setState({
-            listUser: listUser,
-            searchText: searchCharacter
+            searchText: searchText
         })
     }
     selectCollaborator = (value) => {
-        this.setState({
+        this.setState(() => ({
             searchText: value,
-            listUser: [],
-        })
+        }))
         let data = {
-            "searchWord": value
+            "searchWord": this.state.searchText
         }
         searchUserList(data).then(res => {
             this.setState({
                 collaborator: res.data.data.details
             })
         })
+        console.log("res in serachUserList", this.state.collaborator);
+
     }
     handleSave = () => {
-        let collaboratorData = this.state.collaborator.map(key => {
-            return key
-        })
-        addCollaborators(collaboratorData[0], this.props.noteId).then(res => {
-            console.log("res in collaborator", res)
+        let data = {
+            "searchWord": this.state.searchText
+        }
+        searchUserList(data).then((res) => {
+            console.log("res in search user list is", res);
             this.setState({
+                searchData: res.data.data.details[0].email,
                 open: false
             })
+            console.log("res.data in collab is ", res.data.data.details[0].email);
+            let searChUserData = {
+                "email": res.data.data.details[0].email,
+                "firstName": res.data.data.details[0].firstName,
+                "lastName": res.data.data.details[0].lastName,
+                "userId": res.data.data.details[0].userId
+            }
+            console.log("this.props.noteTo", searChUserData);
+            addCollaborators(searChUserData, this.props.noteId).then((res) => {
+                console.log("res after hitting adding collaborator api is ", res);
+                this.setState({
+                    searchText: ''
+                })
+            }).catch((err) => {
+                console.log("err in hitting collaborator api", err);
+            })
+            console.log("data1---------->", searChUserData);
+
+        }).catch(err => {
+            console.log("err in hitting search user api ", err);
         })
     }
+    renderSuggestion = () => {
+        return (
+            <List>
+                {this.state.listUser.map(users =>
+                    <ListItemText onClick={() => this.selectCollaborator(users)}>
+                        {users}
+                    </ListItemText>
+                )}
+            </List>
+        )
+    }
     render() {
-        //console.log("ghrthrghrfyrthyryhtrrthr----------------",this.props.collaboratorToGetNote);
-        
-        let listUserData = this.state.listUser.map(key => {
-            return (
-                <List>
-                    <ListItem
-                        onClick={()=>this.selectCollaborator(key)}>
-                        {key}
-                    </ListItem>
-                </List>
-            )
-        })
+        //console.log("ghrthrghrfyrthyryhtrrthr----------------",this.props.collaboratorToGetNote);        
         return (
             <div className="main_collaborator">
                 <div>
-                    <PersonAddIcon onClick={(e) => this.handleColloborator(e)} cursor="pointer" />
+                    <PersonAddIcon onClick={(e) => this.handleCollaborator(e)} cursor="pointer" />
                 </div>
                 <Dialog
                     open={this.state.open}
@@ -181,9 +204,7 @@ export default class Collaborators extends Component {
                                     </div>
                                 </div>
                                 <div className="collaborator-avtar-email">
-                                    <List>
-                                        {listUserData}
-                                    </List>
+                                    {this.state.searchData}
                                 </div>
                                 <div className="collaborator-button">
                                     <div>

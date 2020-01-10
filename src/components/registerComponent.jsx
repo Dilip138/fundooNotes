@@ -85,7 +85,7 @@ class Register extends Component {
       userRegister(data)
         .then(res => {
           console.log("res in register---------", res);
-          this.props.history.push("/login");
+          this.props.history.push("/");
           this.setState({
             snackbarOpen: true,
             snackbarMsg: " successfully!!"

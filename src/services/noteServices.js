@@ -93,7 +93,7 @@ export function noteLabels(data) {
 }
 
 export function addCollaborators(data,noteId) {
-  return axios.post(process.env.React_App_BASE_URL + `/notes/${noteId}/AddcollaboratorsNotes`, data, {
+  return axios.post(`http://fundoonotes.incubation.bridgelabz.com/api/notes/${noteId}/AddcollaboratorsNotes`, data, {
     headers: {
       Authorization: localStorage.getItem('token')
     }

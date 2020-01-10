@@ -32,7 +32,7 @@ export function imageUpload(data) {
 }
 
 export function searchUserList(data) {
-  return axios.post(process.env.React_App_BASE_URL + apiConstant.searchUserList, data, {
+  return axios.post("http://fundoonotes.incubation.bridgelabz.com/api" + "/user/searchUserList", data, {
     headers: {
       'Authorization': localStorage.getItem('token')
     }
