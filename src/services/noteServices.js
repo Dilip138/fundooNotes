@@ -99,3 +99,12 @@ export function addCollaborators(data) {
     }
   })
 }
+
+export function removeCollaborator(data) {
+  return axios.delete(process.env.React_App_BASE_URL + apiConstant.removeCollaborator, data, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  })
+}
+

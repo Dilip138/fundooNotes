@@ -39,4 +39,11 @@ export function searchUserList(data) {
   })
 }
 
+export function getuserList() {
+  return axios.get(process.env.React_App_BASE_URL + apiConstant.getUserList, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  })
+}
 

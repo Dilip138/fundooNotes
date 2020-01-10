@@ -242,6 +242,16 @@
     margin-top: 10px;
 }
 
+.collaborator-avtar-checkEmail {
+    display: flex;
+    margin-top: 10px;
+}
+
+.collaborator_input {
+    display: flex;
+    width: 26.5em;
+}
+
 .collaborator-button {
     display: flex;
     justify-content: flex-end;

@@ -10,9 +10,11 @@ const apiConstant = {
     colorNotes: "/notes/changesColorNotes",
     reminderNote: "/notes/addUpdateReminderNotes",
     imageUpload: "/user/uploadProfileImage",
-    addCollaborators: " /notes/{id}/AddcollaboratorsNotes",
     searchUserList:"/user/searchUserList",
     createLabels:"/noteLabels",
     getNoteLabel:"/noteLabels/getNoteLabelList",
+    addCollaborators: " /notes/{id}/AddcollaboratorsNotes",
+    getUserList:"/user",
+    removeCollaborator:"/notes/{id}/removeCollaboratorsNotes/{collaboratorUserId}"
 }
 export default apiConstant;
