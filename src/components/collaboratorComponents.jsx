@@ -36,6 +36,13 @@ export default class Collaborators extends Component {
             })
         })
     }
+    getNotes = () => {
+        getAllNotes().then(res => {
+            this.setState({
+                notes: res.data.data.data
+            })
+        })
+    }
     handleSign = () => {
         this.setState({
             trueSign: true
@@ -94,7 +101,7 @@ export default class Collaborators extends Component {
         searchUserList(data).then((res) => {
             console.log("res in search user list is", res);
             this.setState({
-                searchData: res.data.data.details[0].email,
+                searchData: res.data.data.details,
                 open: false
             })
             console.log("res.data in collab is ", res.data.data.details[0].email);
@@ -110,10 +117,11 @@ export default class Collaborators extends Component {
                 this.setState({
                     searchText: ''
                 })
+                this.getNotes()
             }).catch((err) => {
                 console.log("err in hitting collaborator api", err);
             })
-            console.log("data1---------->", searChUserData);
+            console.log("searChUserData---------->", searChUserData);
 
         }).catch(err => {
             console.log("err in hitting search user api ", err);
@@ -131,7 +139,6 @@ export default class Collaborators extends Component {
         )
     }
     render() {
-        //console.log("ghrthrghrfyrthyryhtrrthr----------------",this.props.collaboratorToGetNote);        
         return (
             <div className="main_collaborator">
                 <div>
@@ -165,27 +172,27 @@ export default class Collaborators extends Component {
                                         {localStorage.getItem('email')}
                                     </div>
                                 </div>
-                                {/* {this. state.collaborators.map(key => {
+                                {this.state.notes.map(key => {
                                     return (
-                                        <div className="collaborator-avtar-email">
-                                            <div className="collaborator-avatar">
-                                                <Avatar style={{ width: "35px", height: "35px" }}>
-                                                    <img alt="pic"
-                                                        src={localStorage.getItem('imageUrl')}
-                                                    />
-                                                </Avatar>
-                                            </div>
-                                            <div>
-                                                <div>
-                                                    <span>{key.email}</span>
+                                        key.id === this.props.noteId ?
+                                            <div className="collaborator-avtar-email">
+                                                <div className="collaborator-avtar">
+                                                    {key.collaborators.map(col => {
+                                                        return (
+                                                            <div>
+                                                                <Avatar style={{ width: "35px", height: "35px" }} />
+                                                                <span style={{ fontFamily: 'Roboto' }}>
+                                                                    <b>{col.email}</b>
+                                                                </span>
+                                                            </div>
+                                                        )
+                                                    })}
                                                 </div>
-                                                <div>
-                                                    <ClearIcon />
-                                                </div>
                                             </div>
-                                        </div>
-                                    )
-                                })} */}
+                                            : (null))
+                                })
+
+                                }
                                 <div className="collaborator-avtar-email">
                                     <div className="collaborator-avatar">
                                         <Avatar style={{ width: "35px", height: "35px" }} />
@@ -203,9 +210,9 @@ export default class Collaborators extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="collaborator-avtar-email">
+                                {/* <div className="collaborator-avtar-email">
                                     {this.state.searchData}
-                                </div>
+                                </div> */}
                                 <div className="collaborator-button">
                                     <div>
                                         <Button onClick={this.handleCancel} >cancel</Button>
