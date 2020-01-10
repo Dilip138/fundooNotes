@@ -3,25 +3,29 @@ import { Card, Dialog, Divider, Avatar, Button, InputBase, DialogTitle, DialogCo
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import DoneIcon from '@material-ui/icons/Done';
+import ClearIcon from '@material-ui/icons/Clear';
 import { addCollaborators } from '../services/noteServices';
 import { searchUserList, getuserList } from '../services/userService';
+
+const firstName = localStorage.getItem('firstName')
+const lastName = localStorage.getItem('lastName')
 
 export default class Collaborators extends Component {
     constructor() {
         super()
         this.state = {
             open: false,
-            searchData: '',
             collaborator: [],
             searchText: '',
             trueSign: false,
             allUserEmail: [],
+            listUser: [],
+            // collaborators:this.props.collaboratorToGetNote
         }
     }
     componentDidMount() {
         getuserList().then(res => {
             console.log("res in userList", res);
-
             let userList = res.data.map(key => {
                 return key.email
             })
@@ -57,7 +61,7 @@ export default class Collaborators extends Component {
     }
     handleOnChangeUser = (event) => {
         let searchCharacter = event.target.value
-        let listUser = []
+        let listUser = [];
         if (searchCharacter.length > 0) {
             let regex = new RegExp(`^${searchCharacter}`, 'i');
             listUser = this.state.allUserEmail.sort().filter(v => regex.test(v))
@@ -73,7 +77,7 @@ export default class Collaborators extends Component {
             listUser: [],
         })
         let data = {
-            "searchWord": this.state.searchText
+            "searchWord": value
         }
         searchUserList(data).then(res => {
             this.setState({
@@ -82,10 +86,10 @@ export default class Collaborators extends Component {
         })
     }
     handleSave = () => {
-        let collaboratorData = this.state.collaborator.map(key=>{
+        let collaboratorData = this.state.collaborator.map(key => {
             return key
         })
-        addCollaborators(collaboratorData[0],this.props.noteId).then(res => {
+        addCollaborators(collaboratorData[0], this.props.noteId).then(res => {
             console.log("res in collaborator", res)
             this.setState({
                 open: false
@@ -93,15 +97,16 @@ export default class Collaborators extends Component {
         })
     }
     render() {
-        let listUserData = this.state.allUserEmail.map(key => {
+        //console.log("ghrthrghrfyrthyryhtrrthr----------------",this.props.collaboratorToGetNote);
+        
+        let listUserData = this.state.listUser.map(key => {
             return (
-                <div>
-                    <List>
-                        <ListItem
-                            onClick={this.selectCollaborator(key.id)}>
-                        </ListItem>
-                    </List>
-                </div>
+                <List>
+                    <ListItem
+                        onClick={()=>this.selectCollaborator(key)}>
+                        {key}
+                    </ListItem>
+                </List>
             )
         })
         return (
@@ -129,22 +134,36 @@ export default class Collaborators extends Component {
                                     </div>
                                     <div className="collaborator-email">
                                         <span style={{ fontFamily: 'Roboto' }}>
-                                            <b>{localStorage.getItem('firstName')}
-                                                {localStorage.getItem('lastName')}
-                                            </b>
-                                            <span style={{ fontFamily: "Roboto arial sansSerif", paddingLeft: "10px" }}>
-                                                (owner)</span>
+                                            <b>{firstName}</b>
+                                            <b>{lastName}</b>
+                                            <span style={{ fontFamily: "Roboto arial sansSerif", paddingLeft: "10px" }}> (owner)</span>
                                         </span>
                                         <br />
                                         {localStorage.getItem('email')}
                                     </div>
                                 </div>
+                                {/* {this. state.collaborators.map(key => {
+                                    return (
                                         <div className="collaborator-avtar-email">
-                                            <List>
-                                                {listUserData}
-                                            </List>
+                                            <div className="collaborator-avatar">
+                                                <Avatar style={{ width: "35px", height: "35px" }}>
+                                                    <img alt="pic"
+                                                        src={localStorage.getItem('imageUrl')}
+                                                    />
+                                                </Avatar>
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    <span>{key.email}</span>
+                                                </div>
+                                                <div>
+                                                    <ClearIcon />
+                                                </div>
+                                            </div>
                                         </div>
-                                <div className="collaborator-avtar-checkEmail">
+                                    )
+                                })} */}
+                                <div className="collaborator-avtar-email">
                                     <div className="collaborator-avatar">
                                         <Avatar style={{ width: "35px", height: "35px" }} />
                                     </div>
@@ -160,6 +179,11 @@ export default class Collaborators extends Component {
                                             {this.state.trueSign ? <DoneIcon /> : (null)}
                                         </div>
                                     </div>
+                                </div>
+                                <div className="collaborator-avtar-email">
+                                    <List>
+                                        {listUserData}
+                                    </List>
                                 </div>
                                 <div className="collaborator-button">
                                     <div>

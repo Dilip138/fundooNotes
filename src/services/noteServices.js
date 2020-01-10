@@ -92,19 +92,19 @@ export function noteLabels(data) {
   })
 }
 
-export function addCollaborators(data) {
-  return axios.post(process.env.React_App_BASE_URL + apiConstant.addCollaborators, data, {
+export function addCollaborators(data,noteId) {
+  return axios.post(process.env.React_App_BASE_URL + `/notes/${noteId}/AddcollaboratorsNotes`, data, {
     headers: {
       Authorization: localStorage.getItem('token')
     }
   })
 }
 
-export function removeCollaborator(data) {
-  return axios.delete(process.env.React_App_BASE_URL + apiConstant.removeCollaborator, data, {
-    headers: {
-      Authorization: localStorage.getItem('token')
-    }
-  })
-}
+// export function removeCollaborator(data) {
+//   return axios.delete(process.env.React_App_BASE_URL + `/notes/${id}/removeCollaboratorsNotes/{collaboratorUserId}`, data, {
+//     headers: {
+//       Authorization: localStorage.getItem('token')
+//     }
+//   })
+// }
 

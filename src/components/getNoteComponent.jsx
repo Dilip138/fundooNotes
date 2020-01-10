@@ -157,7 +157,8 @@ class GetNotes extends Component {
                                                 <div className="imageIconCard">
                                                     <div style={{ cursor: 'pointer' }}><AddAlertIcon onClick={() => this.handleReminder(key.reminder, key.id)} />
                                                     </div>
-                                                    <div><Collaborators noteId={key.id}/></div>
+                                                    <div><Collaborators noteId={key.id} 
+                                                    collaboratorToGetNote={key.collaborators}/></div>
                                                     <div><ColorComponent
                                                         colorPatter={this.handleChangeColor}
                                                         noteId={key.id} /></div>

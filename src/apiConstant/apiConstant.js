@@ -13,8 +13,6 @@ const apiConstant = {
     searchUserList:"/user/searchUserList",
     createLabels:"/noteLabels",
     getNoteLabel:"/noteLabels/getNoteLabelList",
-    addCollaborators: " /notes/{id}/AddcollaboratorsNotes",
     getUserList:"/user",
-    removeCollaborator:"/notes/{id}/removeCollaboratorsNotes/{collaboratorUserId}"
 }
 export default apiConstant;
