@@ -4,7 +4,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import DoneIcon from '@material-ui/icons/Done';
 import ClearIcon from '@material-ui/icons/Clear';
-import { getAllNotes, addCollaborators } from '../services/noteServices';
+import { getAllNotes, addCollaborators, removeCollaborator } from '../services/noteServices';
 import { searchUserList, getuserList } from '../services/userService';
 
 const firstName = localStorage.getItem('firstName')
@@ -20,7 +20,6 @@ export default class Collaborators extends Component {
             trueSign: false,
             allUserEmail: [],
             notes: [],
-            listUser: [],
             searchData: '',
         }
     }
@@ -35,12 +34,22 @@ export default class Collaborators extends Component {
             })
         })
     }
-    handleSearch = () =>{
-        let filteredEmail = this.state.allUserEmail.map(key=>{
+    handleSearch = () => {
+        let filteredEmail = this.state.allUserEmail.map(key => {
             return key.toLowerCase().indexof(this.state.searchText.toLowerCase()) !== -1
         })
         this.setState({
-            filteredEmail:filteredEmail
+            filteredEmail: filteredEmail
+        })
+    }
+    handleClear = (userId) => {
+        let data = {
+            noteId: this.props.noteId,
+            collaboratorUserId: userId
+        }
+        removeCollaborator(data).then(res => {
+            console.log("res in removeCollaborator", res)
+            this.getNotes()
         })
     }
     getNotes = () => {
@@ -89,7 +98,6 @@ export default class Collaborators extends Component {
             console.log("res in search user list is", res);
             this.setState({
                 searchData: res.data.data.details,
-                open: false
             })
             console.log("res.data in collab is ", res.data.data.details[0].email);
             let searChUserData = {
@@ -113,17 +121,6 @@ export default class Collaborators extends Component {
         }).catch(err => {
             console.log("err in search user api ", err);
         })
-    }
-    renderSuggestion = () => {
-        return (
-            <List>
-                {this.state.listUser.map(users =>
-                    <ListItemText onClick={() => this.selectCollaborator(users)}>
-                        {users}
-                    </ListItemText>
-                )}
-            </List>
-        )
     }
     render() {
         return (
@@ -160,20 +157,25 @@ export default class Collaborators extends Component {
                                     </div>
                                 </div>
                                 {this.state.notes.map(key => {
-                                    console.log("key in collaborator", key)
                                     return (
                                         key.id == this.props.noteId ?
-                                            <div className="collaborator-avtar-email">
+                                            <div className="collaboratorEmailAll">
                                                 {key.collaborators.map(collab => {
-                                                    console.log("col in collaborators", collab);
                                                     return (
-                                                        <div className="collaborator-avatar">
-                                                            <Tooltip title={collab.email} >
-                                                                <Avatar style={{ width: "35px", height: "35px" }} />
-                                                            </Tooltip>
-                                                            <span style={{ fontFamily: 'Roboto' }}>
-                                                                <b>{collab.email}</b>
-                                                            </span>
+                                                        <div className="collaborator-avtar-email">
+                                                            <div className="collaborator-avatar">
+                                                                <Tooltip title={collab.email} >
+                                                                    <Avatar style={{ width: "35px", height: "35px" }} />
+                                                                </Tooltip>
+                                                            </div>
+                                                            <div className="collaborator-personOremail">
+                                                                <div className="collaborator_input">
+                                                                    <b>{collab.email}</b>
+                                                                </div>
+                                                                <div style={{cursor:'pointer'}}>
+                                                                    <ClearIcon  onClick={() => this.handleClear(collab.userId)} />
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     )
                                                 })}
@@ -191,6 +193,7 @@ export default class Collaborators extends Component {
                                             <InputBase
                                                 value={this.state.searchText}
                                                 onKeyDown={this.handleSign}
+                                                onKeyUp={this.handleSearch}
                                                 placeholder="Person or email share with"
                                                 onChange={this.handleOnChangeUser} />
                                         </div>
@@ -199,6 +202,7 @@ export default class Collaborators extends Component {
                                         </div>
                                     </div>
                                 </div>
+
                                 <div className="collaborator-button">
                                     <div>
                                         <Button onClick={this.handleCancel} >cancel</Button>

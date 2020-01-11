@@ -92,7 +92,7 @@ export function noteLabels(data) {
   })
 }
 
-export function addCollaborators(data,noteId) {
+export function addCollaborators(data, noteId) {
   return axios.post(`http://fundoonotes.incubation.bridgelabz.com/api/notes/${noteId}/AddcollaboratorsNotes`, data, {
     headers: {
       Authorization: localStorage.getItem('token')
@@ -100,11 +100,13 @@ export function addCollaborators(data,noteId) {
   })
 }
 
-// export function removeCollaborator(data) {
-//   return axios.delete(process.env.React_App_BASE_URL + `/notes/${id}/removeCollaboratorsNotes/{collaboratorUserId}`, data, {
-//     headers: {
-//       Authorization: localStorage.getItem('token')
-//     }
-//   })
-// }
+export function removeCollaborator(data) {
+  let id = data.noteId
+  let collaboratorUserId = data.collaboratorUserId
+  return axios.delete("http://fundoonotes.incubation.bridgelabz.com/api" + `/notes/${id}/removeCollaboratorsNotes/${collaboratorUserId}`, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  })
+}
 
