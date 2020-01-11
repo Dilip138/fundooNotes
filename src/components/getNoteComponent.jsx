@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, InputBase } from '@material-ui/core';
+import { Card, InputBase, Avatar, Tooltip } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/ImageOutlined';
 import AddAlertIcon from '@material-ui/icons/AddAlertOutlined';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
@@ -119,8 +119,8 @@ class GetNotes extends Component {
                 console.log("err in reminderComponent", err);
             });
     }
-    handleCreateLabel = (isTrue)=>{
-        if(isTrue){
+    handleCreateLabel = (isTrue) => {
+        if (isTrue) {
             this.handleGetNotes()
         }
     }
@@ -135,7 +135,7 @@ class GetNotes extends Component {
                                     return (
                                         key.isArchived === false && key.isDeleted === false &&
                                         <div className="getCardNote">
-                                            <Card className="getcard" style={{ borderRadius:'10px',backgroundColor: key.color,width:'20em'}}>
+                                            <Card className="getcard" style={{ borderRadius: '10px', backgroundColor: key.color, width: '20em' }}>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}
@@ -154,19 +154,31 @@ class GetNotes extends Component {
                                                         multiline
                                                         onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
                                                 </div>
+                                                    <div className="collaborator-avtar-email">
+                                                        {key.collaborators.map(data => {
+                                                            console.log("col in collaborators", data);
+                                                            return (
+                                                                <Tooltip title={data.email}>
+                                                                    <div className="collaborator-avatar" style={{cursor:'pointer'}}>
+                                                                        <Avatar style={{ width: "35px", height: "35px" }} />
+                                                                    </div>
+                                                                </Tooltip>
+                                                            )
+                                                        })}
+                                                    </div>
+
                                                 <div className="imageIconCard">
                                                     <div style={{ cursor: 'pointer' }}><AddAlertIcon onClick={() => this.handleReminder(key.reminder, key.id)} />
                                                     </div>
-                                                    <div><Collaborators noteId={key.id} 
-                                                    collaboratorToGetNote={key.collaborators}/></div>
+                                                    <div><Collaborators noteId={key.id} /></div>
                                                     <div><ColorComponent
                                                         colorPatter={this.handleChangeColor}
                                                         noteId={key.id} /></div>
                                                     <div><ImageIcon /></div>
                                                     <div style={{ cursor: 'pointer' }} onClick={() => this.handleArchiveNotes(key.id)} notecolor={key.color}><ArchiveIcon /></div>
-                                                    <div><MoreMenu 
-                                                    noteId={key.id} 
-                                                    createLabelPropsTogetNote={this.handleCreateLabel}/>
+                                                    <div><MoreMenu
+                                                        noteId={key.id}
+                                                        createLabelPropsTogetNote={this.handleCreateLabel} />
                                                     </div>
                                                 </div>
                                             </Card>
@@ -209,7 +221,8 @@ class GetNotes extends Component {
                                 </div>
                             </Card>
                         </Dialog>
-                    </div>)}
+                    </div>)
+                }
             </div>
         );
     }

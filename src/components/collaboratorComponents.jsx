@@ -79,21 +79,6 @@ export default class Collaborators extends Component {
             searchText: searchText
         })
     }
-    selectCollaborator = (value) => {
-        this.setState(() => ({
-            searchText: value,
-        }))
-        let data = {
-            "searchWord": this.state.searchText
-        }
-        searchUserList(data).then(res => {
-            this.setState({
-                collaborator: res.data.data.details
-            })
-        })
-        console.log("res in serachUserList", this.state.collaborator);
-
-    }
     handleSave = () => {
         let data = {
             "searchWord": this.state.searchText
@@ -119,12 +104,12 @@ export default class Collaborators extends Component {
                 })
                 this.getNotes()
             }).catch((err) => {
-                console.log("err in hitting collaborator api", err);
+                console.log("err in collaborator api", err);
             })
             console.log("searChUserData---------->", searChUserData);
 
         }).catch(err => {
-            console.log("err in hitting search user api ", err);
+            console.log("err in search user api ", err);
         })
     }
     renderSuggestion = () => {
@@ -173,21 +158,22 @@ export default class Collaborators extends Component {
                                     </div>
                                 </div>
                                 {this.state.notes.map(key => {
+                                    console.log("key in collaborator", key)
                                     return (
                                         key.id === this.props.noteId ?
                                             <div className="collaborator-avtar-email">
-                                                <div className="collaborator-avtar">
-                                                    {key.collaborators.map(col => {
-                                                        return (
-                                                            <div>
-                                                                <Avatar style={{ width: "35px", height: "35px" }} />
-                                                                <span style={{ fontFamily: 'Roboto' }}>
-                                                                    <b>{col.email}</b>
-                                                                </span>
-                                                            </div>
-                                                        )
-                                                    })}
-                                                </div>
+                                                {key.collaborators.map(collab => {
+                                                    console.log("col in collaborators", collab);
+
+                                                    return (
+                                                        <div className="collaborator-avatar">
+                                                            <Avatar style={{ width: "35px", height: "35px" }} />
+                                                            <span style={{ fontFamily: 'Roboto' }}>
+                                                                <b>{collab.email}</b>
+                                                            </span>
+                                                        </div>
+                                                    )
+                                                })}
                                             </div>
                                             : (null))
                                 })
@@ -210,9 +196,6 @@ export default class Collaborators extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                {/* <div className="collaborator-avtar-email">
-                                    {this.state.searchData}
-                                </div> */}
                                 <div className="collaborator-button">
                                     <div>
                                         <Button onClick={this.handleCancel} >cancel</Button>
