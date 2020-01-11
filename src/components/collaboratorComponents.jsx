@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Dialog, Divider, Avatar, Button, InputBase, DialogTitle, DialogContent, List, ListItem, ListItemText, Checkbox, Tooltip } from '@material-ui/core';
+import { Card, Dialog, Divider, Avatar, Button, InputBase, DialogTitle, DialogContent, List, ListItem, ListItemText, Checkbox, Tooltip, MenuItem } from '@material-ui/core';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import DoneIcon from '@material-ui/icons/Done';
@@ -15,15 +15,16 @@ export default class Collaborators extends Component {
         super()
         this.state = {
             open: false,
-            collaborator: [],
             searchText: '',
             trueSign: false,
             allUserEmail: [],
             notes: [],
-            searchData: '',
+            filteredEmails: [],
+            searchData: [],
+            card: false,
         }
     }
-    componentWillMount() {
+    componentDidMount() {
         getuserList().then(res => {
             console.log("res in userList", res);
             let userList = res.data.map(key => {
@@ -32,14 +33,16 @@ export default class Collaborators extends Component {
             this.setState({
                 allUserEmail: userList
             })
+            // console.log("res in allUserList", this.state.allUserEmail)
         })
     }
     handleSearch = () => {
-        let filteredEmail = this.state.allUserEmail.map(key => {
-            return key.toLowerCase().indexof(this.state.searchText.toLowerCase()) !== -1
+        const filteredEmail = this.state.allUserEmail.filter(email => {
+            return email.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
         })
         this.setState({
-            filteredEmail: filteredEmail
+            card: true,
+            filteredEmails: filteredEmail,
         })
     }
     handleClear = (userId) => {
@@ -88,6 +91,12 @@ export default class Collaborators extends Component {
         const searchText = event.target.value
         this.setState({
             searchText: searchText
+        })
+    }
+    handleMenu = (event) => {
+        this.setState({
+            card: false,
+            searchText: event.target.value,
         })
     }
     handleSave = () => {
@@ -172,8 +181,8 @@ export default class Collaborators extends Component {
                                                                 <div className="collaborator_input">
                                                                     <b>{collab.email}</b>
                                                                 </div>
-                                                                <div style={{cursor:'pointer'}}>
-                                                                    <ClearIcon  onClick={() => this.handleClear(collab.userId)} />
+                                                                <div style={{ cursor: 'pointer' }}>
+                                                                    <ClearIcon onClick={() => this.handleClear(collab.userId)} />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -202,7 +211,24 @@ export default class Collaborators extends Component {
                                         </div>
                                     </div>
                                 </div>
-
+                                <div className="allEmail-show">
+                                    {
+                                        this.state.card !== false && this.state.searchText !== '' ?
+                                            <Card>
+                                                {
+                                                    this.state.filteredEmails.map(key => {
+                                                        return (
+                                                            <div class="allEmail">
+                                                                <MenuItem onClick={this.handleMenu}>
+                                                                    {key}
+                                                                </MenuItem>
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
+                                            </Card> : (null)
+                                    }
+                                </div>
                                 <div className="collaborator-button">
                                     <div>
                                         <Button onClick={this.handleCancel} >cancel</Button>

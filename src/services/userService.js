@@ -40,7 +40,7 @@ export function searchUserList(data) {
 }
 
 export function getuserList() {
-  return axios.get(process.env.React_App_BASE_URL + apiConstant.getUserList, {
+  return axios.get("http://fundoonotes.incubation.bridgelabz.com/api" + "/user", {
     headers: {
       Authorization: localStorage.getItem('token')
     }
