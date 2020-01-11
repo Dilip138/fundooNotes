@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Dialog, Divider, Avatar, Button, InputBase, DialogTitle, DialogContent, List, ListItem, ListItemText, Checkbox } from '@material-ui/core';
+import { Card, Dialog, Divider, Avatar, Button, InputBase, DialogTitle, DialogContent, List, ListItem, ListItemText, Checkbox, Tooltip } from '@material-ui/core';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import DoneIcon from '@material-ui/icons/Done';
@@ -22,10 +22,9 @@ export default class Collaborators extends Component {
             notes: [],
             listUser: [],
             searchData: '',
-            // collaborators:this.props.collaboratorToGetNote
         }
     }
-    componentDidMount() {
+    componentWillMount() {
         getuserList().then(res => {
             console.log("res in userList", res);
             let userList = res.data.map(key => {
@@ -34,6 +33,14 @@ export default class Collaborators extends Component {
             this.setState({
                 allUserEmail: userList
             })
+        })
+    }
+    handleSearch = () =>{
+        let filteredEmail = this.state.allUserEmail.map(key=>{
+            return key.toLowerCase().indexof(this.state.searchText.toLowerCase()) !== -1
+        })
+        this.setState({
+            filteredEmail:filteredEmail
         })
     }
     getNotes = () => {
@@ -70,11 +77,6 @@ export default class Collaborators extends Component {
     }
     handleOnChangeUser = (event) => {
         const searchText = event.target.value
-        // let listUser = [];
-        // if (value.length > 0) {
-        //     let regex = new RegExp(`^${value}`, 'i');
-        //     listUser = this.state.allUserEmail.sort().filter(v => regex.test(v))
-        // }
         this.setState({
             searchText: searchText
         })
@@ -160,14 +162,15 @@ export default class Collaborators extends Component {
                                 {this.state.notes.map(key => {
                                     console.log("key in collaborator", key)
                                     return (
-                                        key.id === this.props.noteId ?
+                                        key.id == this.props.noteId ?
                                             <div className="collaborator-avtar-email">
                                                 {key.collaborators.map(collab => {
                                                     console.log("col in collaborators", collab);
-
                                                     return (
                                                         <div className="collaborator-avatar">
-                                                            <Avatar style={{ width: "35px", height: "35px" }} />
+                                                            <Tooltip title={collab.email} >
+                                                                <Avatar style={{ width: "35px", height: "35px" }} />
+                                                            </Tooltip>
                                                             <span style={{ fontFamily: 'Roboto' }}>
                                                                 <b>{collab.email}</b>
                                                             </span>

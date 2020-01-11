@@ -8,8 +8,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import Refresh from '@material-ui/icons/Refresh';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ViewAgenda from '@material-ui/icons/ViewAgenda';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import ProfileImgComponenet from './profileComponent';
 import DrawerComponent from '../components/drawer.jsx';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import { Card, InputBase } from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForeverOutlined';
 import RestoreFromTrashIcon from '@material-ui/icons/RestoreFromTrash';
@@ -70,23 +71,21 @@ export default class Trash extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="trash">
                 <div className="root">
                     <MuiThemeProvider theme={theme}>
                         <AppBar>
                             <Toolbar>
-                                <div className="Icon">
-                                    <div>
-                                        <IconButton className="menuButton" onClick={this.openDrawer}>
-                                            <MenuIcon />
-                                        </IconButton>
+                                <div className="dashBoardIcon">
+                                    <div className="icon">
+                                        <MenuIcon onClick={this.openDrawer} />
                                     </div>
                                     <div>
                                         <img src={require('../assets/keep.jpeg')} alt="logo" style={{ width: '30px', height: '30px' }} />
                                     </div>
                                     <div style={{ color: "black", cursor: "pointer" }}>
                                         <Typography className="title" variant="h6">
-                                            Trash </Typography>
+                                            fundooNotes </Typography>
                                     </div>
                                 </div>
                                 <div className="searchAndIcon">
@@ -100,31 +99,24 @@ export default class Trash extends Component {
                                         </div>
                                     </div>
                                     <div className="sectionDesktop">
-                                        <div>
-                                            <IconButton>
-                                                <Refresh onClick={this.handleReload} />
-                                            </IconButton>
+                                        <div className="iconReaload">
+                                            <Refresh onClick={this.handleReload} />
                                         </div>
-                                        <div>
-                                            <IconButton>
-                                                <ViewAgenda />
-                                            </IconButton>
-                                        </div>
-                                        <div>
-                                            <IconButton>
-                                                <SettingsIcon />
-                                            </IconButton>
+                                        {!this.state.open ?
+                                            (<div className="iconGrid-List">
+                                                <DashboardIcon onClick={this.gridList} />
+                                            </div>) :
+                                            (<div className="iconGrid-List">
+                                                <ViewAgenda onClick={this.gridList} />
+                                            </div>)}
+                                        <div style={{ color: 'gray' }}>
+                                            <SettingsIcon />
                                         </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <IconButton
-                                        aria-haspopup="true"
-                                        onClick={this.handleProfileMenuOpen}
-                                    >
-                                        <AccountCircle style={{ color: "black" }} />
-                                    </IconButton>
-                                </div>
+                                <div style={{ cursor: 'pointer' }}>
+                                    <ProfileImgComponenet />
+                                </div>    
                             </Toolbar>
                             <DrawerComponent
                                 drawerOpen={this.state.drawerOpen}
@@ -139,7 +131,7 @@ export default class Trash extends Component {
                                 if (key.isDeleted === true) {
                                     return (
                                         <div className="getCardNote">
-                                            <Card className="getcard" style={{borderRadius: '10px',width:'20em' }}>
+                                            <Card className="getcard" style={{ borderRadius: '10px', width: '20em' }}>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}

@@ -9,7 +9,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import Refresh from '@material-ui/icons/Refresh';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ViewAgenda from '@material-ui/icons/ViewAgenda';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import ProfileImgComponenet from './profileComponent';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import DrawerComponent from '../components/drawer.jsx';
 import ImageIcon from '@material-ui/icons/ImageOutlined';
 import AddAlertIcon from '@material-ui/icons/AddAlertOutlined';
@@ -74,23 +75,21 @@ export default class Archive extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="archive">
                 <div className="root">
                     <MuiThemeProvider theme={theme}>
                         <AppBar>
                             <Toolbar>
-                                <div className="Icon">
-                                    <div>
-                                        <IconButton className="menuButton" onClick={this.openDrawer}>
-                                            <MenuIcon />
-                                        </IconButton>
+                                <div className="dashBoardIcon">
+                                    <div className="icon">
+                                        <MenuIcon onClick={this.openDrawer} />
                                     </div>
                                     <div>
                                         <img src={require('../assets/keep.jpeg')} alt="logo" style={{ width: '30px', height: '30px' }} />
                                     </div>
                                     <div style={{ color: "black", cursor: "pointer" }}>
                                         <Typography className="title" variant="h6">
-                                            Archive </Typography>
+                                            fundooNotes </Typography>
                                     </div>
                                 </div>
                                 <div className="searchAndIcon">
@@ -104,30 +103,23 @@ export default class Archive extends Component {
                                         </div>
                                     </div>
                                     <div className="sectionDesktop">
-                                        <div>
-                                            <IconButton>
-                                                <Refresh onClick={this.handleReload} />
-                                            </IconButton>
+                                        <div className="iconReaload">
+                                            <Refresh onClick={this.handleReload} />
                                         </div>
-                                        <div>
-                                            <IconButton>
-                                                <ViewAgenda />
-                                            </IconButton>
-                                        </div>
-                                        <div>
-                                            <IconButton>
-                                                <SettingsIcon />
-                                            </IconButton>
+                                        {!this.state.open ?
+                                            (<div className="iconGrid-List">
+                                                <DashboardIcon onClick={this.gridList} />
+                                            </div>) :
+                                            (<div className="iconGrid-List">
+                                                <ViewAgenda onClick={this.gridList} />
+                                            </div>)}
+                                        <div style={{ color: 'gray' }}>
+                                            <SettingsIcon />
                                         </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <IconButton
-                                        aria-haspopup="true"
-                                        onClick={this.handleProfileMenuOpen}
-                                    >
-                                        <AccountCircle style={{ color: "black" }} />
-                                    </IconButton>
+                                <div style={{ cursor: 'pointer' }}>
+                                    <ProfileImgComponenet />
                                 </div>
                             </Toolbar>
                             <DrawerComponent
@@ -140,10 +132,10 @@ export default class Archive extends Component {
                     <div className="trashNote">
                         {
                             this.state.notes.map(key => {
-                                if (key.isArchived === true && key.isDeleted !== true ) {
+                                if (key.isArchived === true && key.isDeleted !== true) {
                                     return (
                                         <div className="getCardNote">
-                                            <Card className="getcard" style={{borderRadius: '10px',backgroundColor:this.props.notecolor,width:'20em'}}>
+                                            <Card className="getcard" style={{ borderRadius: '10px', backgroundColor: this.props.notecolor, width: '20em' }}>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}
@@ -157,14 +149,14 @@ export default class Archive extends Component {
                                                     />
                                                 </div>
                                                 <div className="imageIconCard">
-                                                <div><AddAlertIcon /></div>
-                                                <div><PersonAddIcon /></div>
-                                                <div><ColorLensIcon /></div>
-                                                <div><ImageIcon /></div>
-                                                <div><ArchiveIcon /></div>
-                                                <div><MoreMenu /></div>
+                                                    <div><AddAlertIcon /></div>
+                                                    <div><PersonAddIcon /></div>
+                                                    <div><ColorLensIcon /></div>
+                                                    <div><ImageIcon /></div>
+                                                    <div><ArchiveIcon /></div>
+                                                    <div><MoreMenu /></div>
 
-                                            </div>
+                                                </div>
                                             </Card>
                                         </div>
                                     )

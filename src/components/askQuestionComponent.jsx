@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
-import { Card, Button } from '@material-ui/core';
+import { Card, Button, Icon } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -41,12 +41,18 @@ export default class AskQuestion extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorState: EditorState.createEmpty(),
+      contentState: '',
+      drawerOpen: false,
     }
   }
-  onContentStateChange = (editorState) => {
+  openDrawer = () => {
     this.setState({
-      editorState: editorState
+      drawerOpen: !this.state.drawerOpen
+    })
+  }
+  onContentStateChange = (contentState) => {
+    this.setState({
+      editorState: contentState
     });
   };
   handleReload = () => {
@@ -54,15 +60,13 @@ export default class AskQuestion extends Component {
   }
   render() {
     return (
-      <div className="root" style={{backgroundColor:'gray'}}>
+      <div className="root">
         <MuiThemeProvider theme={theme}>
           <AppBar>
             <Toolbar>
-              <div className="Icon">
-                <div>
-                  <IconButton className="menuButton" onClick={this.openDrawer}>
-                    <MenuIcon />
-                  </IconButton>
+              <div className="dashBoardIcon">
+                <div className="icon">
+                  <MenuIcon onClick={this.openDrawer} />
                 </div>
                 <div>
                   <img src={require('../assets/keep.jpeg')} alt="logo" style={{ width: '30px', height: '30px' }} />
@@ -83,33 +87,31 @@ export default class AskQuestion extends Component {
                   </div>
                 </div>
                 <div className="sectionDesktop">
-                  <div>
-                    <IconButton>
+                  <div className="iconReaload">
+                    <Icon>
                       <Refresh onClick={this.handleReload} />
-                    </IconButton>
+                    </Icon>
                   </div>
                   {!this.state.open ?
-                    (<div>
-                      <IconButton>
+                    (<div className="iconGrid-List">
+                      <Icon>
                         <DashboardIcon onClick={this.gridList} />
-                      </IconButton>
+                      </Icon>
                     </div>) :
-                    (<div>
-                      <IconButton>
+                    (<div style={{ color: 'black' }}>
+                      <Icon>
                         <ViewAgenda onClick={this.gridList} />
-                      </IconButton>
+                      </Icon>
                     </div>)}
-                  <div>
-                    <IconButton>
+                  <div style={{ color: 'gray' }}>
+                    <Icon>
                       <SettingsIcon />
-                    </IconButton>
+                    </Icon>
                   </div>
                 </div>
               </div>
-              <div>
-                <IconButton  >
-                  <ProfileImgComponenet />
-                </IconButton>
+              <div style={{ cursor: 'pointer' }}>
+                <ProfileImgComponenet />
               </div>
             </Toolbar>
             <DrawerComponent
@@ -118,20 +120,24 @@ export default class AskQuestion extends Component {
           </AppBar>
         </MuiThemeProvider>
         <Card className="cardQuestion">
-          <div  className="selectNoteQues">
+          <div className="selectNoteQues">
             <h6>Selected Note</h6>
           </div>
           <div className="closeQues">
             <Button>Close</Button>
           </div>
         </Card>
-        <div className="editor">
-          <Editor
-            editorState={this.state.editorState}
-            wrapperClassName="demo-wrapper"
-            editorClassName="demo-editor"
-            onContentStateChange={this.onContentStateChange}
-          />
+        <div className="questionAndEditor">
+          <div className="question">Ask a Question..?</div>
+          <div className="editor">
+            <Editor
+              initialContentState={this.state.contentState}
+              wrapperClassName="demo-wrapper"
+              editorClassName="demo-editor"
+              onContentStateChange={this.onContentStateChange}
+            />
+          </div>
+          <div className="ask">Ask..?</div>
         </div>
       </div>
     );

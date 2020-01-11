@@ -64,11 +64,9 @@ class DashBoard extends Component {
                 <MuiThemeProvider theme={theme}>
                     <AppBar>
                         <Toolbar>
-                            <div className="Icon">
-                                <div>
-                                    <IconButton className="menuButton" onClick={this.openDrawer}>
-                                        <MenuIcon />
-                                    </IconButton>
+                            <div className="dashBoardIcon">
+                                <div className="icon">
+                                    <MenuIcon onClick={this.openDrawer} />
                                 </div>
                                 <div>
                                     <img src={require('../assets/keep.jpeg')} alt="logo" style={{ width: '30px', height: '30px' }} />
@@ -89,33 +87,23 @@ class DashBoard extends Component {
                                     </div>
                                 </div>
                                 <div className="sectionDesktop">
-                                    <div>
-                                        <IconButton>
-                                            <Refresh onClick={this.handleReload} />
-                                        </IconButton>
+                                    <div className="iconReaload">
+                                        <Refresh onClick={this.handleReload} />
                                     </div>
                                     {!this.state.open ?
-                                        (<div>
-                                            <IconButton>
-                                                <DashboardIcon onClick={this.gridList} />
-                                            </IconButton>
+                                        (<div className="iconGrid-List">
+                                            <DashboardIcon onClick={this.gridList} />
                                         </div>) :
-                                        (<div>
-                                            <IconButton>
-                                                <ViewAgenda onClick={this.gridList} />
-                                            </IconButton>
+                                        (<div className="iconGrid-List">
+                                            <ViewAgenda onClick={this.gridList} />
                                         </div>)}
-                                    <div>
-                                        <IconButton>
-                                            <SettingsIcon />
-                                        </IconButton>
+                                    <div style={{ color: 'gray' }}>
+                                        <SettingsIcon />
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <IconButton  >
-                                    <ProfileImgComponenet/>
-                                </IconButton>
+                            <div style={{cursor:'pointer'}}>
+                                <ProfileImgComponenet />
                             </div>
                         </Toolbar>
                         <DrawerComponent
