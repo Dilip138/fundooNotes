@@ -5,7 +5,6 @@ import { Card, Button, Icon } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
@@ -16,7 +15,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import DrawerComponent from '../components/drawer.jsx';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import ProfileImgComponenet from './profileComponent';
-import { askQuestion } from '../services/noteServices.js';
+import { askQuestion, getAllNotes } from '../services/noteServices.js';
 const theme = createMuiTheme({
   overrides: {
     MuiAppBar: {
@@ -43,9 +42,21 @@ export default class AskQuestion extends Component {
     this.state = {
       contentState: '',
       drawerOpen: false,
-      isApproved: false,
+      open: false,
       isCanceled: false,
+      questionAnswer: '',
+      noteIdQuestion: '',
+      quesId: '',
+      message: '',
+      notes: [],
     }
+  }
+  componentDidMount() {
+    getAllNotes().then(res => {
+      this.setState({
+        notes: res.data.data.data
+      })
+    })
   }
   openDrawer = () => {
     this.setState({
@@ -53,45 +64,31 @@ export default class AskQuestion extends Component {
     })
   }
   onEditorStateChange = (e) => {
-    let question = e.block[0].text
+    let question = e.blocks[0].text
     this.setState({
       message: question
     })
   }
   handleSelectNotes = () => {
-    var data = {
-      data1: this.state.questionAns,
-      data2: this.state.noteIdQues
-    }
-    this.props.history.push('/dashboard', data)
+    this.props.history.push('/dashBoard')
   }
-  submitQuestion = (data) => {
-    var data1 = {
-      message: this.state.body,
-      notesId: data
+  handleAskQuestion = (value) => {
+    var data = {
+      message: this.state.message,
+      notesId: this.props.location.state.notesId
     }
-    console.log("data occur while htiing back-end ask question Api", data);
-    askQuestion(data1).then(res => {
+    console.log("data occurs for ask", data);
+    askQuestion(data).then(res => {
       console.log("response comming from que ans component ", res);
       this.setState({
-        questionAns: res.data.data.details.message,
+        questionAnswer: res.data.data.details.message,
         quesId: res.data.data.details.id,
         open: true,
-        noteIdQues: res.data.data.details.notesId
+        noteIdQuestion: res.data.data.details.notesId
       })
-      console.log("response========>", this.state.questionAns);
+      console.log("response========>", this.state.questionAnswer);
     }).catch(err => {
-      console.log('err occur while htiing back-end ask question Api', err);
-    })
-  }
-  handleAskQuestion = (noteId) => {
-    let data = {
-      noteId: noteId,
-      "userId": localStorage.getItem('userId')
-
-    }
-    askQuestion(data).then(res => {
-      console.log("res in questionData", res)
+      console.log('err in ask question Api', err);
     })
   }
   render() {
@@ -99,7 +96,10 @@ export default class AskQuestion extends Component {
     if (this.props.location.state !== undefined) {
       title = this.props.location.state.title
       description = this.props.location.state.description
-      noteId = this.props.location.state.id
+      noteId = this.props.location.state.notesId
+      console.log("title", title);
+      console.log("description", description);
+      console.log("description", noteId);
     }
     return (
       <div className="root">
@@ -163,25 +163,31 @@ export default class AskQuestion extends Component {
         </MuiThemeProvider>
         <Card className="cardQuestion">
           <div className="selectNoteQues">
-            <h6>Selected Note</h6>
-            <div>{title}</div>
-            <div>{description}</div>
+            <div>
+              <h6>Selected Note</h6>
+              <div>{title} {description}</div>
+            </div>
+            <div>{this.state.questionAnswer}</div>
           </div>
           <div className="closeQues">
-            <Button>Close</Button>
+            <Button onClick={this.handleSelectNotes}>Close</Button>
           </div>
         </Card>
         <div className="questionAndEditor">
           <div className="question">Ask a Question..?</div>
           <div className="editor">
             <Editor
-              initialContentState={this.state.contentState}
-              wrapperClassName="demo-wrapper"
-              editorClassName="demo-editor"
+              toolbar={{
+                inline: { inDropdown: true, },
+                link: { inDropdown: true },
+                textAline: { inDropdown: true },
+                list: { inDropdown: true },
+                history: { inDropdown: true }
+              }}
               onChange={(event) => this.onEditorStateChange(event)}
             />
           </div>
-          <div className="ask" onClick={this.handleAskQuestion}>Ask..?</div>
+          <div className="ask" onClick={() => this.handleAskQuestion(noteId)}>Ask..?</div>
         </div>
       </div>
     );

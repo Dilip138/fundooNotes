@@ -125,3 +125,11 @@ export function askQuestion(data) {
     }
   })
 }
+
+export function addReply(data) {
+  return axios.post("http://fundoonotes.incubation.bridgelabz.com/api" + `/questionAndAnswerNotes/reply/{parentId}`, data, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  })
+}

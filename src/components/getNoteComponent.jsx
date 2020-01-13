@@ -178,9 +178,14 @@ class GetNotes extends Component {
                                                     <div style={{ cursor: 'pointer' }} onClick={() => this.handleArchiveNotes(key.id)} notecolor={key.color}><ArchiveIcon /></div>
                                                     <div><MoreMenu
                                                         noteId={key.id}
+                                                        title={key.title}
+                                                        description={key.description}
                                                         createLabelPropsTogetNote={this.handleCreateLabel} />
                                                     </div>
                                                 </div>
+
+                                                
+                                                
                                             </Card>
                                         </div>
                                     )
@@ -222,7 +227,7 @@ class GetNotes extends Component {
                             </Card>
                         </Dialog>
                     </div>)
-                }
+                }                  
             </div>
         );
     }
