@@ -16,6 +16,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import DrawerComponent from '../components/drawer.jsx';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import ProfileImgComponenet from './profileComponent';
+import { askQuestion } from '../services/noteServices.js';
 const theme = createMuiTheme({
   overrides: {
     MuiAppBar: {
@@ -36,13 +37,14 @@ const theme = createMuiTheme({
     }
   }
 })
-
 export default class AskQuestion extends Component {
   constructor(props) {
     super(props);
     this.state = {
       contentState: '',
       drawerOpen: false,
+      isApproved: false,
+      isCanceled: false,
     }
   }
   openDrawer = () => {
@@ -50,15 +52,55 @@ export default class AskQuestion extends Component {
       drawerOpen: !this.state.drawerOpen
     })
   }
-  onContentStateChange = (contentState) => {
+  onEditorStateChange = (e) => {
+    let question = e.block[0].text
     this.setState({
-      editorState: contentState
-    });
-  };
-  handleReload = () => {
-    window.location.reload()
+      message: question
+    })
+  }
+  handleSelectNotes = () => {
+    var data = {
+      data1: this.state.questionAns,
+      data2: this.state.noteIdQues
+    }
+    this.props.history.push('/dashboard', data)
+  }
+  submitQuestion = (data) => {
+    var data1 = {
+      message: this.state.body,
+      notesId: data
+    }
+    console.log("data occur while htiing back-end ask question Api", data);
+    askQuestion(data1).then(res => {
+      console.log("response comming from que ans component ", res);
+      this.setState({
+        questionAns: res.data.data.details.message,
+        quesId: res.data.data.details.id,
+        open: true,
+        noteIdQues: res.data.data.details.notesId
+      })
+      console.log("response========>", this.state.questionAns);
+    }).catch(err => {
+      console.log('err occur while htiing back-end ask question Api', err);
+    })
+  }
+  handleAskQuestion = (noteId) => {
+    let data = {
+      noteId: noteId,
+      "userId": localStorage.getItem('userId')
+
+    }
+    askQuestion(data).then(res => {
+      console.log("res in questionData", res)
+    })
   }
   render() {
+    let title = "", description = "", noteId = ""
+    if (this.props.location.state !== undefined) {
+      title = this.props.location.state.title
+      description = this.props.location.state.description
+      noteId = this.props.location.state.id
+    }
     return (
       <div className="root">
         <MuiThemeProvider theme={theme}>
@@ -89,7 +131,7 @@ export default class AskQuestion extends Component {
                 <div className="sectionDesktop">
                   <div className="iconReaload">
                     <Icon>
-                      <Refresh onClick={this.handleReload} />
+                      <Refresh />
                     </Icon>
                   </div>
                   {!this.state.open ?
@@ -122,6 +164,8 @@ export default class AskQuestion extends Component {
         <Card className="cardQuestion">
           <div className="selectNoteQues">
             <h6>Selected Note</h6>
+            <div>{title}</div>
+            <div>{description}</div>
           </div>
           <div className="closeQues">
             <Button>Close</Button>
@@ -134,10 +178,10 @@ export default class AskQuestion extends Component {
               initialContentState={this.state.contentState}
               wrapperClassName="demo-wrapper"
               editorClassName="demo-editor"
-              onContentStateChange={this.onContentStateChange}
+              onChange={(event) => this.onEditorStateChange(event)}
             />
           </div>
-          <div className="ask">Ask..?</div>
+          <div className="ask" onClick={this.handleAskQuestion}>Ask..?</div>
         </div>
       </div>
     );

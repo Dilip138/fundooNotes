@@ -73,7 +73,7 @@ class MoreMenu extends Component {
             <MenuList>
               <MenuItem onClick={() => this.handleTrash(this.props.noteId)}>Delete note</MenuItem>
               <MenuItem><CreateLabelComponent noteIdLabel={this.props.noteId} /></MenuItem>
-              <MenuItem onClick={this.handleQuestion}>Ask a question</MenuItem>
+              <MenuItem onClick={this.handleQuestion} notesId={this.props.noteId}>Ask a question</MenuItem>
               <MenuItem onClick={this.handleClose}>Make a copy</MenuItem>
             </MenuList>
             {/* </ClickAwayListener> */}

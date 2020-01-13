@@ -110,3 +110,18 @@ export function removeCollaborator(data) {
   })
 }
 
+export function getNoteDetails(data) {
+  return axios.get("http://fundoonotes.incubation.bridgelabz.com/api" + "/notes/getNotesDetail/{noteId}", data, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  })
+}
+
+export function askQuestion(data) {
+  return axios.post("http://fundoonotes.incubation.bridgelabz.com/api" + "/questionAndAnswerNotes/addQuestionAndAnswer", data, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  })
+}

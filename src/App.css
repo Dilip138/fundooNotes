@@ -323,6 +323,7 @@
     justify-content: flex-end;
     margin-right: 6em;
     color: brown;
+    cursor: pointer;
 }
 
 /* -----------------------DashBoard----------------------- */
