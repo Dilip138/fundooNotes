@@ -26,7 +26,7 @@ export default class Collaborators extends Component {
     }
     componentDidMount() {
         getuserList().then(res => {
-            console.log("res in userList", res);
+            //console.log("res in userList", res);
             let userList = res.data.map(key => {
                 return key.email
             })
@@ -108,14 +108,14 @@ export default class Collaborators extends Component {
             this.setState({
                 searchData: res.data.data.details,
             })
-            console.log("res.data in collab is ", res.data.data.details[0].email);
+            console.log("res.data in collab ", res.data.data.details[0].email);
             let searChUserData = {
                 "email": res.data.data.details[0].email,
                 "firstName": res.data.data.details[0].firstName,
                 "lastName": res.data.data.details[0].lastName,
                 "userId": res.data.data.details[0].userId
             }
-            console.log("this.props.noteTo", searChUserData);
+            console.log("this.props.noteId", searChUserData);
             addCollaborators(searChUserData, this.props.noteId).then((res) => {
                 console.log("res after hitting adding collaborator api is ", res);
                 this.setState({

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { InputBase } from '@material-ui/core';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
@@ -7,10 +6,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { getAllNotes, trashNotes } from '../services/noteServices';
-import { Dialog } from '@material-ui/core';
 import CreateLabelComponent from '../components/createLabelComponent';
+import { withRouter } from 'react-router-dom';
 
-export default class MoreMenu extends Component {
+class MoreMenu extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -21,7 +20,7 @@ export default class MoreMenu extends Component {
     }
   }
   handleQuestion = () => {
-    this.props.history.push('question')
+    this.props.history.push('/askQuestion')
   }
   handleMenu = (e) => {
     this.setState({
@@ -85,3 +84,4 @@ export default class MoreMenu extends Component {
     );
   }
 }
+export default withRouter(MoreMenu)
