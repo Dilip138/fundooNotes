@@ -15,7 +15,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import DrawerComponent from '../components/drawer.jsx';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import ProfileImgComponenet from './profileComponent';
-import { askQuestion, getAllNotes } from '../services/noteServices.js';
+import { askQuestion } from '../services/noteServices.js';
 const theme = createMuiTheme({
   overrides: {
     MuiAppBar: {
@@ -50,13 +50,6 @@ export default class AskQuestion extends Component {
       message: '',
       notes: [],
     }
-  }
-  componentDidMount() {
-    getAllNotes().then(res => {
-      this.setState({
-        notes: res.data.data.data
-      })
-    })
   }
   openDrawer = () => {
     this.setState({

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, InputBase, Avatar, Tooltip } from '@material-ui/core';
+import { Card, InputBase, Avatar, Tooltip, CardContent } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/ImageOutlined';
 import AddAlertIcon from '@material-ui/icons/AddAlertOutlined';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
@@ -154,18 +154,18 @@ class GetNotes extends Component {
                                                         multiline
                                                         onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
                                                 </div>
-                                                    <div className="collaborator-avtar-email">
-                                                        {key.collaborators.map(data => {
-                                                            console.log("col in collaborators", data);
-                                                            return (
-                                                                <Tooltip title={data.email}>
-                                                                    <div className="collaborator-avatar" style={{cursor:'pointer'}}>
-                                                                        <Avatar style={{ width: "35px", height: "35px" }} />
-                                                                    </div>
-                                                                </Tooltip>
-                                                            )
-                                                        })}
-                                                    </div>
+                                                <div className="collaborator-avtar-email">
+                                                    {key.collaborators.map(data => {
+                                                        console.log("col in collaborators", data);
+                                                        return (
+                                                            <Tooltip title={data.email}>
+                                                                <div className="collaborator-avatar" style={{ cursor: 'pointer' }}>
+                                                                    <Avatar style={{ width: "35px", height: "35px" }} />
+                                                                </div>
+                                                            </Tooltip>
+                                                        )
+                                                    })}
+                                                </div>
 
                                                 <div className="imageIconCard">
                                                     <div style={{ cursor: 'pointer' }}><AddAlertIcon onClick={() => this.handleReminder(key.reminder, key.id)} />
@@ -183,9 +183,20 @@ class GetNotes extends Component {
                                                         createLabelPropsTogetNote={this.handleCreateLabel} />
                                                     </div>
                                                 </div>
-
-                                                
-                                                
+                                                <CardContent>{
+                                                    <div style={{ display: "flex", flexDirection: "column-reverse" }}>
+                                                        {(key.questionAndAnswerNotes.length > 0) &&
+                                                            <div className="ques-asked" onClick={() => this.RedirectToQueDisplayPage(key.id)} style={{ borderTop: "1px solid", padding: "5px" }}>
+                                                                <b className="quesHeanding">
+                                                                    Question Asked
+                                                            </b>
+                                                                <div className="questionGetDispaly"
+                                                                    dangerouslySetInnerHTML={{ __html: key.questionAndAnswerNotes[key.questionAndAnswerNotes.length - 1].message.toString() }}>
+                                                                </div>
+                                                            </div>}
+                                                    </div>
+                                                }
+                                                </CardContent>
                                             </Card>
                                         </div>
                                     )
@@ -227,7 +238,7 @@ class GetNotes extends Component {
                             </Card>
                         </Dialog>
                     </div>)
-                }                  
+                }
             </div>
         );
     }
