@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { Card, Button, Icon } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
@@ -40,7 +39,6 @@ export default class AskQuestion extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      contentState: '',
       drawerOpen: false,
       open: false,
       isCanceled: false,
@@ -65,7 +63,7 @@ export default class AskQuestion extends Component {
   handleSelectNotes = () => {
     this.props.history.push('/dashBoard')
   }
-  handleAskQuestion = (value) => {
+  handleAskQuestion = () => {
     var data = {
       message: this.state.message,
       notesId: this.props.location.state.notesId
@@ -75,9 +73,7 @@ export default class AskQuestion extends Component {
       console.log("response comming from que ans component ", res);
       this.setState({
         questionAnswer: res.data.data.details.message,
-        quesId: res.data.data.details.id,
         open: true,
-        noteIdQuestion: res.data.data.details.notesId
       })
       console.log("response========>", this.state.questionAnswer);
     }).catch(err => {
@@ -90,9 +86,6 @@ export default class AskQuestion extends Component {
       title = this.props.location.state.title
       description = this.props.location.state.description
       noteId = this.props.location.state.notesId
-      console.log("title", title);
-      console.log("description", description);
-      console.log("description", noteId);
     }
     return (
       <div className="root">

@@ -40,9 +40,16 @@ class DashBoard extends Component {
         super()
         this.state = {
             drawerOpen: false,
-            open: false
+            open: false,
+            searchNote: '',
 
         }
+    }
+    handleSearch = (event) => {
+        const searchNote = event.target.value
+        this.setState({
+            searchNote: searchNote
+        })
     }
     gridList = () => {
         this.setState({
@@ -83,7 +90,9 @@ class DashBoard extends Component {
                                     </div>
                                     <div>
                                         <InputBase
-                                            placeholder="Search…" />
+                                            placeholder="Search…"
+                                            value={this.state.searchNote}
+                                            onChange={this.handleSearch} />
                                     </div>
                                 </div>
                                 <div className="sectionDesktop">
@@ -102,7 +111,7 @@ class DashBoard extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div style={{cursor:'pointer'}}>
+                            <div style={{ cursor: 'pointer' }}>
                                 <ProfileImgComponenet />
                             </div>
                         </Toolbar>

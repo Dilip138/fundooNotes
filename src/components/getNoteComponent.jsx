@@ -13,6 +13,12 @@ import MoreMenu from '../components/moreComponent';
 import ColorComponent from '../components/colorComponent';
 import Collaborators from '../components/collaboratorComponents';
 
+function titleDescriptionSearch(searchText){
+    return function (x){
+        return x.title.include(searchText) || x.description.inclue(searchText)
+    }
+}
+
 class GetNotes extends Component {
     constructor(props) {
         super(props)
@@ -184,7 +190,7 @@ class GetNotes extends Component {
                                                     </div>
                                                 </div>
                                                 <CardContent>{
-                                                    <div style={{ display: "flex", flexDirection: "column-reverse" }}>
+                                                    <div className="showQuestion">
                                                         {(key.questionAndAnswerNotes.length > 0) &&
                                                             <div className="ques-asked" onClick={() => this.RedirectToQueDisplayPage(key.id)} style={{ borderTop: "1px solid", padding: "5px" }}>
                                                                 <b className="quesHeanding">
