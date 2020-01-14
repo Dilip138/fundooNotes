@@ -132,7 +132,7 @@ class DashBoard extends Component {
                 </MuiThemeProvider>
                 <div><CreateNotes /></div>
                 {/* <div style={take}><GetNoteComponent /></div> */}
-                <div><GetNoteComponent searchText={this.state.searchNote} /></div>
+                <div><GetNoteComponent searchText={this.state.searchNote}  iconSelect={this.state.open}/></div>
             </div>
         );
     }

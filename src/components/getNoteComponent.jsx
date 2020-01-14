@@ -15,7 +15,7 @@ import Collaborators from '../components/collaboratorComponents';
 
 function titleDescriptionSearch(searchText) {
     return function (val) {
-        return val.title.includes(searchText) || val.description.includes(searchText) 
+        return val.title.includes(searchText) || val.description.includes(searchText)
     }
 }
 class GetNotes extends Component {
@@ -130,17 +130,19 @@ class GetNotes extends Component {
         }
     }
     render() {
+        let iconList = this.props.iconSelect ? "listViewCss" : "gridViewCss"
+        let listViewShow = this.props.iconSelect ? "listView" : "gridView"
         return (
             <div>
                 {!this.state.open ? (
-                    <div className="allNotes">
-                        <div className="notesAll_">
-                            {
-                                this.state.notes.filter(titleDescriptionSearch(this.props.searchText)).map(key => {
-                                    return (
-                                        key.isArchived === false && key.isDeleted === false &&
+                    <div className={iconList}>
+                        {
+                            this.state.notes.filter(titleDescriptionSearch(this.props.searchText)).map(key => {
+                                return (
+                                    key.isArchived === false && key.isDeleted === false &&
+                                    <div className="allNotes">
                                         <div className="getCardNote">
-                                            <Card className="getcard" style={{ borderRadius: '10px', backgroundColor: key.color, width: '20em' }}>
+                                            <Card className={listViewShow} style={{ borderRadius: '10px', backgroundColor: key.color, margin: '8px', padding: '10px', flexWrap: 'wrap' }}>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}
@@ -204,10 +206,10 @@ class GetNotes extends Component {
                                                 </CardContent>
                                             </Card>
                                         </div>
-                                    )
-                                })
-                            }
-                        </div>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 ) :
                     (<div>

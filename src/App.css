@@ -172,28 +172,39 @@
     visibility: hidden;
 }
 
-.allNotes {
+/* .iconList {
+    display: flex;
+    justify-content: center; */
+
+/* flex-wrap: wrap; */
+
+/* width: 93%; */
+
+/* } */
+
+.getCardNote {
     display: flex;
     justify-content: center;
-    /* flex-wrap: wrap; */
-    /* width: 93%; */
 }
 
-.notesAll_ {
-    display: flex;
-    justify-content: center;
-    /* width: 93%; */
-    flex-wrap: wrap;
+.gridView {
+    width: 52%;
 }
 
-.getcard {
+.listView {
+    width: 25%;
+}
+
+.listViewShow {
     margin: 8px;
     padding: 15px;
     box-shadow: 0px 1px 7px 0px;
     border: 1px solid gray;
+    display: flex;
+   
 }
 
-.getcard:hover>.imageIconCard {
+.listViewShow:hover>.imageIconCard {
     visibility: visible;
 }
 
@@ -277,6 +288,7 @@
     margin-left: 12px;
     display: flex;
 }
+
 .cardQuestion {
     display: flex;
     justify-content: space-between;
@@ -326,7 +338,7 @@
     cursor: pointer;
 }
 
-.showQuestion{
+.showQuestion {
     display: flex;
     flex-direction: column-reverse;
 }
