@@ -81,16 +81,6 @@ export default class CraeteLabel extends Component {
         })
 
     }
-    handleSearch = () => {
-        const filteredCheckBox = this.state.allLabels.filter((key)=>{
-            return key.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
-        })
-        this.setState({
-            filteredCheckBoxs: filteredCheckBox,
-        })
-        console.log("res in filtered", this.state.filteredCheckBoxs)
-    }
-
     checkNoteLabels = (labelId) => {
         let data = {
             labelId: labelId,
@@ -101,20 +91,13 @@ export default class CraeteLabel extends Component {
         })
     }
     render() {
-        let labelData = this.state.allLabels.map(key => {
-            console.log("res in keyFilter",key)
-            return (
-                <div>
-                    <List>
-                        <Checkbox
-                            value={key.label}
-                            onClick={this.checkNoteLabels(key.id)}>
-                        </Checkbox>
-                        {key.label}
-                    </List>
-                </div>
-            )
-        })
+        let allLabels = this.state.allLabels
+        let label = this.state.label.trim().toLowerCase();
+        if (label.length > 0) {
+            allLabels = allLabels.filter((key)=> {
+                return key.label.toLowerCase().match(label);
+            });
+        }
         return (
             <div className="labelCard">
                 <div onClick={(e) => this.handleMoreVertical(e)} className="">Add label</div>
@@ -130,7 +113,6 @@ export default class CraeteLabel extends Component {
                                         <InputBase
                                             placeholder="Enter label name"
                                             value={this.state.label}
-                                             onKeyDown={this.handleSearch}
                                             onChange={this.handleChangeLabel} />
                                     </div>
                                     <div>
@@ -138,7 +120,21 @@ export default class CraeteLabel extends Component {
                                     </div>
                                 </div>
                             </ClickAwayListener>
-                            <div> {labelData}</div>
+                            {allLabels.map(key => {
+                                console.log("res in keyFilter", key)
+                                return (
+                                    <div>
+                                        <List>
+                                            <Checkbox
+                                                // value={key.label}
+                                                onClick={this.checkNoteLabels(key.id)}>
+                                            </Checkbox>
+                                            {key.label}
+                                        </List>
+                                    </div>
+                                )
+                            })
+                            }
                             <div classNam="createLabel">
                                 {this.state.clear ?
                                     (<p onClick={this.handleCreateLabel} style={{ cursor: 'pointer' }}><span>+ create "{this.state.label}"</span></p>)
