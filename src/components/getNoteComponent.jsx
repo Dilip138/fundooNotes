@@ -13,12 +13,11 @@ import MoreMenu from '../components/moreComponent';
 import ColorComponent from '../components/colorComponent';
 import Collaborators from '../components/collaboratorComponents';
 
-function titleDescriptionSearch(searchText){
-    return function (x){
-        return x.title.include(searchText) || x.description.inclue(searchText)
+function titleDescriptionSearch(searchText) {
+    return function (val) {
+        return val.title.includes(searchText) || val.description.includes(searchText) 
     }
 }
-
 class GetNotes extends Component {
     constructor(props) {
         super(props)
@@ -137,7 +136,7 @@ class GetNotes extends Component {
                     <div className="allNotes">
                         <div className="notesAll_">
                             {
-                                this.state.notes.map(key => {
+                                this.state.notes.filter(titleDescriptionSearch(this.props.searchText)).map(key => {
                                     return (
                                         key.isArchived === false && key.isDeleted === false &&
                                         <div className="getCardNote">
@@ -162,7 +161,7 @@ class GetNotes extends Component {
                                                 </div>
                                                 <div className="collaborator-avtar-email">
                                                     {key.collaborators.map(data => {
-                                                        console.log("col in collaborators", data);
+                                                        //console.log("col in collaborators", data);
                                                         return (
                                                             <Tooltip title={data.email}>
                                                                 <div className="collaborator-avatar" style={{ cursor: 'pointer' }}>
@@ -192,7 +191,7 @@ class GetNotes extends Component {
                                                 <CardContent>{
                                                     <div className="showQuestion">
                                                         {(key.questionAndAnswerNotes.length > 0) &&
-                                                            <div className="ques-asked" onClick={() => this.RedirectToQueDisplayPage(key.id)} style={{ borderTop: "1px solid", padding: "5px" }}>
+                                                            <div className="ques-asked" style={{ borderTop: "1px solid", padding: "5px" }}>
                                                                 <b className="quesHeanding">
                                                                     Question Asked
                                                             </b>

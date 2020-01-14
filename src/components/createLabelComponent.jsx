@@ -13,7 +13,6 @@ const theme = createMuiTheme({
         },
     }
 })
-
 export default class CraeteLabel extends Component {
     constructor(props) {
         super(props)
@@ -24,7 +23,8 @@ export default class CraeteLabel extends Component {
             isDeleted: false,
             clear: false,
             createLabel: "",
-            allLabels: []
+            allLabels: [],
+            filteredCheckBoxs: [],
         }
     }
     componentDidMount() {
@@ -81,6 +81,16 @@ export default class CraeteLabel extends Component {
         })
 
     }
+    handleSearch = () => {
+        const filteredCheckBox = this.state.allLabels.filter((key)=>{
+            return key.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
+        })
+        this.setState({
+            filteredCheckBoxs: filteredCheckBox,
+        })
+        console.log("res in filtered", this.state.filteredCheckBoxs)
+    }
+
     checkNoteLabels = (labelId) => {
         let data = {
             labelId: labelId,
@@ -92,6 +102,7 @@ export default class CraeteLabel extends Component {
     }
     render() {
         let labelData = this.state.allLabels.map(key => {
+            console.log("res in keyFilter",key)
             return (
                 <div>
                     <List>
@@ -108,31 +119,32 @@ export default class CraeteLabel extends Component {
             <div className="labelCard">
                 <div onClick={(e) => this.handleMoreVertical(e)} className="">Add label</div>
                 <MuiThemeProvider theme={theme}>
-                    <Menu open={this.state.anchorElLabel} anchorEl={this.state.anchorElLabel} style={{ zIndex: "999"}} onKeyDown={this.handleClear} >
-                            <div className="dialogLabel">
-                                <div>
-                                    <p>Label note</p>
-                                </div>
-                                <ClickAwayListener onClickAway={this.handleListenerClose}>
-                                    <div style={{ display: 'flex' }}>
-                                        <div>
-                                            <InputBase
-                                                placeholder="Enter label name"
-                                                value={this.state.label}
-                                                onChange={this.handleChangeLabel} />
-                                        </div>
-                                        <div>
-                                            <SearchIcon style={{ color: "black",alignItems:'center'}} />
-                                        </div>
-                                    </div>
-                                </ClickAwayListener>
-                                <div> {labelData}</div>
-                                <div classNam="createLabel">
-                                    {this.state.clear ?
-                                        (<p onClick={this.handleCreateLabel} style={{ cursor: 'pointer' }}><span>+ create "{this.state.label}"</span></p>)
-                                        : (null)}
-                                </div>
+                    <Menu open={this.state.anchorElLabel} anchorEl={this.state.anchorElLabel} style={{ zIndex: "999" }} onKeyDown={this.handleClear} >
+                        <div className="dialogLabel">
+                            <div>
+                                <p>Label note</p>
                             </div>
+                            <ClickAwayListener onClickAway={this.handleListenerClose}>
+                                <div style={{ display: 'flex' }}>
+                                    <div>
+                                        <InputBase
+                                            placeholder="Enter label name"
+                                            value={this.state.label}
+                                             onKeyDown={this.handleSearch}
+                                            onChange={this.handleChangeLabel} />
+                                    </div>
+                                    <div>
+                                        <SearchIcon style={{ color: "black", alignItems: 'center' }} />
+                                    </div>
+                                </div>
+                            </ClickAwayListener>
+                            <div> {labelData}</div>
+                            <div classNam="createLabel">
+                                {this.state.clear ?
+                                    (<p onClick={this.handleCreateLabel} style={{ cursor: 'pointer' }}><span>+ create "{this.state.label}"</span></p>)
+                                    : (null)}
+                            </div>
+                        </div>
                     </Menu>
                 </MuiThemeProvider>
             </div>

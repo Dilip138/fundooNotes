@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
@@ -11,7 +10,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import ViewAgenda from '@material-ui/icons/ViewAgenda';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import DrawerComponent from '../components/drawer.jsx';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
+import { createMuiTheme, MuiThemeProvider, ClickAwayListener } from '@material-ui/core';
 import CreateNotes from './createNotesComponent';
 import GetNoteComponent from '../components/getNoteComponent';
 import ProfileImgComponenet from './profileComponent';
@@ -45,11 +44,19 @@ class DashBoard extends Component {
 
         }
     }
+    handleListenerClose = () => {
+        this.setState({
+            drawerOpen: false
+        })
+    }
     handleSearch = (event) => {
         const searchNote = event.target.value
+        console.log("searchNote", searchNote)
         this.setState({
             searchNote: searchNote
         })
+        console.log("serachNote in setState", this.state.searchNote);
+
     }
     gridList = () => {
         this.setState({
@@ -72,9 +79,11 @@ class DashBoard extends Component {
                     <AppBar>
                         <Toolbar>
                             <div className="dashBoardIcon">
-                                <div className="icon">
-                                    <MenuIcon onClick={this.openDrawer} />
-                                </div>
+                                <ClickAwayListener onClickAway={this.handleListenerClose}>
+                                    <div className="icon">
+                                        <MenuIcon onClick={this.openDrawer} />
+                                    </div>
+                                </ClickAwayListener>
                                 <div>
                                     <img src={require('../assets/keep.jpeg')} alt="logo" style={{ width: '30px', height: '30px' }} />
                                 </div>
@@ -115,6 +124,7 @@ class DashBoard extends Component {
                                 <ProfileImgComponenet />
                             </div>
                         </Toolbar>
+
                         <DrawerComponent
                             drawerOpen={this.state.drawerOpen}
                         />
@@ -122,7 +132,7 @@ class DashBoard extends Component {
                 </MuiThemeProvider>
                 <div><CreateNotes /></div>
                 {/* <div style={take}><GetNoteComponent /></div> */}
-                <div><GetNoteComponent /></div>
+                <div><GetNoteComponent searchText={this.state.searchNote} /></div>
             </div>
         );
     }

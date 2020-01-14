@@ -37,8 +37,8 @@ export default class Collaborators extends Component {
         })
     }
     handleSearch = () => {
-        const filteredEmail = this.state.allUserEmail.filter(email => {
-            return email.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
+        const filteredEmail = this.state.allUserEmail.filter(key => {
+            return key.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1
         })
         this.setState({
             card: true,
