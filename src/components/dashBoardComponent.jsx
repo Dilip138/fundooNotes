@@ -72,7 +72,6 @@ class DashBoard extends Component {
         window.location.reload()
     }
     render() {
-        // let take = this.state.open ? ({display: 'flex',width:'46em',marginLeft:'18em'}) : ({display: 'flex',width:'71em',marginLeft:'4em'})
         return (
             <div className="root">
                 <MuiThemeProvider theme={theme}>
@@ -131,8 +130,7 @@ class DashBoard extends Component {
                     </AppBar>
                 </MuiThemeProvider>
                 <div><CreateNotes /></div>
-                {/* <div style={take}><GetNoteComponent /></div> */}
-                <div><GetNoteComponent searchText={this.state.searchNote}  iconSelect={this.state.open}/></div>
+                <div><GetNoteComponent searchText={this.state.searchNote} iconSelect={this.state.open} /></div>
             </div>
         );
     }

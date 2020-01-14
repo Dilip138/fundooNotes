@@ -11,6 +11,7 @@ export function createNotes(data) {
 }
 
 export function getAllNotes() {
+  console.log("data in service for getNote ", localStorage.getItem('token'));
   return axios.get(process.env.REACT_APP_BASE_URL + apiConstant.getAllNotes, {
     headers: {
       Authorization: localStorage.getItem('token')

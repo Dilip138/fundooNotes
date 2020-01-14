@@ -130,8 +130,8 @@ class GetNotes extends Component {
         }
     }
     render() {
-        let iconList = this.props.iconSelect ? "listViewCss" : "gridViewCss"
-        let listViewShow = this.props.iconSelect ? "listView" : "gridView"
+        let iconList = this.props.iconSelect ? "gridViewCss" : "listViewCss"
+        let listViewShow = this.props.iconSelect ? "gridView" : "listView"
         return (
             <div>
                 {!this.state.open ? (
