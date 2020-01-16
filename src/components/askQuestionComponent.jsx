@@ -14,7 +14,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import DrawerComponent from '../components/drawer.jsx';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import ProfileImgComponenet from './profileComponent';
-import { askQuestion } from '../services/noteServices.js';
+import { askQuestion, getAllNotes } from '../services/noteServices.js';
 const theme = createMuiTheme({
   overrides: {
     MuiAppBar: {
@@ -47,7 +47,19 @@ export default class AskQuestion extends Component {
       quesId: '',
       message: '',
       notes: [],
+      id:'',
+      askShow: false
     }
+  }
+  componentDidMount() {
+    this.getNotes()
+  }
+  getNotes = () => {
+    getAllNotes().then(res => {
+      this.setState({
+        notes: res.data.data.data
+      })
+    })
   }
   openDrawer = () => {
     this.setState({
@@ -74,6 +86,7 @@ export default class AskQuestion extends Component {
       this.setState({
         questionAnswer: res.data.data.details.message,
         open: true,
+        askShow: !this.state.askShow
       })
       console.log("response========>", this.state.questionAnswer);
     }).catch(err => {
@@ -81,12 +94,14 @@ export default class AskQuestion extends Component {
     })
   }
   render() {
-    let title = "", description = "", noteId = ""
+    let title = "", description = "", noteId = "", questionAndAnswerNotes = ""
     if (this.props.location.state !== undefined) {
       title = this.props.location.state.title
       description = this.props.location.state.description
       noteId = this.props.location.state.notesId
+      questionAndAnswerNotes = this.props.location.state.questionAndAnswerNotes
     }
+    console.log("res in renderData", questionAndAnswerNotes)
     return (
       <div className="root">
         <MuiThemeProvider theme={theme}>
@@ -159,22 +174,45 @@ export default class AskQuestion extends Component {
             <Button onClick={this.handleSelectNotes}>Close</Button>
           </div>
         </Card>
-        <div className="questionAndEditor">
-          <div className="question">Ask a Question..?</div>
-          <div className="editor">
-            <Editor
-              toolbar={{
-                inline: { inDropdown: true, },
-                link: { inDropdown: true },
-                textAline: { inDropdown: true },
-                list: { inDropdown: true },
-                history: { inDropdown: true }
-              }}
-              onChange={(event) => this.onEditorStateChange(event)}
-            />
+        {!this.state.askShow ?
+          (<div className="questionAndEditor">
+            <div className="question">Ask a Question..?</div>
+            <div className="editor">
+              <Editor
+                toolbar={{
+                  inline: { inDropdown: true, },
+                  link: { inDropdown: true },
+                  textAline: { inDropdown: true },
+                  list: { inDropdown: true },
+                  history: { inDropdown: true }
+                }}
+                onChange={(event) => this.onEditorStateChange(event)}
+              />
+            </div>
+            <div className="ask" onClick={() => this.handleAskQuestion(noteId)}>Ask..?</div>
+          </div>) :
+
+          (<div className="showAll">
+            {this.state.notes.map(data => {
+              return (
+                <div className="showQuestion">
+                  {(data.questionAndAnswerNotes.length > 0) && (data.id = this.state.id) &&
+                    <div className="ques-asked" style={{ borderTop: "1px solid", padding: "5px" }}>
+                      <b className="quesHeanding">
+                        asked Question
+                    </b>
+                      <div className="questionGetDispaly"
+                        dangerouslySetInnerHTML={{ __html: data.questionAndAnswerNotes[data.questionAndAnswerNotes.length - 1].message.toString() }}>
+                      </div>
+                    </div>}
+                </div>
+              )
+            })
+            }
           </div>
-          <div className="ask" onClick={() => this.handleAskQuestion(noteId)}>Ask..?</div>
-        </div>
+          )
+        }
+
       </div>
     );
   }
