@@ -20,10 +20,20 @@ class MoreMenu extends Component {
     }
   }
   handleQuestion = () => {
-    var data={
-      notesId : this.props.noteId,
-      title:this.props.title,
-      description:this.props.description
+    let data = {
+      notesId: this.props.noteId,
+      title: this.props.title,
+      description: this.props.description,
+      questionAndAnswerNotes: this.props.questionAndAnswerNotes
+    }
+    this.props.history.push('/askQuestion', data)
+  }
+  handleShowQuestion = () => {
+    let data = {
+      notesId: this.props.noteId,
+      title: this.props.title,
+      description: this.props.description,
+      questionAndAnswerNotes: this.props.questionAndAnswerNotes
     }
     this.props.history.push('/askQuestion', data)
   }
@@ -77,8 +87,12 @@ class MoreMenu extends Component {
             {/* <ClickAwayListener onClickAway={this.handleClose}> */}
             <MenuList>
               <MenuItem onClick={() => this.handleTrash(this.props.noteId)}>Delete note</MenuItem>
-              <MenuItem><CreateLabelComponent  noteIdLabel={this.props.noteId} /></MenuItem>
-              <MenuItem onClick={this.handleQuestion} notesId={this.props.noteId} >Ask a question</MenuItem>
+              <MenuItem><CreateLabelComponent noteIdLabel={this.props.noteId} /></MenuItem>
+              {this.props.questionAndAnswerNotes.length > 0 ?
+                <MenuItem onClick={this.handleShowQuestion} >Show question</MenuItem>
+                :
+                <MenuItem onClick={this.handleQuestion} notesId={this.props.noteId} >Ask a question</MenuItem>
+              }
               <MenuItem onClick={this.handleClose}>Make a copy</MenuItem>
             </MenuList>
             {/* </ClickAwayListener> */}

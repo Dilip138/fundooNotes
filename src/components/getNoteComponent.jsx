@@ -157,7 +157,7 @@ class GetNotes extends Component {
                                                 </div>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
-                                                        value={key.reminder}
+                                                        value={key.reminder.toString().slice(0,24)}
                                                         multiline
                                                         onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
                                                 </div>
@@ -187,6 +187,7 @@ class GetNotes extends Component {
                                                         noteId={key.id}
                                                         title={key.title}
                                                         description={key.description}
+                                                        questionAndAnswerNotes={key.questionAndAnswerNotes}
                                                         createLabelPropsTogetNote={this.handleCreateLabel} />
                                                     </div>
                                                 </div>
@@ -195,7 +196,7 @@ class GetNotes extends Component {
                                                         {(key.questionAndAnswerNotes.length > 0) &&
                                                             <div className="ques-asked" style={{ borderTop: "1px solid", padding: "5px" }}>
                                                                 <b className="quesHeanding">
-                                                                    Question Asked
+                                                                    asked Question
                                                             </b>
                                                                 <div className="questionGetDispaly"
                                                                     dangerouslySetInnerHTML={{ __html: key.questionAndAnswerNotes[key.questionAndAnswerNotes.length - 1].message.toString() }}>
