@@ -47,8 +47,7 @@ export default class AskQuestion extends Component {
       quesId: '',
       message: '',
       notes: [],
-      id:'',
-      askShow: false
+      id: '',
     }
   }
   componentDidMount() {
@@ -86,7 +85,6 @@ export default class AskQuestion extends Component {
       this.setState({
         questionAnswer: res.data.data.details.message,
         open: true,
-        askShow: !this.state.askShow
       })
       console.log("response========>", this.state.questionAnswer);
     }).catch(err => {
@@ -101,7 +99,7 @@ export default class AskQuestion extends Component {
       noteId = this.props.location.state.notesId
       questionAndAnswerNotes = this.props.location.state.questionAndAnswerNotes
     }
-    console.log("res in renderData", questionAndAnswerNotes)
+    console.log("res in renderData", noteId)
     return (
       <div className="root">
         <MuiThemeProvider theme={theme}>
@@ -174,7 +172,7 @@ export default class AskQuestion extends Component {
             <Button onClick={this.handleSelectNotes}>Close</Button>
           </div>
         </Card>
-        {!this.state.askShow ?
+        {this.props.location.state.questionAndAnswerNotes === undefined ?
           (<div className="questionAndEditor">
             <div className="question">Ask a Question..?</div>
             <div className="editor">
@@ -192,19 +190,26 @@ export default class AskQuestion extends Component {
             <div className="ask" onClick={() => this.handleAskQuestion(noteId)}>Ask..?</div>
           </div>) :
 
-          (<div className="showAll">
+          (<div className="showAll" style={{ padding: '5em' }}>
             {this.state.notes.map(data => {
+              console.log("res in data for question answer", data);
+
               return (
                 <div className="showQuestion">
-                  {(data.questionAndAnswerNotes.length > 0) && (data.id = this.state.id) &&
-                    <div className="ques-asked" style={{ borderTop: "1px solid", padding: "5px" }}>
-                      <b className="quesHeanding">
-                        asked Question
+                  {data.questionAndAnswerNotes.length > 0 && data.id === noteId &&
+                    data.questionAndAnswerNotes.map(key => {
+                      return (
+                        <div className="ques-asked" style={{ borderTop: "1px solid", padding: "5px" }}>
+                          <b className="quesHeanding">
+                            asked Question
                     </b>
-                      <div className="questionGetDispaly"
-                        dangerouslySetInnerHTML={{ __html: data.questionAndAnswerNotes[data.questionAndAnswerNotes.length - 1].message.toString() }}>
-                      </div>
-                    </div>}
+                          <div className="questionGetDispaly"
+                            dangerouslySetInnerHTML={{ __html: key.message }}>
+                          </div>
+                        </div>
+                      )
+                    })
+                  }
                 </div>
               )
             })

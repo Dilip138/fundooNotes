@@ -27,15 +27,16 @@ class MoreMenu extends Component {
     }
     this.props.history.push('/askQuestion', data)
   }
-  handleShowQuestion = (id) => {
+  handleShowQuestion = () => {
     let data = {
       notesId: this.props.noteId,
       title: this.props.title,
       description: this.props.description,
-      questionAndAnswerNotes: this.props.questionAndAnswerNotes
+      questionAndAnswerNotes: this.props.questionAndAnswerNotes,
+
     }
     // console.log("res in data for showanswer", data);
-    this.props.history.push(`/askQuestion/${id}`, data)
+    this.props.history.push("/askQuestion", data)
   }
   handleMenu = (e) => {
     this.setState({
@@ -77,6 +78,8 @@ class MoreMenu extends Component {
     this.props.createLabelPropsTogetNote(isTrue)
   }
   render() {
+    console.log("question Answer",this.props.questionAndAnswerNotes.length);
+    
     return (
       <div className="moreComponent">
         <div style={{ cursor: 'pointer' }} onClick={(e) => this.handleMenu(e)}>
@@ -90,7 +93,7 @@ class MoreMenu extends Component {
               <MenuItem><CreateLabelComponent noteIdLabel={this.props.noteId} /></MenuItem>
               {this.props.questionAndAnswerNotes !== undefined ?
                 this.props.questionAndAnswerNotes.length > 0 ?
-                  <MenuItem onClick={() => this.handleShowQuestion(this.props.noteId)}  >Show question</MenuItem>
+                  <MenuItem onClick={this.handleShowQuestion}>Show question</MenuItem>
                   :
                   <MenuItem onClick={this.handleQuestion} notesId={this.props.noteId} >Ask a question</MenuItem>
                 : (null)
