@@ -88,7 +88,7 @@ export default class Reminders extends Component {
                                     </div>
                                     <div style={{ color: "black", cursor: "pointer" }}>
                                         <Typography className="title" variant="h6">
-                                            fundooNotes </Typography>
+                                            Reminders </Typography>
                                     </div>
                                 </div>
                                 <div className="searchAndIcon">

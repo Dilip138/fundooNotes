@@ -11,7 +11,7 @@ import ViewAgenda from '@material-ui/icons/ViewAgenda';
 import ProfileImgComponenet from './profileComponent';
 import DrawerComponent from '../components/drawer.jsx';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import { Card, InputBase } from '@material-ui/core';
+import { Card, InputBase, Tooltip } from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForeverOutlined';
 import RestoreFromTrashIcon from '@material-ui/icons/RestoreFromTrash';
 import { getAllNotes } from '../services/noteServices';
@@ -153,8 +153,12 @@ export default class Trash extends Component {
                                                     />
                                                 </div>
                                                 <div className="imageIconTrash">
-                                                    <div><DeleteForeverIcon /></div>
-                                                    <div><RestoreFromTrashIcon /></div>
+                                                    <Tooltip title="Delete forever" >
+                                                        <div style={{ cursor: 'pointer' }}><DeleteForeverIcon /></div>
+                                                    </Tooltip>
+                                                    <Tooltip title="Restore" >
+                                                        <div style={{ cursor: 'pointer' }}><RestoreFromTrashIcon /></div>
+                                                    </Tooltip>
                                                 </div>
                                             </Card>
                                         </div>

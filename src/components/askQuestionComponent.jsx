@@ -11,6 +11,7 @@ import Refresh from '@material-ui/icons/Refresh';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ViewAgenda from '@material-ui/icons/ViewAgenda';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ReplyIcon from '@material-ui/icons/Reply';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import DrawerComponent from '../components/drawer.jsx';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
@@ -48,7 +49,7 @@ export default class AskQuestion extends Component {
       quesId: '',
       message: '',
       notes: [],
-      id: '',
+      count: '',
     }
   }
   componentDidMount() {
@@ -59,6 +60,11 @@ export default class AskQuestion extends Component {
       this.setState({
         notes: res.data.data.data
       })
+    })
+  }
+  handleThumb = () => {
+    this.setState({
+      count: !this.state.count
     })
   }
   openDrawer = () => {
@@ -217,7 +223,7 @@ export default class AskQuestion extends Component {
             })
             }
             <Divider />
-            <div className="rateAndLike" style={{ display: 'flex' }}>
+            <div className="messageAndLike" style={{ display: 'flex' }}>
               <div className="selectNameAndMessage">
                 <div className="selectName">
                   <div> {localStorage.getItem('firstName')}</div>
@@ -243,12 +249,60 @@ export default class AskQuestion extends Component {
                 })
                 }
               </div>
-              <div className="likes">
+              <div className="editor-thumb">
+                <ReplyIcon onClick={() => this.handleReply(data)} />
+                {/* {!this.state.like ?
+                                                <div onClick={()=>this.handleLike(data.id)}>  <ThumbUpIcon />like 0</div>
+                                                :
+                                                <div style={{ color: "blue" }} onClick={()=>this.handleLike(data.id)}> <ThumbUpIcon />like 1</div>
+                                            } */}
+
+                {console.log("9999999", data.like.length)}
                 <div>
-                  <ThumbUpIcon />
+                  {data.like.length > 0 ?
+
+                    data.like.map(val => {
+                      return (
+
+                        val.like ?
+                          <div className="editor-thumbsUp">
+                            <ThumbUpIcon
+                              onClick={() => this.handleLike(data.id)}
+                              style={{ color: val.like ? '#0000FF' : '' }}
+                            />
+                            {data.like.length} like
+            </div>
+                          :
+                          <div className="editor-thumbsUp">
+                            <ThumbUpIcon
+                              onClick={() => this.handleLike(data.id)}
+                              style={{
+                                color: !this.state.count ? '' :
+                                  '#0000FF'
+                              }}
+                            />
+                            {!this.state.count ? '0 likes' : '1 like'}
+                          </div>
+                      )
+                    }) :
+
+                    <div className="editor-thumbsUp">
+                      <ThumbUpIcon
+                        onClick={() => this.handleLike(data.id)}
+                        style={{ color: !this.state.count ? '' : '#0000FF' }}
+                      />
+                      {!this.state.count ? '0 likes' : '1 like'}
+                    </div>
+                  }
                 </div>
-                <div>
-                  {!this.state.count ? 0 : 1}
+              </div>
+
+              <div className="likesAndRate">
+                <div className="likes" onClick={this.handleThumb} >
+                  <ThumbUpIcon style={{ color: !this.state.count ? "black" : "blue" }} />
+                  <div className="likeCount">
+                    {!this.state.count ? '0 likes' : '1 likes'}
+                  </div>
                 </div>
               </div>
             </div>

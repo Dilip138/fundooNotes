@@ -222,7 +222,11 @@
     visibility: hidden;
 }
 
-.getcard:hover>.imageIconTrash {
+.listView:hover>.imageIconTrash {
+    visibility: visible;
+}
+
+.gridView:hover>.imageIconTrash {
     visibility: visible;
 }
 
@@ -345,6 +349,15 @@
 
 .showMessage {
     margin-top: 15px;
+}
+
+.likes {
+    display: flex;
+    margin: 2em;
+}
+
+.likeCount {
+    margin-left: 10px;
 }
 
 /* -----------------------DashBoard----------------------- */
