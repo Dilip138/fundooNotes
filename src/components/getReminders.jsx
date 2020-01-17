@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { InputBase, Card } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
@@ -130,8 +129,7 @@ export default class Reminders extends Component {
                 </div>
                 <div className="allNotes">
                     <div className="trashNote">
-                        {
-                            this.state.notes.map(key => {
+                        { this.state.notes.map((key) => {
                                 console.log("key", key);
                                 if (key.isArchived === false && key.isDeleted === true && key.reminder === true) {
                                     return (

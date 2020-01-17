@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
-import { Card, Button, Icon } from '@material-ui/core';
+import { Card, Button, Icon, Divider } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -10,6 +10,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Refresh from '@material-ui/icons/Refresh';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ViewAgenda from '@material-ui/icons/ViewAgenda';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import DrawerComponent from '../components/drawer.jsx';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
@@ -172,7 +173,7 @@ export default class AskQuestion extends Component {
             <Button onClick={this.handleSelectNotes}>Close</Button>
           </div>
         </Card>
-        {this.props.location.state.questionAndAnswerNotes === undefined ?
+        {questionAndAnswerNotes === undefined ?
           (<div className="questionAndEditor">
             <div className="question">Ask a Question..?</div>
             <div className="editor">
@@ -190,21 +191,22 @@ export default class AskQuestion extends Component {
             <div className="ask" onClick={() => this.handleAskQuestion(noteId)}>Ask..?</div>
           </div>) :
 
-          (<div className="showAll" style={{ padding: '5em' }}>
+          (<div className="showAll" style={{ padding: "4em 7em 0em 7em" }}>
             {this.state.notes.map(data => {
               console.log("res in data for question answer", data);
-
               return (
                 <div className="showQuestion">
                   {data.questionAndAnswerNotes.length > 0 && data.id === noteId &&
                     data.questionAndAnswerNotes.map(key => {
                       return (
-                        <div className="ques-asked" style={{ borderTop: "1px solid", padding: "5px" }}>
-                          <b className="quesHeanding">
-                            asked Question
+                        <div className="messageAndLike">
+                          <div className="ques-asked" style={{ borderTop: "1px solid", padding: "5px" }}>
+                            <b className="quesHeanding">
+                              asked Question
                     </b>
-                          <div className="questionGetDispaly"
-                            dangerouslySetInnerHTML={{ __html: key.message }}>
+                            <div className="questionGetDispaly"
+                              dangerouslySetInnerHTML={{ __html: key.message }}>
+                            </div>
                           </div>
                         </div>
                       )
@@ -214,6 +216,42 @@ export default class AskQuestion extends Component {
               )
             })
             }
+            <Divider />
+            <div className="rateAndLike" style={{ display: 'flex' }}>
+              <div className="selectNameAndMessage">
+                <div className="selectName">
+                  <div> {localStorage.getItem('firstName')}</div>
+                  <div style={{ marginLeft: '4px' }}>{localStorage.getItem('lastName')} </div>
+                </div>
+                {this.state.notes.map(data => {
+                  console.log("res in data for question answer", data);
+                  return (
+                    <div className="showMessage">
+                      {data.questionAndAnswerNotes.length > 0 && data.id === noteId &&
+                        data.questionAndAnswerNotes.map(key => {
+                          return (
+                            <div className="message">
+                              <div className="questionGetDispaly"
+                                dangerouslySetInnerHTML={{ __html: key.message }}>
+                              </div>
+                            </div>
+                          )
+                        })
+                      }
+                    </div>
+                  )
+                })
+                }
+              </div>
+              <div className="likes">
+                <div>
+                  <ThumbUpIcon />
+                </div>
+                <div>
+                  {!this.state.count ? 0 : 1}
+                </div>
+              </div>
+            </div>
           </div>
           )
         }

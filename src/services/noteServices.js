@@ -104,15 +104,7 @@ export function addCollaborators(data, noteId) {
 export function removeCollaborator(data) {
   let id = data.noteId
   let collaboratorUserId = data.collaboratorUserId
-  return axios.delete("http://fundoonotes.incubation.bridgelabz.com/api" + `/notes/${id}/removeCollaboratorsNotes/${collaboratorUserId}`, {
-    headers: {
-      Authorization: localStorage.getItem('token')
-    }
-  })
-}
-
-export function getNoteDetails(data) {
-  return axios.get("http://fundoonotes.incubation.bridgelabz.com/api" + "/notes/getNotesDetail/{noteId}", data, {
+  return axios.delete(`http://fundoonotes.incubation.bridgelabz.com/api/notes/${id}/removeCollaboratorsNotes/${collaboratorUserId}`, {
     headers: {
       Authorization: localStorage.getItem('token')
     }
@@ -120,17 +112,26 @@ export function getNoteDetails(data) {
 }
 
 export function askQuestion(data) {
-  return axios.post("http://fundoonotes.incubation.bridgelabz.com/api" + "/questionAndAnswerNotes/addQuestionAndAnswer", data, {
+  return axios.post("http://fundoonotes.incubation.bridgelabz.com/api/questionAndAnswerNotes/addQuestionAndAnswer", data, {
     headers: {
       Authorization: localStorage.getItem('token')
     }
   })
 }
 
-export function addReply(data) {
-  return axios.post("http://fundoonotes.incubation.bridgelabz.com/api" + `/questionAndAnswerNotes/reply/{parentId}`, data, {
+export function postLike(data) {
+  return axios.post(`http://fundoonotes.incubation.bridgelabz.com/api/questionAndAnswerNotes/like/{parentId}`, data, {
     headers: {
       Authorization: localStorage.getItem('token')
     }
   })
 }
+
+export function postRate(data) {
+  return axios.post(`http://fundoonotes.incubation.bridgelabz.com/api/questionAndAnswerNotes/rate/{parentId}`, data, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  })
+}
+

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ClickAwayListener, InputBase, Checkbox, List, Divider, Menu, } from '@material-ui/core';
+import { ClickAwayListener, InputBase, Checkbox, List, Menu, } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { addNoteLabels, getNoteLabels, noteLabels } from '../services/noteServices';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';

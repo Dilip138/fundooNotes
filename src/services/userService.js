@@ -32,7 +32,7 @@ export function imageUpload(data) {
 }
 
 export function searchUserList(data) {
-  return axios.post("http://fundoonotes.incubation.bridgelabz.com/api" + "/user/searchUserList", data, {
+  return axios.post("http://fundoonotes.incubation.bridgelabz.com/api/user/searchUserList", data, {
     headers: {
       'Authorization': localStorage.getItem('token')
     }
@@ -40,7 +40,7 @@ export function searchUserList(data) {
 }
 
 export function getuserList() {
-  return axios.get("http://fundoonotes.incubation.bridgelabz.com/api" + "/user", {
+  return axios.get("http://fundoonotes.incubation.bridgelabz.com/api/user", {
     headers: {
       Authorization: localStorage.getItem('token')
     }

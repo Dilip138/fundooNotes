@@ -47,8 +47,14 @@ export default class Archive extends Component {
         this.state = {
             drawerOpen: false,
             open: false,
-            notes: []
+            notes: [],
+            click:false,
         }
+    }
+    gridList = () => {
+        this.setState({
+            click: !this.state.click
+        })
     }
     openDrawer = () => {
         this.setState({
@@ -74,6 +80,8 @@ export default class Archive extends Component {
         })
     }
     render() {
+        let iconList = this.state.click ? "gridViewCss" : "listViewCss"
+        let listViewShow = this.state.click ? "gridView" : "listView"
         return (
             <div className="archive">
                 <div className="root">
@@ -89,7 +97,7 @@ export default class Archive extends Component {
                                     </div>
                                     <div style={{ color: "black", cursor: "pointer" }}>
                                         <Typography className="title" variant="h6">
-                                            fundooNotes </Typography>
+                                            Archive </Typography>
                                     </div>
                                 </div>
                                 <div className="searchAndIcon">
@@ -106,7 +114,7 @@ export default class Archive extends Component {
                                         <div className="iconReaload">
                                             <Refresh onClick={this.handleReload} />
                                         </div>
-                                        {!this.state.open ?
+                                        {!this.state.click ?
                                             (<div className="iconGrid-List">
                                                 <DashboardIcon onClick={this.gridList} />
                                             </div>) :
@@ -128,14 +136,14 @@ export default class Archive extends Component {
                         </AppBar>
                     </MuiThemeProvider>
                 </div>
-                <div className="allNotes">
-                    <div className="trashNote">
+                <div className="allNotes" style={{marginTop:'6em'}}>
+                    <div className={iconList}>
                         {
                             this.state.notes.map(key => {
                                 if (key.isArchived === true && key.isDeleted !== true) {
                                     return (
                                         <div className="getCardNote">
-                                            <Card className="getcard" style={{ borderRadius: '10px', backgroundColor: this.props.notecolor, width: '20em' }}>
+                                            <Card className={listViewShow} style={{ borderRadius: '10px', backgroundColor: this.props.notecolor, margin:'8px',padding:'10px' }}>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}

@@ -43,8 +43,14 @@ export default class Trash extends Component {
         this.state = {
             drawerOpen: false,
             open: false,
-            notes: []
+            notes: [],
+            click: false,
         }
+    }
+    gridList = () => {
+        this.setState({
+            click: !this.state.click
+        })
     }
     openDrawer = () => {
         this.setState({
@@ -70,6 +76,8 @@ export default class Trash extends Component {
         })
     }
     render() {
+        let iconList = this.state.click ? "gridViewCss" : "listViewCss"
+        let listViewShow = this.state.click ? "gridView" : "listView"
         return (
             <div className="trash">
                 <div className="root">
@@ -85,7 +93,7 @@ export default class Trash extends Component {
                                     </div>
                                     <div style={{ color: "black", cursor: "pointer" }}>
                                         <Typography className="title" variant="h6">
-                                            fundooNotes </Typography>
+                                            Trash </Typography>
                                     </div>
                                 </div>
                                 <div className="searchAndIcon">
@@ -102,7 +110,7 @@ export default class Trash extends Component {
                                         <div className="iconReaload">
                                             <Refresh onClick={this.handleReload} />
                                         </div>
-                                        {!this.state.open ?
+                                        {!this.state.click ?
                                             (<div className="iconGrid-List">
                                                 <DashboardIcon onClick={this.gridList} />
                                             </div>) :
@@ -116,7 +124,7 @@ export default class Trash extends Component {
                                 </div>
                                 <div style={{ cursor: 'pointer' }}>
                                     <ProfileImgComponenet />
-                                </div>    
+                                </div>
                             </Toolbar>
                             <DrawerComponent
                                 drawerOpen={this.state.drawerOpen}
@@ -124,14 +132,14 @@ export default class Trash extends Component {
                         </AppBar>
                     </MuiThemeProvider>
                 </div>
-                <div className="allNotes">
-                    <div className="trashNote">
+                <div className="allNotes" style={{ marginTop: '6em' }}>
+                    <div className={iconList}>
                         {
                             this.state.notes.map(key => {
                                 if (key.isDeleted === true) {
                                     return (
                                         <div className="getCardNote">
-                                            <Card className="getcard" style={{ borderRadius: '10px', width: '20em' }}>
+                                            <Card className={listViewShow} style={{ borderRadius: '10px', margin: '8px', padding: '10px' }}>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}

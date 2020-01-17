@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Dialog, Divider, Avatar, Button, InputBase, DialogTitle, DialogContent, List, ListItem, ListItemText, Checkbox, Tooltip, MenuItem } from '@material-ui/core';
+import { Card, Dialog, Divider, Avatar, Button, InputBase, DialogTitle, DialogContent, Tooltip, MenuItem } from '@material-ui/core';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import DoneIcon from '@material-ui/icons/Done';
@@ -167,7 +167,7 @@ export default class Collaborators extends Component {
                                 </div>
                                 {this.state.notes.map(key => {
                                     return (
-                                        key.id == this.props.noteId ?
+                                        key.id === this.props.noteId ?
                                             <div className="collaboratorEmailAll">
                                                 {key.collaborators.map(collab => {
                                                     return (

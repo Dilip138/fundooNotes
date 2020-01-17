@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -78,8 +77,7 @@ class MoreMenu extends Component {
     this.props.createLabelPropsTogetNote(isTrue)
   }
   render() {
-    console.log("question Answer",this.props.questionAndAnswerNotes.length);
-    
+    // console.log("question Answer",this.props.questionAndAnswerNotes.length);    
     return (
       <div className="moreComponent">
         <div style={{ cursor: 'pointer' }} onClick={(e) => this.handleMenu(e)}>

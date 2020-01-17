@@ -133,7 +133,7 @@ class GetNotes extends Component {
         let iconList = this.props.iconSelect ? "gridViewCss" : "listViewCss"
         let listViewShow = this.props.iconSelect ? "gridView" : "listView"
         return (
-            <div>
+            <div className="main-getNote">
                 {!this.state.open ? (
                     <div className={iconList}>
                         {
@@ -142,7 +142,7 @@ class GetNotes extends Component {
                                     key.isArchived === false && key.isDeleted === false &&
                                     <div className="allNotes">
                                         <div className="getCardNote">
-                                            <Card className={listViewShow} style={{ borderRadius: '10px', backgroundColor: key.color, margin: '8px', padding: '10px', flexWrap: 'wrap' }}>
+                                            <Card className={listViewShow} style={{ borderRadius: '10px', backgroundColor: key.color, margin: '8px', padding: '10px'}}>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}
