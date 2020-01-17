@@ -345,19 +345,19 @@
 
 .selectName {
     display: flex;
+    margin-top: 15px;
 }
 
 .showMessage {
     margin-top: 15px;
 }
 
-.likes {
+.message {
     display: flex;
-    margin: 2em;
 }
 
-.likeCount {
-    margin-left: 10px;
+.like {
+    margin-left: 30px;
 }
 
 /* -----------------------DashBoard----------------------- */

@@ -16,7 +16,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import DrawerComponent from '../components/drawer.jsx';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import ProfileImgComponenet from './profileComponent';
-import { askQuestion, getAllNotes } from '../services/noteServices.js';
+import { askQuestion, getAllNotes, postLike } from '../services/noteServices.js';
 const theme = createMuiTheme({
   overrides: {
     MuiAppBar: {
@@ -50,6 +50,7 @@ export default class AskQuestion extends Component {
       message: '',
       notes: [],
       count: '',
+      like: [],
     }
   }
   componentDidMount() {
@@ -60,11 +61,6 @@ export default class AskQuestion extends Component {
       this.setState({
         notes: res.data.data.data
       })
-    })
-  }
-  handleThumb = () => {
-    this.setState({
-      count: !this.state.count
     })
   }
   openDrawer = () => {
@@ -98,6 +94,19 @@ export default class AskQuestion extends Component {
       console.log('err in ask question Api', err);
     })
   }
+  handleLike = (id) => {
+    let data = {
+      id: id,
+      like: this.state.like
+    }
+    postLike(data, id).then(res => {
+      console.log("res in like data", res)
+    })
+    this.setState({
+      count: !this.state.count
+    })
+  }
+
   render() {
     let title = "", description = "", noteId = "", questionAndAnswerNotes = ""
     if (this.props.location.state !== undefined) {
@@ -240,6 +249,35 @@ export default class AskQuestion extends Component {
                               <div className="questionGetDispaly"
                                 dangerouslySetInnerHTML={{ __html: key.message }}>
                               </div>
+                              <div className="editor-thumb">
+                                {/* <ReplyIcon onClick={() => this.handleReply(key)} /> */}
+                                {key.like.length > 0 ?
+                                  key.like.map(val => {
+                                    return (
+                                      val.like ?
+                                        <div className="like">
+                                          <ThumbUpIcon
+                                            onClick={() => this.handleLike(key.id)}
+                                            style={{ color: !this.state.count ? 'blue' : 'black' }} />
+                                          {!this.state.count ? '1 likes' : '0 likes'}
+                                        </div>
+                                        :
+                                        <div className="like">
+                                          <ThumbUpIcon
+                                            onClick={() => this.handleLike(key.id)}
+                                            style={{ color: !this.state.count ? 'black' : 'blue' }} />
+                                          {!this.state.count ? '0 likes' : '1 likes'}
+                                        </div>
+                                    )
+                                  }) :
+                                  <div className="like">
+                                    <ThumbUpIcon
+                                      onClick={() => this.handleLike(key.id)}
+                                      style={{ color: !this.state.count ? 'black' : 'blue' }} />
+                                    {!this.state.count ? '0 likes' : '1 likes'}
+                                  </div>
+                                }
+                              </div>
                             </div>
                           )
                         })
@@ -248,62 +286,6 @@ export default class AskQuestion extends Component {
                   )
                 })
                 }
-              </div>
-              <div className="editor-thumb">
-                <ReplyIcon onClick={() => this.handleReply(data)} />
-                {/* {!this.state.like ?
-                                                <div onClick={()=>this.handleLike(data.id)}>  <ThumbUpIcon />like 0</div>
-                                                :
-                                                <div style={{ color: "blue" }} onClick={()=>this.handleLike(data.id)}> <ThumbUpIcon />like 1</div>
-                                            } */}
-
-                {console.log("9999999", data.like.length)}
-                <div>
-                  {data.like.length > 0 ?
-
-                    data.like.map(val => {
-                      return (
-
-                        val.like ?
-                          <div className="editor-thumbsUp">
-                            <ThumbUpIcon
-                              onClick={() => this.handleLike(data.id)}
-                              style={{ color: val.like ? '#0000FF' : '' }}
-                            />
-                            {data.like.length} like
-            </div>
-                          :
-                          <div className="editor-thumbsUp">
-                            <ThumbUpIcon
-                              onClick={() => this.handleLike(data.id)}
-                              style={{
-                                color: !this.state.count ? '' :
-                                  '#0000FF'
-                              }}
-                            />
-                            {!this.state.count ? '0 likes' : '1 like'}
-                          </div>
-                      )
-                    }) :
-
-                    <div className="editor-thumbsUp">
-                      <ThumbUpIcon
-                        onClick={() => this.handleLike(data.id)}
-                        style={{ color: !this.state.count ? '' : '#0000FF' }}
-                      />
-                      {!this.state.count ? '0 likes' : '1 like'}
-                    </div>
-                  }
-                </div>
-              </div>
-
-              <div className="likesAndRate">
-                <div className="likes" onClick={this.handleThumb} >
-                  <ThumbUpIcon style={{ color: !this.state.count ? "black" : "blue" }} />
-                  <div className="likeCount">
-                    {!this.state.count ? '0 likes' : '1 likes'}
-                  </div>
-                </div>
               </div>
             </div>
           </div>
