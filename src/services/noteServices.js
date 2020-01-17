@@ -127,11 +127,4 @@ export function postLike(data) {
   })
 }
 
-export function postRate(data) {
-  return axios.post(`http://fundoonotes.incubation.bridgelabz.com/api/questionAndAnswerNotes/rate/{parentId}`, data, {
-    headers: {
-      Authorization: localStorage.getItem('token')
-    }
-  })
-}
 

@@ -50,7 +50,7 @@ export default class AskQuestion extends Component {
       message: '',
       notes: [],
       count: '',
-      like: [],
+      like: false
     }
   }
   componentDidMount() {
@@ -87,7 +87,7 @@ export default class AskQuestion extends Component {
       console.log("response comming from que ans component ", res);
       this.setState({
         questionAnswer: res.data.data.details.message,
-        open: true,
+        open: false,
       })
       console.log("response========>", this.state.questionAnswer);
     }).catch(err => {
@@ -97,12 +97,13 @@ export default class AskQuestion extends Component {
   handleLike = (id) => {
     let data = {
       id: id,
-      like: this.state.like
+      like: !this.state.like
     }
     postLike(data, id).then(res => {
       console.log("res in like data", res)
     })
     this.setState({
+      like: !this.state.like, 
       count: !this.state.count
     })
   }
@@ -203,7 +204,7 @@ export default class AskQuestion extends Component {
                 onChange={(event) => this.onEditorStateChange(event)}
               />
             </div>
-            <div className="ask" onClick={() => this.handleAskQuestion(noteId)}>Ask..?</div>
+            <div className="ask" onClick={() => this.handleAskQuestion()}>Ask..?</div>
           </div>) :
 
           (<div className="showAll" style={{ padding: "4em 7em 0em 7em" }}>
@@ -237,6 +238,7 @@ export default class AskQuestion extends Component {
                 <div className="selectName">
                   <div> {localStorage.getItem('firstName')}</div>
                   <div style={{ marginLeft: '4px' }}>{localStorage.getItem('lastName')} </div>
+                  <div>{}</div>
                 </div>
                 {this.state.notes.map(data => {
                   console.log("res in data for question answer", data);
@@ -260,6 +262,7 @@ export default class AskQuestion extends Component {
                                             onClick={() => this.handleLike(key.id)}
                                             style={{ color: !this.state.count ? 'blue' : 'black' }} />
                                           {!this.state.count ? '1 likes' : '0 likes'}
+                                          {/* <div>{key.createdDate}</div> */}
                                         </div>
                                         :
                                         <div className="like">

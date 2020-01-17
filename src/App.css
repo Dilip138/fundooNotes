@@ -437,3 +437,14 @@
         width: 100%;
     }
 }
+#reminderStyle{
+    width: 240px;
+    height: 36px;
+    background: grey;
+    padding: 4px;
+    border-radius: 38px;
+    border: 1px solid;
+    opacity: 0.8;
+    display: flex;
+    justify-content: center;
+}

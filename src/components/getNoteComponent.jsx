@@ -12,7 +12,7 @@ import Dialog from '@material-ui/core/Dialog';
 import MoreMenu from '../components/moreComponent';
 import ColorComponent from '../components/colorComponent';
 import Collaborators from '../components/collaboratorComponents';
-
+import AccessAlarmsIcon from '@material-ui/icons/AccessAlarms';
 function titleDescriptionSearch(searchText) {
     return function (val) {
         return val.title.includes(searchText) || val.description.includes(searchText)
@@ -142,7 +142,7 @@ class GetNotes extends Component {
                                     key.isArchived === false && key.isDeleted === false &&
                                     <div className="allNotes">
                                         <div className="getCardNote">
-                                            <Card className={listViewShow} style={{ borderRadius: '10px', backgroundColor: key.color, margin: '8px', padding: '10px'}}>
+                                            <Card className={listViewShow} style={{ borderRadius: '10px', backgroundColor: key.color, margin: '8px', padding: '10px', border: '1px solid' }}>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}
@@ -155,12 +155,17 @@ class GetNotes extends Component {
                                                         multiline
                                                         onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
                                                 </div>
-                                                <div onClick={this.handleOpenDialogue}>
+                                        {key.reminder.length>0?
+                                                <div onClick={this.handleOpenDialogue}  id="reminderStyle">      
+                                                   <AccessAlarmsIcon/>
                                                     <InputBase
-                                                        value={key.reminder.toString().slice(0,24)}
+                                                   
+                                                        value={key.reminder.toString().slice(0, 24)}
                                                         multiline
-                                                        onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
+                                                        onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />      
                                                 </div>
+                                                :null
+                            }
                                                 <div className="collaborator-avtar-email">
                                                     {key.collaborators.map(data => {
                                                         //console.log("col in collaborators", data);

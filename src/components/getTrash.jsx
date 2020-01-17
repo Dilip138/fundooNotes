@@ -45,6 +45,7 @@ export default class Trash extends Component {
             open: false,
             notes: [],
             click: false,
+            isDeleted: false,
         }
     }
     gridList = () => {
@@ -74,6 +75,12 @@ export default class Trash extends Component {
         }).catch(err => {
             console.log("err", err);
         })
+    }
+    handleDeleteForever = (id) => {
+        let data = {
+            id: id,
+            isDeleted: true
+        }
     }
     render() {
         let iconList = this.state.click ? "gridViewCss" : "listViewCss"
@@ -136,6 +143,8 @@ export default class Trash extends Component {
                     <div className={iconList}>
                         {
                             this.state.notes.map(key => {
+                                console.log("key in trashNote", key);
+
                                 if (key.isDeleted === true) {
                                     return (
                                         <div className="getCardNote">
@@ -154,7 +163,7 @@ export default class Trash extends Component {
                                                 </div>
                                                 <div className="imageIconTrash">
                                                     <Tooltip title="Delete forever" >
-                                                        <div style={{ cursor: 'pointer' }}><DeleteForeverIcon /></div>
+                                                        <div style={{ cursor: 'pointer' }}><DeleteForeverIcon onClick={() => this.handleDeleteForever(key.id)} /></div>
                                                     </Tooltip>
                                                     <Tooltip title="Restore" >
                                                         <div style={{ cursor: 'pointer' }}><RestoreFromTrashIcon /></div>
