@@ -48,7 +48,7 @@ export default class Archive extends Component {
             drawerOpen: false,
             open: false,
             notes: [],
-            click:false,
+            click: false,
         }
     }
     gridList = () => {
@@ -136,14 +136,14 @@ export default class Archive extends Component {
                         </AppBar>
                     </MuiThemeProvider>
                 </div>
-                <div className="allNotes" style={{marginTop:'6em'}}>
+                <div className="allNotes" style={{ marginTop: '6em' }}>
                     <div className={iconList}>
                         {
                             this.state.notes.map(key => {
                                 if (key.isArchived === true && key.isDeleted !== true) {
                                     return (
                                         <div className="getCardNote">
-                                            <Card className={listViewShow} style={{ borderRadius: '10px', backgroundColor: this.props.notecolor, margin:'8px',padding:'10px' }}>
+                                            <Card className={listViewShow} style={{ borderRadius: '10px', backgroundColor: this.props.notecolor, margin: '8px', padding: '10px' }}>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}
@@ -162,7 +162,9 @@ export default class Archive extends Component {
                                                     <div><ColorLensIcon /></div>
                                                     <div><ImageIcon /></div>
                                                     <div><ArchiveIcon /></div>
-                                                    <div><MoreMenu /></div>
+                                                    <div><MoreMenu
+                                                        noteId={key.id} />
+                                                    </div>
 
                                                 </div>
                                             </Card>
