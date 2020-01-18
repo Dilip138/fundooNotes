@@ -103,11 +103,10 @@ export default class AskQuestion extends Component {
       console.log("res in like data", res)
     })
     this.setState({
-      like: !this.state.like, 
+      like: !this.state.like,
       count: !this.state.count
     })
   }
-
   render() {
     let title = "", description = "", noteId = "", questionAndAnswerNotes = ""
     if (this.props.location.state !== undefined) {

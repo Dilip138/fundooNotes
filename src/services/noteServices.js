@@ -144,5 +144,3 @@ export function postLike(data) {
     }
   })
 }
-
-

@@ -10,20 +10,19 @@ import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
 import EditIcon from '@material-ui/icons/EditOutlined';
 import DeleteIcon from '@material-ui/icons/DeleteOutline';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
- class DrawerComponent extends Component {
-   
-    handleNotes =()=>{
+class DrawerComponent extends Component {
+    handleNotes = () => {
         this.props.history.push("/dashboard");
-    }   
-    handleReminders =()=>{
+    }
+    handleReminders = () => {
         this.props.history.push("/reminders");
     }
-    handleArchieve =()=>{
+    handleArchieve = () => {
         this.props.history.push("/archive");
     }
-    handleTrash =()=>{
+    handleTrash = () => {
         this.props.history.push("/trash");
     }
     render() {
@@ -63,5 +62,4 @@ import {withRouter} from 'react-router-dom';
         );
     }
 }
-
 export default withRouter(DrawerComponent)
