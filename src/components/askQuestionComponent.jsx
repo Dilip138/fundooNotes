@@ -99,7 +99,7 @@ export default class AskQuestion extends Component {
       id: id,
       like: !this.state.like
     }
-    postLike(data, id).then(res => {
+    postLike(data).then(res => {
       console.log("res in like data", res)
     })
     this.setState({

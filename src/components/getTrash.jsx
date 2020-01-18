@@ -14,7 +14,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import { Card, InputBase, Tooltip } from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForeverOutlined';
 import RestoreFromTrashIcon from '@material-ui/icons/RestoreFromTrash';
-import { getAllNotes } from '../services/noteServices';
+import { getAllNotes, deleteNotes, restoreNotes } from '../services/noteServices';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 const theme = createMuiTheme({
     overrides: {
@@ -76,11 +76,25 @@ export default class Trash extends Component {
             console.log("err", err);
         })
     }
-    handleDeleteForever = (id) => {
+    handleDeleteForever = (noteId) => {
         let data = {
-            id: id,
+            noteIdList: [noteId],
             isDeleted: true
         }
+        deleteNotes(data).then(res => {
+            console.log("res in deleteNotes", res)
+        })
+        this.handleGetNotes()
+    }
+    handleRestore = (noteId) => {
+        let data = {
+            noteIdList: [noteId],
+            isDeleted: false,
+        }
+        restoreNotes(data).then(res => {
+            console.log("res in deleteNotes", res)
+        })
+        this.handleGetNotes()
     }
     render() {
         let iconList = this.state.click ? "gridViewCss" : "listViewCss"
@@ -166,7 +180,7 @@ export default class Trash extends Component {
                                                         <div style={{ cursor: 'pointer' }}><DeleteForeverIcon onClick={() => this.handleDeleteForever(key.id)} /></div>
                                                     </Tooltip>
                                                     <Tooltip title="Restore" >
-                                                        <div style={{ cursor: 'pointer' }}><RestoreFromTrashIcon /></div>
+                                                        <div style={{ cursor: 'pointer' }}><RestoreFromTrashIcon onClick={() => this.handleRestore(key.id)} /></div>
                                                     </Tooltip>
                                                 </div>
                                             </Card>

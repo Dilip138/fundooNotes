@@ -45,6 +45,24 @@ export function trashNotes(data) {
   })
 }
 
+export function deleteNotes(data) {
+  console.log("data in service for trash ", data, localStorage.getItem('token'));
+  return axios.post(process.env.REACT_APP_BASE_URL + apiConstant.deleteNotes, data, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  })
+}
+
+export function restoreNotes(data) {
+  console.log("data in service for trash ", data, localStorage.getItem('token'));
+  return axios.post(process.env.REACT_APP_BASE_URL + apiConstant.restoreNotes, data, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  })
+}
+
 export function colorNotes(data) {
   console.log("token", localStorage.getItem('token'));
   console.log("data in service for color ", data, localStorage.getItem('token'));
