@@ -188,49 +188,49 @@ export default class TakeNotes extends Component {
                     this.state.open ?
                         (<div className="Take_Note" >
                             {/* <ClickAwayListener onClickAway={this.handleListnerInput}> */}
-                                <Card className="card_Notes" style={{ backgroundColor: this.state.color, boxShadow: "0px 0px 7px 0px" }}  >
-                                    <div>
-                                        <b><InputBase
-                                            placeholder="Title"
-                                            value={this.state.title}
-                                            onChange={this.handleTitle} /></b>
+                            <Card className="card_Notes" style={{ backgroundColor: this.state.color, boxShadow: "0px 0px 7px 0px" }}  >
+                                <div>
+                                    <b><InputBase
+                                        placeholder="Title"
+                                        value={this.state.title}
+                                        onChange={this.handleTitle} /></b>
+                                </div>
+                                <div className="inputNote">
+                                    <InputBase
+                                        placeholder="Take a note..."
+                                        value={this.state.description}
+                                        onChange={this.handleDescription} />
+                                </div>
+                                <div>
+                                    <InputBase
+                                        value={this.state.reminder} />
+                                </div>
+                                <div className="imageAndClose">
+                                    <div className="imageIcon">
+                                        <Tooltip title="Remind me">
+                                            <div style={{ cursor: 'pointer' }} onClick={(e, value) => this.handleReminder(e, value)} ><AddAlertIcon /></div>
+                                        </Tooltip>
+                                        <div><Collaborators /></div>
+                                        <Tooltip title="Change color">
+                                            <div><ColorComponent
+                                                colorPatter={this.handleColor} /></div>
+                                        </Tooltip>
+                                        <Tooltip title="Add image">
+                                            <div><ImageIcon /></div>
+                                        </Tooltip>
+                                        <Tooltip title="Archive">
+                                            <div><ArchiveIcon /></div>
+                                        </Tooltip>
+                                        <div ><MoreComponent /></div>
                                     </div>
-                                    <div className="inputNote">
-                                        <InputBase
-                                            placeholder="Take a note..."
-                                            value={this.state.description}
-                                            onChange={this.handleDescription} />
-                                    </div>
-                                    <div>
-                                        <InputBase
-                                            value={this.state.reminder} />
-                                    </div>
-                                    <div className="imageAndClose">
-                                        <div className="imageIcon">
-                                            <Tooltip title="Remind me">
-                                                <div style={{ cursor: 'pointer' }} onClick={(e, value) => this.handleReminder(e, value)} ><AddAlertIcon /></div>
-                                            </Tooltip>
-                                            <div><Collaborators /></div>
-                                            <Tooltip title="Change color">
-                                                <div><ColorComponent
-                                                    colorPatter={this.handleColor} /></div>
-                                            </Tooltip>
-                                            <Tooltip title="Add image">
-                                                <div><ImageIcon /></div>
-                                            </Tooltip>
-                                            <Tooltip title="Archive">
-                                                <div><ArchiveIcon /></div>
-                                            </Tooltip>
-                                            <div ><MoreComponent /></div>
-                                        </div>
-                                        <div onClick={this.handleClose} style={{ cursor: 'pointer' }}>Close</div>
-                                    </div>
-                                </Card>
+                                    <div onClick={this.handleClose} style={{ cursor: 'pointer' }}>Close</div>
+                                </div>
+                            </Card>
                             {/* </ClickAwayListener> */}
                         </div>) :
                         <div className="Take_Note" >
                             <Card className="card_Note" style={{ boxShadow: "0px 0px 7px 0px" }}>
-                                <div>
+                                <div className="typeNote" >
                                     <InputBase onClick={(e) => this.handleOpenInput(e)}
                                         placeholder="Take a note..." />
                                 </div>
