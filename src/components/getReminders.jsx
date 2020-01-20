@@ -3,7 +3,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
-import { InputBase, Card } from '@material-ui/core';
+import { InputBase, Card, Dialog, Button, Paper, Popper, ClickAwayListener } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import Refresh from '@material-ui/icons/Refresh';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -46,8 +46,17 @@ export default class Reminders extends Component {
         this.state = {
             drawerOpen: false,
             open: false,
-            notes: []
+            notes: [],
+            anchorEl: false,
+            click: false,
+            reminder: '',
+            selectedDate: new Date()
         }
+    }
+    gridList = () => {
+        this.setState({
+            open: !this.state.open
+        })
     }
     openDrawer = () => {
         this.setState({
@@ -56,7 +65,7 @@ export default class Reminders extends Component {
     }
     handleOpenDialogue = () => {
         this.setState({
-            open: !this.state.open
+            click: !this.state.click
         })
     }
     componentDidMount() {
@@ -73,6 +82,8 @@ export default class Reminders extends Component {
         })
     }
     render() {
+        let iconList = this.state.click ? "gridViewCss" : "listViewCss"
+        let listViewShow = this.state.click ? "gridView" : "listView"
         return (
             <div className="reminder">
                 <div className="root">
@@ -127,46 +138,46 @@ export default class Reminders extends Component {
                         </AppBar>
                     </MuiThemeProvider>
                 </div>
-                <div className="allNotes">
-                    <div className="trashNote">
-                        { this.state.notes.map((key) => {
-                                console.log("key", key);
-                                if (key.isArchived === false && key.isDeleted === true && key.reminder === true) {
-                                    return (
-                                        <div className="getCardNote">
-                                            <Card className="getcard" style={{ boxShadow: "0px 0px 7px 0px", border: "1px solid black", borderRadius: '10px', backgroundColor: this.props.notecolor }}>
-                                                <div onClick={this.handleOpenDialogue}>
-                                                    <InputBase
-                                                        value={key.title}
-                                                        multiline
-                                                    />
-                                                </div>
-                                                <div onClick={this.handleOpenDialogue}>
-                                                    <InputBase
-                                                        value={key.description}
-                                                        multiline
-                                                    />
-                                                </div>
-                                                <div onClick={this.handleOpenDialogue}>
-                                                    <InputBase
-                                                        value={key.reminder}
-                                                        multiline
-                                                        onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
-                                                </div>
-                                                <div className="imageIconCard">
-                                                    <div><AddAlertIcon /></div>
-                                                    <div><PersonAddIcon /></div>
-                                                    <div><ColorLensIcon /></div>
-                                                    <div><ImageIcon /></div>
-                                                    <div><ArchiveIcon /></div>
-                                                    <div><MoreMenu /></div>
+                <div className="allNotes" style={{ marginTop: '85px' }}>
+                    <div className={iconList}>
+                        {this.state.notes.map((key) => {
+                            //console.log("key", key);
+                            if (key.isArchived === false && key.isDeleted === false && key.reminder === undefined) {
+                                return (
+                                    <div className="getCardNote">
+                                        <Card className={listViewShow} style={{ boxShadow: "0px 0px 7px 0px", borderRadius: '10px', backgroundColor: this.props.notecolor, padding: '10px', margin: '8px' }}>
+                                            <div >
+                                                <InputBase
+                                                    value={key.title}
+                                                    multiline
+                                                />
+                                            </div>
+                                            <div >
+                                                <InputBase
+                                                    value={key.description}
+                                                    multiline
+                                                />
+                                            </div>
+                                            <div>
+                                                <InputBase
+                                                    value={key.reminder}
+                                                    multiline
+                                                    onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
+                                            </div>
+                                            <div className="imageIconCard">
+                                                <div style={{ cursor: 'pointer' }}><AddAlertIcon onClick={(e, value) => this.handleReminder(e, value)} /></div>
+                                                <div><PersonAddIcon /></div>
+                                                <div><ColorLensIcon /></div>
+                                                <div><ImageIcon /></div>
+                                                <div><ArchiveIcon /></div>
+                                                <div><MoreMenu noteId={key.id} /></div>
 
-                                                </div>
-                                            </Card>
-                                        </div>
-                                    )
-                                }
-                            })
+                                            </div>
+                                        </Card>
+                                    </div>
+                                )
+                            }
+                        })
                         }
                     </div>
                 </div>

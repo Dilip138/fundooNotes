@@ -68,6 +68,7 @@ class MoreMenu extends Component {
     console.log("res in handleData", data);
     trashNotes(data).then(res => {
       console.log("res in trashNotes", res)
+      this.handleGetNotes()
     })    
       .catch(err => {
         console.log("err in trshNote component ", err);

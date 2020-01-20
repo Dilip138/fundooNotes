@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, InputBase, Avatar, Tooltip, CardContent } from '@material-ui/core';
+import { Card, InputBase, Avatar, Tooltip, CardContent, Popper, Paper, ClickAwayListener, Button } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/ImageOutlined';
 import AddAlertIcon from '@material-ui/icons/AddAlertOutlined';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
@@ -9,10 +9,15 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { getAllNotes, editNote, archiveNotes, colorNotes, reminderNotes } from '../services/noteServices';
 import { withRouter } from "react-router-dom";
 import Dialog from '@material-ui/core/Dialog';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker, } from '@material-ui/pickers';
 import MoreMenu from '../components/moreComponent';
 import ColorComponent from '../components/colorComponent';
 import Collaborators from '../components/collaboratorComponents';
 import AccessAlarmsIcon from '@material-ui/icons/AccessAlarms';
+
 function titleDescriptionSearch(searchText) {
     return function (val) {
         return val.title.includes(searchText) || val.description.includes(searchText)
@@ -30,6 +35,10 @@ class GetNotes extends Component {
             color: '',
             isArchived: false,
             reminder: '',
+            anchorEl: false,
+            click: false,
+            selectedDate: new Date()
+
         };
     };
     componentDidMount() {
@@ -93,6 +102,7 @@ class GetNotes extends Component {
         console.log("res in noteData", noteId);
         archiveNotes(data).then(res => {
             console.log("res in archiveNotes", res)
+            this.handleGetNotes()
         })
             .catch(err => {
                 console.log("err in archiveNote component ", err);
@@ -111,11 +121,14 @@ class GetNotes extends Component {
                 console.log("err in colorNote component ", err);
             });
     }
-    handleReminder = (reminder, noteId) => {
+    handleReminder = (e, reminder, noteId) => {
         let data = {
             reminder: reminder,
             noteIdList: [noteId]
         }
+        this.setState({
+            anchorEl: this.state.anchorEl ? false : e.target
+        })
         console.log("res in reminderData", data);
         reminderNotes(data).then(res => {
             console.log("res in reminderNotes", res);
@@ -128,6 +141,31 @@ class GetNotes extends Component {
         if (isTrue) {
             this.handleGetNotes()
         }
+    }
+    handleOpenReminder = () => {
+        this.setState({
+            click: !this.state.click
+        })
+    }
+    handleDateChange = date => {
+        this.setState({ selectedDate: date });
+        //console.log("remifvgfgvyghvb"+this.state.selectedDate)
+    };
+    handleSave = () => {
+        let dateTime = this.state.selectedDate
+        console.log("dateTime", dateTime)
+        if (dateTime !== '') {
+            this.setState({
+                reminder: dateTime,
+                click: false
+            });
+            console.log("reminder", this.state.reminder);
+        };
+    };
+    handleListenerClose = () => {
+        this.setState({
+            anchorEl: false
+        })
     }
     render() {
         let iconList = this.props.iconSelect ? "gridViewCss" : "listViewCss"
@@ -155,17 +193,17 @@ class GetNotes extends Component {
                                                         multiline
                                                         onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
                                                 </div>
-                                        {key.reminder.length>0?
-                                                <div onClick={this.handleOpenDialogue}  id="reminderStyle">      
-                                                   <AccessAlarmsIcon/>
-                                                    <InputBase
-                                                   
-                                                        value={key.reminder.toString().slice(0, 24)}
-                                                        multiline
-                                                        onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />      
-                                                </div>
-                                                :null
-                            }
+                                                {key.reminder.length > 0 ?
+                                                    <div onClick={this.handleOpenDialogue} id="reminderStyle">
+                                                        <AccessAlarmsIcon />
+                                                        <InputBase
+
+                                                            value={key.reminder.toString().slice(0, 24)}
+                                                            multiline
+                                                            onClick={() => this.handleEditNote(key.title, key.description, key.color, key.id)} />
+                                                    </div>
+                                                    : null
+                                                }
                                                 <div className="collaborator-avtar-email">
                                                     {key.collaborators.map(data => {
                                                         //console.log("col in collaborators", data);
@@ -180,7 +218,7 @@ class GetNotes extends Component {
                                                 </div>
 
                                                 <div className="imageIconCard">
-                                                    <div style={{ cursor: 'pointer' }}><AddAlertIcon onClick={() => this.handleReminder(key.reminder, key.id)} />
+                                                    <div style={{ cursor: 'pointer' }}><AddAlertIcon onClick={(e) => this.handleReminder(e, key.reminder, key.id)} />
                                                     </div>
                                                     <div><Collaborators noteId={key.id} /></div>
                                                     <div><ColorComponent
@@ -252,6 +290,55 @@ class GetNotes extends Component {
                         </Dialog>
                     </div>)
                 }
+
+                <Popper open={this.state.anchorEl} anchorEl={this.state.anchorEl} style={{ zIndex: "999" }} >
+                    <Paper>
+                        <ClickAwayListener onClickAway={this.handleListenerClose}>
+                            <MenuList>
+                                <MenuItem >Toady</MenuItem>
+                                <MenuItem >Tomorrow</MenuItem>
+                                <MenuItem >Next week</MenuItem>
+                                <MenuItem onClick={this.handleOpenReminder}>Pick date & time</MenuItem>
+                            </MenuList>
+                        </ClickAwayListener>
+                    </Paper>
+                </Popper>
+                <Dialog
+                    open={this.state.click}
+                    onClose={this.handleOpenReminder}>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}  >
+                        <div style={{ padding: '15px' }}>
+                            <div>
+                                <KeyboardDatePicker
+                                    margin="normal"
+                                    id="date-picker-dialog"
+                                    label="Date picker dialog"
+                                    format="MM/dd/yyyy"
+                                    value={this.state.selectedDate}
+                                    onChange={this.handleDateChange}
+                                    KeyboardButtonProps={{
+                                        'aria-label': 'change date',
+                                    }}
+                                />
+                            </div>
+                            <div>
+                                <KeyboardTimePicker
+                                    margin="normal"
+                                    id="time-picker"
+                                    label="Time picker"
+                                    value={this.state.selectedDate}
+                                    onChange={this.handleDateChange}
+                                    KeyboardButtonProps={{
+                                        'aria-label': 'change time',
+                                    }}
+                                />
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                <Button onClick={this.handleSave}>Save</Button>
+                            </div>
+                        </div>
+                    </MuiPickersUtilsProvider>
+                </Dialog>
             </div>
         );
     }

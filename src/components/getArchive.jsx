@@ -16,9 +16,9 @@ import ImageIcon from '@material-ui/icons/ImageOutlined';
 import AddAlertIcon from '@material-ui/icons/AddAlertOutlined';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ColorLensIcon from '@material-ui/icons/ColorLensOutlined';
-import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
+import UnarchiveIcon from '@material-ui/icons/UnarchiveOutlined';
 import MoreMenu from '../components/moreComponent';
-import { getAllNotes } from '../services/noteServices';
+import { getAllNotes, archiveNotes } from '../services/noteServices';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 const theme = createMuiTheme({
     overrides: {
@@ -78,6 +78,17 @@ export default class Archive extends Component {
         }).catch(err => {
             console.log("err", err);
         })
+    }
+    handleUnarchive = (noteId) => {
+        let data={
+            noteIdList:[noteId],
+            isArchived:false,
+        }
+        archiveNotes(data).then(res=>{
+            console.log("res in unArchived",res)
+            this.handleGetNotes()
+        })
+
     }
     render() {
         let iconList = this.state.click ? "gridViewCss" : "listViewCss"
@@ -161,7 +172,7 @@ export default class Archive extends Component {
                                                     <div><PersonAddIcon /></div>
                                                     <div><ColorLensIcon /></div>
                                                     <div><ImageIcon /></div>
-                                                    <div><ArchiveIcon /></div>
+                                                    <div><UnarchiveIcon onClick={() => this.handleUnarchive(key.id)} /></div>
                                                     <div><MoreMenu
                                                         noteId={key.id} />
                                                     </div>
