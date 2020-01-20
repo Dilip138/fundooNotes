@@ -25,6 +25,7 @@ export default class CraeteLabel extends Component {
             createLabel: "",
             allLabels: [],
             filteredCheckBoxs: [],
+            check: false
         }
     }
     componentDidMount() {
@@ -56,14 +57,14 @@ export default class CraeteLabel extends Component {
             label: this.state.label,
             userId: localStorage.getItem('userId')
         }
-        console.log("res in createdata", data);
+        //console.log("res in createdata", data);
 
         addNoteLabels(data).then(res => {
             console.log("res in labeldata", res)
             this.setState({
                 createLabel: res.data.label
             })
-            console.log("create label response", this.state.createLabel);
+            //console.log("create label response", this.state.createLabel);
 
         })
     }
@@ -73,7 +74,7 @@ export default class CraeteLabel extends Component {
             this.setState({
                 allLabels: res.data.data.details
             })
-            console.log("response from get label api", this.state.allLabels);
+            //console.log("response from get label api", this.state.allLabels);
 
         }).catch(err => {
             console.log("err occur while hetting back-end api", err);
@@ -87,14 +88,14 @@ export default class CraeteLabel extends Component {
             noteId: this.props.noteIdLabel
         }
         noteLabels(data).then(res => {
-            console.log("res in noteLabels data", res);
+            //console.log("res in noteLabels data", res);
         })
     }
     render() {
         let allLabels = this.state.allLabels
         let label = this.state.label.trim().toLowerCase();
         if (label.length > 0) {
-            allLabels = allLabels.filter((key)=> {
+            allLabels = allLabels.filter((key) => {
                 return key.label.toLowerCase().match(label);
             });
         }
@@ -121,13 +122,14 @@ export default class CraeteLabel extends Component {
                                 </div>
                             </ClickAwayListener>
                             {allLabels.map(key => {
-                                console.log("res in keyFilter", key)
+                                //console.log("res in keyFilter", key)
                                 return (
                                     <div>
                                         <List>
                                             <Checkbox
-                                                // value={key.label}
-                                                onClick={this.checkNoteLabels(key.id)}>
+                                                value={key.label}
+                                                onClick={this.checkNoteLabels(key.id)}
+                                            >
                                             </Checkbox>
                                             {key.label}
                                         </List>

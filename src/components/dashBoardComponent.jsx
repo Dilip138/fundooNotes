@@ -30,6 +30,7 @@ const theme = createMuiTheme({
             paperAnchorDockedLeft: {
                 marginTop: '4em',
                 minWidth: '15em',
+                height: '91vh'
             }
         }
     }

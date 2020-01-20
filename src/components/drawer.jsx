@@ -11,8 +11,19 @@ import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
 import EditIcon from '@material-ui/icons/EditOutlined';
 import DeleteIcon from '@material-ui/icons/DeleteOutline';
 import { withRouter } from 'react-router-dom';
+import LabelIcon from '@material-ui/icons/Label';
+import { getNoteLabels, noteLabels } from '../services/noteServices';
 
 class DrawerComponent extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            allLabels: []
+        }
+    }
+    componentDidMount() {
+        this.handleGetNoteLabels()
+    }
     handleNotes = () => {
         this.props.history.push("/dashboard");
     }
@@ -24,6 +35,19 @@ class DrawerComponent extends Component {
     }
     handleTrash = () => {
         this.props.history.push("/trash");
+    }
+    handleGetNoteLabels = () => {
+        getNoteLabels().then(res => {
+            console.log("response from get label api", res);
+            this.setState({
+                allLabels: res.data.data.details
+            })
+            console.log("response from get label api", this.state.allLabels);
+
+        }).catch(err => {
+            console.log("err occur while hetting back-end api", err);
+
+        })
     }
     render() {
         return (
@@ -42,6 +66,17 @@ class DrawerComponent extends Component {
                         <ListItemText primary="Reminders" />
                     </ListItem>
                     <Divider />
+                    <div style={{ fontSize: '13px', margin: '20px' }}>LABELS</div>
+                    <div className="allLabel">
+                        {this.state.allLabels.map(key => {
+                            return (
+                                <ListItem button key="Reminders" onClick={this.handleReminders}>
+                                    <ListItemIcon><LabelIcon /></ListItemIcon>
+                                    <ListItemText> {key.label}</ListItemText>
+                                </ListItem>
+                            )
+                        })}
+                    </div>
                     <ListItem button key="Edit labels" onClick={this.handlelabel}>
                         <ListItemIcon><EditIcon /></ListItemIcon>
                         <ListItemText primary="Edit labels" />

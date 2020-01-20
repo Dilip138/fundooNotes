@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, InputBase, Avatar, Tooltip, CardContent, Popper, Paper, ClickAwayListener, Button } from '@material-ui/core';
+import { Card, InputBase, Avatar, Tooltip, CardContent, Popper, Paper, ClickAwayListener, Button, Chip, Divider } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/ImageOutlined';
 import AddAlertIcon from '@material-ui/icons/AddAlertOutlined';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
@@ -17,6 +17,7 @@ import MoreMenu from '../components/moreComponent';
 import ColorComponent from '../components/colorComponent';
 import Collaborators from '../components/collaboratorComponents';
 import AccessAlarmsIcon from '@material-ui/icons/AccessAlarms';
+import TagFacesIcon from '@material-ui/icons/TagFacesOutlined';
 
 function titleDescriptionSearch(searchText) {
     return function (val) {
@@ -75,7 +76,7 @@ class GetNotes extends Component {
         }
         //console.log("res in editData",data)
         editNote(data).then(res => {
-            console.log("res in editNote", res);
+            //console.log("res in editNote", res);
             this.handleGetNotes()
         })
             .catch(err => {
@@ -101,7 +102,7 @@ class GetNotes extends Component {
         }
         console.log("res in noteData", noteId);
         archiveNotes(data).then(res => {
-            console.log("res in archiveNotes", res)
+            //console.log("res in archiveNotes", res)
             this.handleGetNotes()
         })
             .catch(err => {
@@ -115,7 +116,8 @@ class GetNotes extends Component {
         }
         console.log("res in colorData", data);
         colorNotes(data).then(res => {
-            console.log("res in colorNotes", res);
+            //console.log("res in colorNotes", res);
+            this.handleGetNotes()
         })
             .catch(err => {
                 console.log("err in colorNote component ", err);
@@ -131,7 +133,7 @@ class GetNotes extends Component {
         })
         console.log("res in reminderData", data);
         reminderNotes(data).then(res => {
-            console.log("res in reminderNotes", res);
+            //console.log("res in reminderNotes", res);
         })
             .catch(err => {
                 console.log("err in reminderComponent", err);
@@ -153,13 +155,13 @@ class GetNotes extends Component {
     };
     handleSave = () => {
         let dateTime = this.state.selectedDate
-        console.log("dateTime", dateTime)
+        //console.log("dateTime", dateTime)
         if (dateTime !== '') {
             this.setState({
                 reminder: dateTime,
                 click: false
             });
-            console.log("reminder", this.state.reminder);
+            //console.log("reminder", this.state.reminder);
         };
     };
     handleListenerClose = () => {
@@ -180,7 +182,7 @@ class GetNotes extends Component {
                                     key.isArchived === false && key.isDeleted === false &&
                                     <div className="allNotes">
                                         <div className="getCardNote">
-                                            <Card className={listViewShow} style={{ borderRadius: '10px', backgroundColor: key.color, margin: '8px', padding: '10px', border: '1px solid' }}>
+                                            <Card className={listViewShow} style={{ borderRadius: '10px', backgroundColor: key.color, margin: '8px', padding: '10px' }}>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}
@@ -204,17 +206,33 @@ class GetNotes extends Component {
                                                     </div>
                                                     : null
                                                 }
-                                                <div className="collaborator-avtar-email">
-                                                    {key.collaborators.map(data => {
-                                                        //console.log("col in collaborators", data);
-                                                        return (
-                                                            <Tooltip title={data.email}>
-                                                                <div className="collaborator-avatar" style={{ cursor: 'pointer' }}>
-                                                                    <Avatar style={{ width: "35px", height: "35px" }} />
-                                                                </div>
-                                                            </Tooltip>
-                                                        )
-                                                    })}
+                                                <div className="labelAndCollaborator">
+                                                    <div className="collaborator-avtar-email">
+                                                        {key.collaborators.map(data => {
+                                                            //console.log("col in collaborators", data);
+                                                            return (
+                                                                <Tooltip title={data.email}>
+                                                                    <div className="collaborator-avatar" style={{ cursor: 'pointer' }}>
+                                                                        <Avatar style={{ width: "35px", height: "35px" }} />
+                                                                    </div>
+                                                                </Tooltip>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                    <div className="getLabel" >
+                                                        {key.noteLabels.map(data => {
+                                                            console.log("labels all data", data);
+                                                            return (
+                                                                <Tooltip title="Label">
+                                                                    <Chip style={{ backgroundColor: "rgba(0,0,0,0.08)", margin: "5px" }} className="chip" onDelete={() => this.handleDelete(key.id, data.id)}
+                                                                        icon={<TagFacesIcon style={{ color: "black" }} />}
+                                                                        label={data.label}>
+                                                                    </Chip>
+                                                                </Tooltip>
+                                                            );
+                                                        })
+                                                        }
+                                                    </div>
                                                 </div>
 
                                                 <div className="imageIconCard">
@@ -237,7 +255,8 @@ class GetNotes extends Component {
                                                 <CardContent>{
                                                     <div className="showQuestion">
                                                         {(key.questionAndAnswerNotes.length > 0) &&
-                                                            <div className="ques-asked" style={{ borderTop: "1px solid", padding: "5px" }}>
+                                                            <div className="ques-asked" style={{ padding: "5px" }}>
+                                                                 <Divider />
                                                                 <b className="quesHeanding">
                                                                     asked Question
                                                             </b>
