@@ -124,6 +124,10 @@
     width: 82em;
 }
 
+.typeNote {
+    display: flex;
+}
+
 .card_Note {
     width: 35em;
     display: flex;
