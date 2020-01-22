@@ -11,7 +11,7 @@ class ProfileImgComponenet extends Component {
         this.state = {
             anchorEl: false,
             open: false,
-            profilePic: localStorage.getItem('imageUrl'),
+            profilePic: '',
         };
     }
     handleProfileUpload = async (event) => {
@@ -24,7 +24,7 @@ class ProfileImgComponenet extends Component {
             this.setState({
                 profilePic: url + res.data.status.imageUrl,
             })
-            localStorage.setItem("imageUrl", this.state.profilePic);
+            //localStorage.setItem("imageUrl", this.state.profilePic);
             console.log("finially upload profile pic", this.state.profilePic);
         }).catch((err) => {
             console.log("Error Occur while hetting upload profile pic back-end Api", err);
@@ -49,6 +49,9 @@ class ProfileImgComponenet extends Component {
         const { anchorEl } = this.state;
         return (
             <div>
+                <div>
+                    <Avatar alt="logo" src={this.state.profilePic} onClick={(e) => this.handleImage(e)} />
+                </div>
                 <div className="Profile-root" >
                     <Popper open={anchorEl} anchorEl={anchorEl} style={{ zIndex: "999" }}>
                         <Card className='Profile' style={{ backgroundColor: 'gray' }}>
@@ -75,9 +78,6 @@ class ProfileImgComponenet extends Component {
                             </ClickAwayListener>
                         </Card>
                     </Popper>
-                </div>
-                <div>
-                    <Avatar alt="logo" src={this.state.profilePic} onClick={(e) => this.handleImage(e)} />
                 </div>
             </div>
         )

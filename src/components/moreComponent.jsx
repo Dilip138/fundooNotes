@@ -86,10 +86,9 @@ class MoreMenu extends Component {
         </div>
         <Popper open={this.state.anchorEl} anchorEl={this.state.anchorEl} style={{ zIndex: "999" }} >
           <Paper>
-            {/* <ClickAwayListener onClickAway={this.handleClose}> */}
             <MenuList>
               <MenuItem onClick={() => this.handleTrash(this.props.noteId)}>Delete note</MenuItem>
-              <MenuItem><CreateLabelComponent noteIdLabel={this.props.noteId} /></MenuItem>
+              <MenuItem><CreateLabelComponent noteIdLabel={this.props.noteId} createLabelPropsTogetNote={this.handleCreate} /></MenuItem>
               {this.props.questionAndAnswerNotes !== undefined ?
                 this.props.questionAndAnswerNotes.length > 0 ?
                   <MenuItem onClick={this.handleShowQuestion}>Show question</MenuItem>
@@ -99,7 +98,6 @@ class MoreMenu extends Component {
               }
               <MenuItem onClick={this.handleClose}>Make a copy</MenuItem>
             </MenuList>
-            {/* </ClickAwayListener> */}
           </Paper>
         </Popper>
 

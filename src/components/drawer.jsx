@@ -12,7 +12,7 @@ import EditIcon from '@material-ui/icons/EditOutlined';
 import DeleteIcon from '@material-ui/icons/DeleteOutline';
 import { withRouter } from 'react-router-dom';
 import LabelIcon from '@material-ui/icons/Label';
-import { getNoteLabels, noteLabels } from '../services/noteServices';
+import { getNoteLabels} from '../services/noteServices';
 
 class DrawerComponent extends Component {
     constructor(props) {
@@ -38,7 +38,7 @@ class DrawerComponent extends Component {
     }
     handleGetNoteLabels = () => {
         getNoteLabels().then(res => {
-            console.log("response from get label api", res);
+            //console.log("response from get label api", res);
             this.setState({
                 allLabels: res.data.data.details
             })

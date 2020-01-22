@@ -25,7 +25,7 @@ export default class CraeteLabel extends Component {
             createLabel: "",
             allLabels: [],
             filteredCheckBoxs: [],
-            check: false
+            check: false,
         }
     }
     componentDidMount() {
@@ -39,9 +39,10 @@ export default class CraeteLabel extends Component {
     handleMoreVertical = (e) => {
         this.setState({
             anchorElLabel: this.state.anchorElLabel ? false : e.target,
+            //open: true
         });
     }
-    handleListenerClose = () => {
+    handleClose = () => {
         this.setState({
             anchorElLabel: false
         })
@@ -80,7 +81,6 @@ export default class CraeteLabel extends Component {
             console.log("err occur while hetting back-end api", err);
 
         })
-
     }
     checkNoteLabels = (labelId) => {
         let data = {
@@ -88,7 +88,8 @@ export default class CraeteLabel extends Component {
             noteId: this.props.noteIdLabel
         }
         noteLabels(data).then(res => {
-            //console.log("res in noteLabels data", res);
+            console.log("res in noteLabels data", res);
+            //this.props.createLabelPropsTogetNote(true)
         })
     }
     render() {
@@ -101,26 +102,26 @@ export default class CraeteLabel extends Component {
         }
         return (
             <div className="labelCard">
-                <div onClick={(e) => this.handleMoreVertical(e)} className="">Add label</div>
+                <ClickAwayListener onClickAway={this.handleClose}>
+                    <div onClick={(e) => this.handleMoreVertical(e)} className="">Add label</div>
+                </ClickAwayListener>
                 <MuiThemeProvider theme={theme}>
-                    <Menu open={this.state.anchorElLabel} anchorEl={this.state.anchorElLabel} style={{ zIndex: "999" }} onKeyDown={this.handleClear} >
+                    <Menu open={this.state.anchorElLabel} anchorEl={this.state.anchorElLabel} style={{ zIndex: "999" }} onKeyDown={this.handleClear}  >
                         <div className="dialogLabel">
                             <div>
                                 <p>Label note</p>
                             </div>
-                            <ClickAwayListener onClickAway={this.handleListenerClose}>
-                                <div style={{ display: 'flex' }}>
-                                    <div>
-                                        <InputBase
-                                            placeholder="Enter label name"
-                                            value={this.state.label}
-                                            onChange={this.handleChangeLabel} />
-                                    </div>
-                                    <div>
-                                        <SearchIcon style={{ color: "black", alignItems: 'center' }} />
-                                    </div>
+                            <div style={{ display: 'flex' }}>
+                                <div>
+                                    <InputBase
+                                        placeholder="Enter label name"
+                                        value={this.state.label}
+                                        onChange={this.handleChangeLabel} />
                                 </div>
-                            </ClickAwayListener>
+                                <div>
+                                    <SearchIcon style={{ color: "black", alignItems: 'center' }} />
+                                </div>
+                            </div>
                             {allLabels.map(key => {
                                 //console.log("res in keyFilter", key)
                                 return (
@@ -128,8 +129,7 @@ export default class CraeteLabel extends Component {
                                         <List>
                                             <Checkbox
                                                 value={key.label}
-                                                onClick={this.checkNoteLabels(key.id)}
-                                            >
+                                                onClick={this.checkNoteLabels(key.id)}>
                                             </Checkbox>
                                             {key.label}
                                         </List>

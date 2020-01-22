@@ -104,6 +104,9 @@ export function getNoteLabels() {
 export function noteLabels(data) {
   const noteId = data.noteId
   const lableId = data.lableId
+  console.log("res in labelAllData",noteId);
+  console.log("res in labelAllData",lableId);
+  
   return axios.post(process.env.REACT_APP_BASE_URL + `/notes/${noteId}/addLabelToNotes/${lableId}/add`, data, {
     headers: {
       Authorization: localStorage.getItem('token')

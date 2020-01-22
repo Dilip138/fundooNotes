@@ -8,10 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import Refresh from '@material-ui/icons/Refresh';
-import SettingsIcon from '@material-ui/icons/Settings';
+import SettingsIcon from '@material-ui/icons/Settings'
 import ViewAgenda from '@material-ui/icons/ViewAgenda';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
-import ReplyIcon from '@material-ui/icons/Reply';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import DrawerComponent from '../components/drawer.jsx';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';

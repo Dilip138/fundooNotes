@@ -24,7 +24,7 @@ export function userForgot(data) {
 
 export function imageUpload(data) {
   console.log("token", localStorage.getItem('token'));
-  return axios.post("http://fundoonotes.incubation.bridgelabz.com/api/user/uploadProfileImage", data, {
+  return axios.post(process.env.REACT_APP_BASE_URL + apiConstant.imageUpload, data, {
     headers: {
       Authorization: localStorage.getItem('token')
     }
