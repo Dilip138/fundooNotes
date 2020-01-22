@@ -15,6 +15,7 @@ import reminders from './components/getReminders';
 import trash from './components/getTrash';
 import colorComponent from './components/colorComponent';
 import profile from './components/profileComponent';
+import imageUpload from './components/imageUploadComponent';
 import collaborators from './components/collaboratorComponents';
 import askQuestion from './components/askQuestionComponent';
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route path="/colorComponent" component={colorComponent}></Route>
         <Route path="/profile" component={profile}></Route>
         <Route path="/collaborators" component={collaborators}></Route>
+        <Route path="/imageUpload" component={imageUpload}></Route>
         <Route path="/askQuestion" component={askQuestion}></Route>
       </Switch>
     </Router>

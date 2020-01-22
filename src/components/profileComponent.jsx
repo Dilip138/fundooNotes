@@ -14,9 +14,9 @@ class ProfileImgComponenet extends Component {
             profilePic: localStorage.getItem('imageUrl'),
         };
     }
-    handleProfileUpload = async (e) => {
-        console.log("profile pic", e.target.files[0]);
-        let file = e.target.files[0]
+    handleProfileUpload = async (event) => {
+        console.log("profile pic", event.target.files[0]);
+        let file = event.target.files[0]
         const formData = new FormData()
         formData.append('file', file)
         await imageUpload(formData).then((res) => {
@@ -53,7 +53,7 @@ class ProfileImgComponenet extends Component {
                     <Popper open={anchorEl} anchorEl={anchorEl} style={{ zIndex: "999" }}>
                         <Card className='Profile' style={{ backgroundColor: 'gray' }}>
                             <div className="profileUpload">
-                                <input type="file" onChange={(e) => this.handleProfileUpload(e)}></input>
+                                <input type="file" onChange={(event) => this.handleProfileUpload(event)}></input>
                             </div>
                             <div>
                                 <div style={{ display: 'flex', justifyContent: 'center' }}>

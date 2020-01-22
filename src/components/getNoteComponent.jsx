@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, InputBase, Avatar, Tooltip, CardContent, Popper, Paper, ClickAwayListener, Button, Chip, Divider } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/ImageOutlined';
+import ImageUpload from './imageUploadComponent';
 import AddAlertIcon from '@material-ui/icons/AddAlertOutlined';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import ColorLensIcon from '@material-ui/icons/ColorLensOutlined';
@@ -169,6 +170,12 @@ class GetNotes extends Component {
             anchorEl: false
         })
     }
+    sendImage = (value) => {
+        let file = value.toString()
+        this.setState({
+            imageUrl: file
+        })
+    }
     render() {
         let iconList = this.props.iconSelect ? "gridViewCss" : "listViewCss"
         let listViewShow = this.props.iconSelect ? "gridView" : "listView"
@@ -183,6 +190,9 @@ class GetNotes extends Component {
                                     <div className="allNotes">
                                         <div className="getCardNote">
                                             <Card className={listViewShow} style={{ borderRadius: '10px', backgroundColor: key.color, margin: '8px', padding: '10px' }}>
+                                                <div>
+                                                    {}
+                                                </div>
                                                 <div onClick={this.handleOpenDialogue}>
                                                     <InputBase
                                                         value={key.title}
@@ -221,7 +231,7 @@ class GetNotes extends Component {
                                                     </div>
                                                     <div className="getLabel" >
                                                         {key.noteLabels.map(data => {
-                                                            console.log("labels all data", data);
+                                                            //console.log("labels all data", data);
                                                             return (
                                                                 <Tooltip title="Label">
                                                                     <Chip style={{ backgroundColor: "rgba(0,0,0,0.08)", margin: "5px" }} className="chip" onDelete={() => this.handleDelete(key.id, data.id)}
@@ -242,7 +252,7 @@ class GetNotes extends Component {
                                                     <div><ColorComponent
                                                         colorPatter={this.handleChangeColor}
                                                         noteId={key.id} /></div>
-                                                    <div><ImageIcon /></div>
+                                                    <div><ImageUpload imageUploadProps={this.sendImage} /></div>
                                                     <div style={{ cursor: 'pointer' }} onClick={() => this.handleArchiveNotes(key.id)} notecolor={key.color}><ArchiveIcon /></div>
                                                     <div><MoreMenu
                                                         noteId={key.id}
@@ -256,7 +266,7 @@ class GetNotes extends Component {
                                                     <div className="showQuestion">
                                                         {(key.questionAndAnswerNotes.length > 0) &&
                                                             <div className="ques-asked" style={{ padding: "5px" }}>
-                                                                 <Divider />
+                                                                <Divider />
                                                                 <b className="quesHeanding">
                                                                     asked Question
                                                             </b>
